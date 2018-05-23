@@ -1,0 +1,43 @@
+\name{plac.dist}
+\alias{plac.dist}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+Plot the distribution of placebo samples for synthetic control analysis with multiple treated units.
+}
+\description{
+Takes the output object of \link{multiple.synth} creates a distribution of placebo average treatment effects, to test the significance of the observed ATE. Does so by sampling k placebos (where k = the number of treated units) nboots times, and calculating the average treatment effect of the k placebos each time.
+}
+\usage{
+plac.dist(multiple.synth, nboots)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{multiple.synth}{An object returned by the function \link{multiple.synth}.
+}
+  \item{nboots}{
+Number of bootstrapped samples of placebos to take.
+}
+}
+ 
+\value{
+\item{p}{The plot.}
+\item{att.t}{The observed average treatment effect.}
+\item{df}{Dataframe where each row is the ATT for one bootstrapped placebo sample, used to build the distribution plot.}
+}
+\references{
+}
+\author{
+Bruno Castanho Silva
+}
+\note{
+%%  ~~further notes~~
+}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+\seealso{
+%% ~~objects to See Also as \code{\link{help}}, ~~~
+}
+\examples{
+When I have the time.
+}

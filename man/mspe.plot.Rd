@@ -1,0 +1,111 @@
+\name{mspe.plot}
+\alias{mspe.plot}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+Plot the post/pre-treatment MSPE ratio
+}
+\description{
+Plots the post/pre-treatment mean square prediction error ratio for the treated unit and placebos.
+}
+\usage{
+mspe.plot(tdf, discard.extreme = TRUE, mspe.limit = 20, plot.hist = FALSE, title = NULL, xlab = "Pre/Post MSPE ratio", ylab = NULL)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{tdf}{
+An object constructed by \code{\link{generate.placebos}}.
+}
+  \item{discard.extreme}{
+Logical. Whether or not placebos with high pretreatement MSPE should be excluded from the plot.
+}
+  \item{mspe.limit}{
+Numerical. Used if \code{discard.extreme} is \code{TRUE}. It indicates how many times the pretreatment MSPE of a placebo should be higher than that of the treated unit to be considered extreme and discarded. Default is \code{20}.
+}
+  \item{plot.hist}{
+Logical. If \code{FALSE}, a dotplot with each unit name and its post/pre treatment MSPE ratio is produced. If \code{TRUE}, a histogram is produced, with the frequency of each ratio. Should be set to \code{TRUE} when there are many controls, to make visualization easier.
+}
+  \item{title}{
+Character. Optional. Title of the plot.
+}
+  \item{xlab}{
+Character. Optional. Label of the x axis.
+}
+  \item{ylab}{
+Character. Optional. Label of the y axis.
+}
+}
+\details{
+Post/pre-treatement mean square prediction error ratio is the difference between the observed outcome of a unit and its synthetic control, before and after treatement. A higher ratio means a small pretreatment prediction error (a good synthetic control), and a high post-treatment MSPE, meaning a large difference between the unit and its synthetic control after the intervention. By calculating this ratio for all placebos, the test can be interpreted as looking at how likely the result obtained for a single treated case with a synthetic control analysis could have occurred by chance given no treatement. For more detailed description, see Abadie, Diamond, and Hainmueller (2011, 2014). 
+}
+\value{
+%%  ~Describe the value returned
+%%  If it is a LIST, use
+%%  \item{comp1 }{Description of 'comp1'}
+%%  \item{comp2 }{Description of 'comp2'}
+%% ...
+}
+\references{
+Abadie, A., Diamond, A., Hainmueller, J. (2014). Comparative Politics and the Synthetic Control Method. American Journal of Political Science Forthcoming 2014.
+
+Synthetic : An R Package for Synthetic Control Methods in Comparative Case Studies. Journal of Statistical Software 42 (13) 1–17.
+
+Abadie, A., Diamond, A., Hainmueller, J. (2011). Synth: An R Package for Synthetic Control Methods in Comparative Case Studies. Journal of Statistical Software 42 (13) 1–17.
+
+Abadie A, Diamond A, Hainmueller J (2010). Synthetic Control Methods for Comparative Case Studies: Estimating the Effect of California's Tobacco Control Program. Journal of the American Statistical Association 105 (490) 493–505.
+
+}
+\author{
+Bruno Castanho Silva
+}
+\note{
+%%  ~~further notes~~
+}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+\seealso{
+See also \code{\link{generate.placebos}, \link{mspe.test}, \link{plot.placebos}, \link[Synth]{synth}}
+}
+\examples{
+## First prepare the required objects
+
+# Load simulated data from Synth
+data(synth.data)
+
+# Execute dataprep to produce the necessary matrices for synth
+dataprep.out<-
+  dataprep(
+   foo = synth.data,
+   predictors = c("X1", "X2", "X3"),
+   predictors.op = "mean",
+   dependent = "Y",
+   unit.variable = "unit.num",
+   time.variable = "year",
+   special.predictors = list(
+      list("Y", 1991, "mean"),
+      list("Y", 1985, "mean"),
+      list("Y", 1980, "mean")
+                            ),
+   treatment.identifier = 7,
+   controls.identifier = c(29, 2, 13, 17, 32, 38),
+   time.predictors.prior = c(1984:1989),
+   time.optimize.ssr = c(1984:1990),
+   unit.names.variable = "name",
+   time.plot = 1984:1996
+   )
+
+# run the synth command to create the synthetic control
+synth.out <- synth(dataprep.out)
+
+## run the generate.placebos command to reassign treatment status
+## to each unit listed as control, one at a time, and generate their
+## synthetic versions. 
+tdf<-generate.placebos(dataprep.out,synth.out)
+
+## Test how extreme was the observed treatment effect given the placebos:
+ratio<-mspe.test(tdf)
+ratio$p.val
+
+## Check visually how extreme is this value in the distribution:
+mspe.plot(tdf,discard.extreme=F)
+}
