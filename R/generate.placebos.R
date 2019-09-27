@@ -1,5 +1,5 @@
 generate.placebos <-
-function(dataprep.out,synth.out) {
+function(dataprep.out,synth.out, Sigf.ipop = 5) {
   tr<-as.numeric(dataprep.out$tag$treatment.identifier)
   names.and.numbers<-subset(dataprep.out$names.and.numbers, unit.numbers != tr)
   n<-length(dataprep.out$tag$controls.identifier)
@@ -39,7 +39,7 @@ function(dataprep.out,synth.out) {
   dp <- list(X0 = X0, X1 = X1, Z0 = Z0, Z1 = Z1, Y0plot = Y0plot, 
                  Y1plot = Y1plot, names.and.numbers = names.and.numbers, 
                  tag = tag)
-  s.out<-synth(data.prep.obj = dp)
+  s.out<-synth(data.prep.obj = dp, Sigf.ipop = Sigf.ipop)
   a<-data.frame(dp$Y0plot %*% s.out$solution.w)
   s.mspe<-s.out$loss.v
   res<-list(a = a,s.mspe = s.mspe)

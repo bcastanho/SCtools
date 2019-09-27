@@ -56,6 +56,9 @@ A numeric value with the value in ``time.variable'' that marks the intervention.
   \item{generate.placebos}{
 Logical. Whether a placebo (a synthetic control) for each unit in the donor pool should be constructed. Will increase computation time.
 }
+  \item{Sigf.ipop}{
+The Precision setting for the ipop optimization routine. Default of 5.
+}
 }
 \details{
 The function runs \link{dataprep} and \link{synth} for each unit identified in ``treated.units''. It saves the vector with predicted values for each synthetic control, to be used in estimating average treatment effects in applications of Synthetic Controls for multiple treated units.
