@@ -2,7 +2,7 @@ multiple.synth<-function(foo,predictors,predictors.op,dependent,unit.variable,ti
                          special.predictors,treated.units,control.units,
                          time.predictors.prior,time.optimize.ssr,unit.names.variable,time.plot,
                          treatment.time,
-                         generate.placebos=F){
+                         generate.placebos=F, Sigf.ipop = 5){
   require(Synth)
   require(ggplot2)
   syn<-function(i){
@@ -20,7 +20,7 @@ multiple.synth<-function(foo,predictors,predictors.op,dependent,unit.variable,ti
       time.optimize.ssr = time.optimize.ssr,
       unit.names.variable = unit.names.variable,
       time.plot = time.plot)
-    synth.out<-synth(dataprep.out)
+    synth.out<-synth(dataprep.out, Sigf.ipop = Sigf.ipop)
     a<-data.frame(dataprep.out$Y0plot %*% synth.out$solution.w)
     colnames(a)<-paste('unit',i,sep='')
     out<-list(a = a, synth.out=synth.out, dataprep.out = dataprep.out)
