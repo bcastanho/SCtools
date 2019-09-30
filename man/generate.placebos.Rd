@@ -17,6 +17,9 @@ A data.prep object produced by the dataprep() command}
   \item{synth.out}{
 A synth.out object produced by the synth() command
 }
+  \item{Sigf.ipop}{
+The Precision setting for the ipop optimization routine. Default of 5.
+}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
