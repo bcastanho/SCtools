@@ -3,6 +3,10 @@
 # Readme
 usethis::use_readme_rmd()
 
+# PAckages USed
+usethis::use_package("Hmisc")
+usethis::use_package("ggplot2")
+usethis::use_package("Synth")
 
 
 # Unit Testing

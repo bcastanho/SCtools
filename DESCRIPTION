@@ -20,3 +20,5 @@ License: GPL-3
 Suggests: 
     testthat (>= 2.1.0),
     covr
+Imports: 
+    Hmisc

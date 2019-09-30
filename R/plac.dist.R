@@ -1,13 +1,37 @@
+#' @title Plot the distribution of placebo samples for synthetic control 
+#'     analysis with multiple treated units.
+#' @description Takes the output object of \link{multiple.synth} creates a 
+#'     distribution of placebo average treatment effects, to test the 
+#'     significance of the observed ATE. Does so by sampling k placebos 
+#'     (where k = the number of treated units) nboots times, and calculating 
+#'     the average treatment effect of the k placebos each time.
+#' @param multiple.synth multiple.synth}{An object returned by the function 
+#'    \link{multiple.synth}
+#' @param nboots Number of bootstrapped samples of placebos to take.
+#' @return \describe{
+#' \item{p}{The plot.}
+#' \item{att.t}{The observed average treatment effect.}
+#' \item{df}{Dataframe where each row is the ATT for one bootstrapped placebo 
+#'    sample, used to build the distribution plot.}
+#' }
+#' @export
+
 plac.dist<-function(multiple.synth,nboots){
-  post.treat.t<-subset(multiple.synth$b.path, year > multiple.synth$treatment.time)
-  require(Hmisc)
+  
+  post.treat.t<-subset(multiple.synth$b.path, 
+                       year > multiple.synth$treatment.time)
+  
   att.t<-mean(post.treat.t$tr)-mean(post.treat.t$cont)
+  
   df.cont<-multiple.synth$df.plac[multiple.synth$df.plac$year > multiple.synth$treatment.time,]
-  storage.matrix<-matrix(NA,ncol=1,nrow=nboots)
+  
+  storage.matrix<-matrix(NA, ncol=1, nrow=nboots)
+  
   for(i in 1:nboots){
     cs<-sample(c(1:length(multiple.synth$control.units)),length(multiple.synth$treated.units),rep=F)
     df.cont.temp<-df.cont[,c(c(cs),c(cs+length(multiple.synth$control.units)))]
     storage.vector<-matrix(NA,ncol=1,nrow=length(cs))
+    
     for(j in 1:length(storage.vector)){
       m<-mean(df.cont.temp[,j])-mean(df.cont.temp[,j+length(cs)])
       storage.vector[j,1]<-m
@@ -15,9 +39,18 @@ plac.dist<-function(multiple.synth,nboots){
     storage.matrix[i,1]<-mean(storage.vector)
   }
   storage.matrix<-data.frame(storage.matrix)
+  
   colnames(storage.matrix)<-'atts'
-  p<-ggplot(data=storage.matrix,aes(x = atts))+geom_histogram()+geom_vline(xintercept=att.t,linetype='dotted',size=2)+
-    theme_bw()
-    out<-list(p = p, att.t = att.t, df = storage.matrix)
-  return(out)
+  
+  p<-ggplot2::ggplot(data=storage.matrix,
+                     ggplot2::aes(x = atts))+
+    ggplot2::geom_histogram()+
+    ggplot2::geom_vline(xintercept=att.t,linetype='dotted',size=2)+
+    ggplot2::theme_bw()
+  
+    out<-list(p = p, 
+              att.t = att.t, 
+              df = storage.matrix)
+  
+    return(out)
 }
