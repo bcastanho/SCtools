@@ -1,6 +1,5 @@
 #' @title Function to Apply Synthetic Controls to Multiple Treated Units
-#' @description 
-#' @param Generates one synthetic control for each treated unit and calculates 
+#' @description Generates one synthetic control for each treated unit and calculates 
 #'    the difference between the treated and the synthetic control for each. 
 #'    Returns a vector with outcome values for the synthetic controls, 
 #'    a plot of average treatment effects, and if required generates placebos 

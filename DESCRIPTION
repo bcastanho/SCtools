@@ -1,5 +1,4 @@
 Package: SCtools
-Type: Package
 Title: Tools for Synthetic Controls Analysis
 Version: 0.2
 Date: 2018-05-22
@@ -10,15 +9,17 @@ Authors@R: c(
            email = "bcsilva@wiso.uni-koeln.de")
            )
 Maintainer: Bruno Castanho Silva <bcsilva@wiso.uni-koeln.de>
-Depends: 
-    Synth, 
-    ggplot2, 
-    stringr, 
-    cvTools
-Description: A set of functions to extend the synthetic controls analyses performed by the package Synth. Includes generating and plotting placebos, significance tests and plots, and calculating average treatment effects for multiple treated units.
+Description: A set of functions to extend the synthetic controls analyses 
+    performed by the package Synth. Includes generating and plotting placebos, 
+    significance tests and plots, and calculating average treatment effects 
+    for multiple treated units.
 License: GPL-3
+Encoding: UTF-8
 Suggests: 
     testthat (>= 2.1.0),
     covr
 Imports: 
-    Hmisc
+    Hmisc,
+    Synth,
+    ggplot2
+RoxygenNote: 6.1.1

@@ -6,7 +6,7 @@
 #'    ratios and a p-value of how extreme the treated unit's ratio is in 
 #'    comparison with that of placebos. Equivalent to a significance testing 
 #'    of a synthetic controls result.
-#' @param tdf An object constructed by \code{\link{generate.placebos}
+#' @param tdf An object constructed by \code{\link{generate.placebos}}
 #' @param discard.extreme Logical. Whether or not placebos with high 
 #'    pre-treatement MSPE should be excluded from the count and significance 
 #'    testing.

@@ -13,9 +13,9 @@
 #' @param xlab Character. Optional. Label of the x axis.
 #' @param ylab Character. Optional. Label of the y axis.
 #' @param title Character. Optional. Title of the plot.
-#' @param alpha.placebos
-#' @references 
-#' @seealso \code{\link{generate.placebos}, \link[Synth]{gaps.plot}, 
+#' @param alpha.placebos the transparency setting, default of \code{1}
+#' @references as
+#' @seealso \code{\link{generate.placebos}}, \link[Synth]{gaps.plot}, 
 #'     \link[Synth]{synth}, \link[Synth]{dataprep}
 #' @examples 
 #' ## First prepare the required objects

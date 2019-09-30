@@ -8,7 +8,6 @@ usethis::use_package("Hmisc")
 usethis::use_package("ggplot2")
 usethis::use_package("Synth")
 
-
 # Unit Testing
 usethis::use_testthat()
 usethis::use_test("generate.placebos.R")
@@ -23,6 +22,9 @@ usethis::use_test("pSCtools-internal.R")
 usethis::use_travis()
 usethis::use_coverage()
 # Use Vignettes
+
+# Build site website
+pkgdown::build_site()
 
 # Licensing
 usethis::use_gpl3_license(name = "Bruno Castanho Silva")
