@@ -19,3 +19,6 @@ usethis::use_test("pSCtools-internal.R")
 usethis::use_travis()
 usethis::use_coverage()
 # Use Vignettes
+
+# Licensing
+usethis::use_gpl3_license(name = "Bruno Castanho Silva")

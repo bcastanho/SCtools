@@ -5,3 +5,4 @@ init.R
 .pdf
 ^\.travis\.yml$
 ^codecov\.yml$
+^LICENSE\.md$
