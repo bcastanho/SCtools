@@ -1,2 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^README\.Rmd$
+init.R
+.pdf
+^\.travis\.yml$
+^codecov\.yml$

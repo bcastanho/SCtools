@@ -3,8 +3,16 @@ Type: Package
 Title: Tools for Synthetic Controls Analysis
 Version: 0.2
 Date: 2018-05-22
-Author: Bruno Castanho Silva <bcsilva@wiso.uni-koeln.de>
+Authors@R: c(
+    person(given = "Bruno",
+           family = "Castanho Silva",
+           role = c("aut", "cre"),
+           email = "bcsilva@wiso.uni-koeln.de")
+           )
 Maintainer: Bruno Castanho Silva <bcsilva@wiso.uni-koeln.de>
 Depends: Synth, ggplot2, stringr, cvTools
 Description: A set of functions to extend the synthetic controls analyses performed by the package Synth. Includes generating and plotting placebos, significance tests and plots, and calculating average treatment effects for multiple treated units.
 License: GPL (>=2)
+Suggests: 
+    testthat (>= 2.1.0),
+    covr

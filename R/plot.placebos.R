@@ -1,5 +1,72 @@
+#' @title Function to plot placebos of a synthetic control analysis
+#' @description Creates plots with the difference between observed units 
+#'     and synthetic controls for the treated and control units. 
+#'     See Abadie, Diamond, and Hainmueller (2011). 
+#' @param tdf An object with a list of outcome values for placebos, 
+#'     constructed by \link{generate.placebos}.
+#' @param discard.extreme Logical. Whether or not units with high pre-treatement 
+#'     MSPE should be excluded from the plot. Takes a default of \code{FALSE}.
+#' @param mspe.limit Numerical. Used if \code{discard.extreme} is \code{TRUE}. 
+#'     It indicates how many times the pre-treatment MSPE of a placebo should 
+#'     be higher than that of the treated unit to be considered extreme and 
+#'     discarded. Default is \code{20}.
+#' @param xlab Character. Optional. Label of the x axis.
+#' @param ylab Character. Optional. Label of the y axis.
+#' @param title Character. Optional. Title of the plot.
+#' @param alpha.placebos
+#' @references 
+#' @seealso \code{\link{generate.placebos}, \link[Synth]{gaps.plot}, 
+#'     \link[Synth]{synth}, \link[Synth]{dataprep}
+#' @examples 
+#' ## First prepare the required objects
+#' # Load simulated data from Synth
+#' data(synth.data)
+#' 
+#' # Execute dataprep to produce the necessary matrices for synth
+#' dataprep.out<-
+#'   dataprep(
+#'     foo = synth.data,
+#'     predictors = c("X1", "X2", "X3"),
+#'     predictors.op = "mean",
+#'     dependent = "Y",
+#'     unit.variable = "unit.num",
+#'     time.variable = "year",
+#'     special.predictors = list(
+#'       list("Y", 1991, "mean"),
+#'       list("Y", 1985, "mean"),
+#'       list("Y", 1980, "mean")
+#'     ),
+#'     treatment.identifier = 7,
+#'     controls.identifier = c(29, 2, 13, 17, 32, 38),
+#'     time.predictors.prior = c(1984:1989),
+#'     time.optimize.ssr = c(1984:1990),
+#'     unit.names.variable = "name",
+#'     time.plot = 1984:1996
+#'   )
+#' 
+#' # run the synth command to create the synthetic control
+#' synth.out <- synth(dataprep.out)
+#' 
+#' ## run the generate.placebos command to reassign treatment status
+#' ## to each unit listed as control, one at a time, and generate their
+#' ## synthetic versions. 
+#' tdf<-generate.placebos(dataprep.out,synth.out)
+#' 
+#' ## Plot the gaps in outcome values over time of each unit --
+#' ## treated and placebos -- to their synthetic controls
+#' 
+#' p <- plot.placebos(tdf,discard.extreme=T,mspe.limit=10,xlab='Year')
+#' p
+#' 
+#' @export
+
 plot.placebos <-
-function(tdf=tdf,discard.extreme=FALSE,mspe.limit=20,xlab = NULL,ylab = NULL,title=NULL,
+function(tdf=tdf, 
+         discard.extreme=FALSE, 
+         mspe.limit=20, 
+         xlab = NULL, 
+         ylab = NULL, 
+         title=NULL,
          alpha.placebos=1, ...){
 n<-tdf$n
 t1<-tdf$t1
@@ -16,12 +83,32 @@ colnames(df.plot)<-c('year','cont','tr','id')
 if(discard.extreme) {
   df.plot<-df.plot[ ! df.plot$id %in% which(tdf$mspe.placs/tdf$loss.v >= mspe.limit),] 
 }
-else {df.plot<-df.plot}
-p.gaps<-ggplot(data=data.frame(df.plot),aes(x=year,y=(tr-cont)))+geom_line(aes(group=id,color='2'))+geom_vline(xintercept = t1,linetype='dotted')+
-    geom_hline(yintercept = 0, linetype = 'dashed')+ geom_line(data=data.frame(tdf$df),aes(x = year, y=(Y1-synthetic.Y1),color='1'),alpha=alpha.placebos)+ ylim(c(1.5*min(c(min(tdf$df$Y1 - tdf$df$synthetic.Y1),min(df.plot$tr-df.plot$cont))),1.5*max(c(max(tdf$df$Y1-tdf$df$synthetic.Y1),max(df.plot$tr-df.plot$cont))))) +
-  labs(y=ylab,x=xlab,title=title)+scale_color_manual(values = c('2' = 'gray80', '1' = 'black'),labels = c(tdf$treated.name, 'Control units'), guide = guide_legend(NULL))+
-    theme(panel.background = element_blank(),panel.grid.major = element_blank(),panel.grid.minor=element_blank(),axis.line.x = element_line(colour = 'black'),axis.line.y = element_line(colour = 'black'),legend.key = element_blank(),
-          axis.text.x = element_text(colour = 'black'),axis.text.y = element_text(colour = 'black'),legend.position='bottom'
-              )
+else {
+  df.plot<-df.plot
+  }
+p.gaps<-ggplot2::ggplot(data=data.frame(df.plot),ggplot2::aes(x=year, y=(tr-cont)))+
+  ggplot2::geom_line(aes(group=id,color='2'))+
+  ggplot2::geom_vline(xintercept = t1,linetype='dotted')+
+  ggplot2::geom_hline(yintercept = 0, linetype = 'dashed')+ 
+  ggplot2::geom_line(data=data.frame(tdf$df),
+                     ggplot2::aes(x = year, y=(Y1-synthetic.Y1),color='1'),
+                     alpha=alpha.placebos)+ 
+  ggplot2::ylim(c(1.5*min(c(min(tdf$df$Y1 - tdf$df$synthetic.Y1),
+                            min(df.plot$tr-df.plot$cont))),
+                  1.5*max(c(max(tdf$df$Y1-tdf$df$synthetic.Y1),
+                            max(df.plot$tr-df.plot$cont))))) +
+  ggplot2::labs(y=ylab,x=xlab,title=title)+
+  ggplot2::scale_color_manual(values = c('2' = 'gray80', '1' = 'black'),
+                     labels = c(tdf$treated.name, 'Control units'), 
+                     guide = ggplot2::guide_legend(NULL))+
+  ggplot2::theme(panel.background = ggplot2::element_blank(), 
+          panel.grid.major = ggplot2::element_blank(),
+          panel.grid.minor=ggplot2::element_blank(),
+          axis.line.x = ggplot2::element_line(colour = 'black'),
+          axis.line.y = ggplot2::element_line(colour = 'black'),
+          legend.key = ggplot2::element_blank(),
+          axis.text.x = ggplot2::element_text(colour = 'black'),
+          axis.text.y = ggplot2::element_text(colour = 'black'),
+          legend.position='bottom')
   return(p.gaps)
 }
