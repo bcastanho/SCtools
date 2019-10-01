@@ -30,6 +30,9 @@ usethis::use_badge("maturing")
 usethis::use_cran_badge()
 usethis::use_code_of_conduct()
 
+# NEws!
+usethis::use_news_md()
+
 # Use Vignettes
 usethis::use_vignette(name = "replicating-basque", "Replicating the Basque Study")
 
