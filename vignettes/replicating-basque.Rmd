@@ -67,3 +67,12 @@ path.plot(synth.res = synth.out, dataprep.res = dataprep.out,
 
 ```
 
+```{r}
+placebo <- generate.placebos(dataprep.out = dataprep.out,
+                             synth.out = synth.out)
+```
+
+```{r}
+plot_placebos(placebo)
+```
+
