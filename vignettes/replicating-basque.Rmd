@@ -14,14 +14,22 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Introduction
+
+In order to demonstrate `SCtools` it is useful to start with a replication of the cannonical Basque study from Abadie.
+
 ```{r setup}
 library(SCtools)
 library(Synth)
 ```
 
+Now we can load the `basque` data set.
+
 ```{r}
 data("basque")
 ```
+
+As per the normal `Synth` workflow, we need to reformat our data using the `dataprep` function in which we specify our counterfactuals and our response variables. 
 
 ```{r}
 dataprep.out <- dataprep(
@@ -50,13 +58,19 @@ dataprep.out <- dataprep(
 
 ```
 
+Now, we can run the SCM algorithm using the `synth` function.
+
 ```{r}
 synth.out <- synth(data.prep.obj = dataprep.out, method = "BFGS")
 ```
 
+`Synth` provides some additional helper functions to extract information from the outputted object including the ability to analyze the outputs:
+
 ```{r}
 gaps <- dataprep.out$Y1plot - (dataprep.out$Y0plot %*% synth.out$solution.w)
 ```
+
+And generate plots of the counterfactual:
 
 ```{r}
 path.plot(synth.res = synth.out, dataprep.res = dataprep.out,
@@ -66,6 +80,10 @@ path.plot(synth.res = synth.out, dataprep.res = dataprep.out,
           Legend.position = "bottomright")
 
 ```
+
+## Extending the Analysis
+
+At this point, `SCtools` extends the analysis from `Synth`, While `Synth` generates an analysis on one configured dataset, `SCtools` provides the tooling to permute the dataset and generate multiple placebos to test the sensitivity of our SCM output.
 
 ```{r}
 placebo <- generate.placebos(dataprep.out = dataprep.out,
