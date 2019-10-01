@@ -37,6 +37,7 @@ Creates plots with the difference between observed units
 \examples{
 ## First prepare the required objects
 # Load simulated data from Synth
+library(Synth)
 data(synth.data)
 
 # Execute dataprep to produce the necessary matrices for synth

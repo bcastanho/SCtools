@@ -84,13 +84,13 @@ synth.out <- synth(dataprep.out)
 ## run the generate.placebos command to reassign treatment status
 ## to each unit listed as control, one at a time, and generate their
 ## synthetic versions. 
-tdf<-generate.placebos(dataprep.out,synth.out)
+tdf<-generate.placebos(dataprep.out, synth.out)
 
 ## Test how extreme was the observed treatment effect given the placebos:
-ratio<-mspe.test(tdf)
+ratio <- mspe.test(tdf)
 ratio$p.val
 
-mspe.plot(tdf,discard, extreme=FALSE)
+mspe.plot(tdf,discard, discard.extreme = FALSE)
    
 }
 \seealso{
