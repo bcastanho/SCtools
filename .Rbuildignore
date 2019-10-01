@@ -12,3 +12,4 @@ init.R
 ^pkgdown$
 ^CODE_OF_CONDUCT\.md$
 ^\.github$
+^data-raw$
