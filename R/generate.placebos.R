@@ -1,7 +1,7 @@
 #' @title Function to generate placebo synthetic controls
 #' @description Constructs a synthetic control group for each unit in the 
 #'    donor pool of an implementation of the synthetic control method for a 
-#'    single treated unit. Used for placebo tests (see \link{plot.placebos}, 
+#'    single treated unit. Used for placebo tests (see \link{plot_placebos}, 
 #'    \link{mspe.test}, \link{mspe.plot}) to assess the strength and 
 #'    significance of a causal inference based on the synthetic control method. 
 #'    On placebo tests, see Abadie and Gardeazabal (2003), and Abadie, Diamond, 
@@ -25,7 +25,7 @@
 #'    \item{loss.v}{Pretreatment MSPE of the treated unit's synthetic control}}
 #' @examples 
 #' ## First prepare the required objects
-#' 
+#' library(Synth)
 #' # Load simulated data from Synth
 #' data(synth.data)
 #' 
@@ -58,11 +58,13 @@
 #' ## to each unit listed as control, one at a time, and generate their
 #' ## synthetic versions. 
 #' tdf <- generate.placebos(dataprep.out,synth.out)
+#' 
 #' @export
 
 generate.placebos <- function(dataprep.out,
                               synth.out,
                               Sigf.ipop = 5) {
+  unit.numbers <- NULL
   
   tr <- as.numeric(dataprep.out$tag$treatment.identifier)
   names.and.numbers <-
@@ -79,7 +81,7 @@ generate.placebos <- function(dataprep.out,
   mspe.placs <- data.frame(matrix(0, ncol = 1, nrow = n))
   
   for (i in 1:n) {
-    temp <- syn.plac(i, dataprep.out, Sigf.ipop)
+    temp <- syn_plac(i, dataprep.out, Sigf.ipop, tr, names.and.numbers)
     b[, i] <- temp$a
     colnames(b)[i] <-
       paste('synthetic', as.character(names.and.numbers[i, 2]), sep = '.')

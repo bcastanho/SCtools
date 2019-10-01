@@ -50,8 +50,9 @@ Post/pre-treatement mean square prediction error ratio is the
    and Hainmueller (2011, 2014).
 }
 \examples{
-## First prepare the required objects
 
+## First prepare the required objects
+library(Synth)
 # Load simulated data from Synth
 data(synth.data)
 
@@ -93,6 +94,6 @@ mspe.plot(tdf,discard.extreme=F)
    
 }
 \seealso{
-See also \code{\link{generate.placebos}, \link{mspe.plot}, 
-   \link[Synth]{synth}}
+\code{\link{generate.placebos}}, \code{\link{mspe.plot}}, 
+   \code{\link[Synth]{synth}}
 }

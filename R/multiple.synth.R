@@ -3,10 +3,10 @@
 #'    the difference between the treated and the synthetic control for each. 
 #'    Returns a vector with outcome values for the synthetic controls, 
 #'    a plot of average treatment effects, and if required generates placebos 
-#'    out of the donor pool to be used in conjunction with \link{plac.dist}. 
-#'    All arguments are the same used for \link{dataprep} in the \link{Synth} 
-#'    package, except for \link{treated.units}, \link{treatment.time}, and 
-#'    \link{generate.placebos}.
+#'    out of the donor pool to be used in conjunction with \code{\link{plac.dist}}. 
+#'    All arguments are the same used for \code{\link[Synth]{dataprep}} in the \code{\link[Synth:synth]{Synth}}
+#'    package, except for \code{treated.units}, \code{treatment.time}, and 
+#'    \code{\link{generate.placebos}}.
 #' @param foo Dataframe with the panel data.
 #' @param predictors Vector of column numbers or column-name character strings 
 #'     that identifies the predictors' columns. All predictors have to be numeric.
@@ -32,7 +32,7 @@
 #' @param unit.names.variable The column number or string with column name 
 #'    identifying the variable with units' names. The variable must be a character.
 #' @param time.plot A vector identifying the periods over which results are 
-#'    to be plotted with \link{path.plot}
+#'    to be plotted with \code{\link{path.plot}}
 #' @param treatment.time A numeric value with the value in ``time.variable'' 
 #'    that marks the intervention.
 #' @param generate.placebos Logical. Whether a placebo (a synthetic control) 
@@ -40,12 +40,14 @@
 #'    computation time.
 #' @param Sigf.ipop The Precision setting for the ipop optimization routine. 
 #'    Default of 5.
-#' @details The function runs \link{dataprep} and \link{synth} for each unit 
-#'    identified in ``treated.units''. It saves the vector with predicted values 
-#'    for each synthetic control, to be used in estimating average treatment 
-#'    effects in applications of Synthetic Controls for multiple treated units.
+#' @details The function runs \code{\link[Synth]{dataprep}} and \code{\link[Synth]{synth}} 
+#'    for each unit identified in ``treated.units''. It saves the vector with 
+#'    predicted values for each synthetic control, to be used in estimating 
+#'    average treatment effects in applications of Synthetic Controls for 
+#'    multiple treated units.
 #'    
-#'    For further details on the arguments, see the documentation of \link{Synth}.
+#'    For further details on the arguments, see the documentation of 
+#'    \code{\link[Synth:synth]{Synth}}.
 #' @return Data frame. Each column contains the outcome values for every time-point for one unit or its synthetic control. The last column contains the time-points.
 #'@export
 
@@ -69,8 +71,24 @@ multiple.synth<-function(foo,
 
   df<-data.frame(time.plot)
   
+  year <- tr <- cont <- NULL
+  
   for(i in 1:length(treated.units)){
-    df[,i]<-syn(i)$a
+    df[,i]<-syn(i,
+                foo,
+                predictors,
+                predictors.op,
+                dependent,
+                unit.variable,
+                time.variable,
+                special.predictors,
+                treated.units,
+                control.units,
+                time.predictors.prior,
+                time.optimize.ssr,
+                unit.names.variable,
+                time.plot,
+                Sigf.ipop)$a
     }
   for(i in 1:length(treated.units)){
     df[,i+length(treated.units)]<-foo[,dependent][foo[,unit.variable] == treated.units[[i]] & foo[,time.variable] %in% time.plot]
@@ -102,14 +120,30 @@ multiple.synth<-function(foo,
     }
   colnames(b.path)<-c('year','tr','cont')
   
-  p<-ggplot(data=b.path,aes(x = year, y=tr))+
-    geom_line()+
-    geom_line(aes(y=cont),linetype='dashed')+
-    geom_vline(xintercept = treatment.time)+
-    theme_bw()
+  p<-ggplot2::ggplot(data=b.path,
+                     ggplot2::aes(x = year, y=tr))+
+    ggplot2::geom_line()+
+    ggplot2::geom_line(ggplot2::aes(y=cont),
+                       linetype='dashed')+
+    ggplot2::geom_vline(xintercept = treatment.time)+
+    ggplot2::theme_bw()
   
   if(generate.placebos){
-    out.temp<-syn(treated.units[[1]])
+    out.temp<-syn(treated.units[[1]],
+                  foo,
+                  predictors,
+                  predictors.op,
+                  dependent,
+                  unit.variable,
+                  time.variable,
+                  special.predictors,
+                  treated.units,
+                  control.units,
+                  time.predictors.prior,
+                  time.optimize.ssr,
+                  unit.names.variable,
+                  time.plot,
+                  Sigf.ipop)
     tdf<-generate.placebos(dataprep.out=out.temp$dataprep.out,synth.out=out.temp$synth.out)
     df.plac<-data.frame(tdf$df)
     df.plac<-df.plac[,-c(ncol(df.plac)-1,ncol(df.plac)-2)]

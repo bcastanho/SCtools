@@ -47,7 +47,7 @@ between each treated unit and its synthetic control.}
 identifying the variable with units' names. The variable must be a character.}
 
 \item{time.plot}{A vector identifying the periods over which results are 
-to be plotted with \link{path.plot}}
+to be plotted with \code{\link{path.plot}}}
 
 \item{treatment.time}{A numeric value with the value in ``time.variable'' 
 that marks the intervention.}
@@ -67,16 +67,18 @@ Generates one synthetic control for each treated unit and calculates
    the difference between the treated and the synthetic control for each. 
    Returns a vector with outcome values for the synthetic controls, 
    a plot of average treatment effects, and if required generates placebos 
-   out of the donor pool to be used in conjunction with \link{plac.dist}. 
-   All arguments are the same used for \link{dataprep} in the \link{Synth} 
-   package, except for \link{treated.units}, \link{treatment.time}, and 
-   \link{generate.placebos}.
+   out of the donor pool to be used in conjunction with \code{\link{plac.dist}}. 
+   All arguments are the same used for \code{\link[Synth]{dataprep}} in the \code{\link[Synth:synth]{Synth}}
+   package, except for \code{treated.units}, \code{treatment.time}, and 
+   \code{\link{generate.placebos}}.
 }
 \details{
-The function runs \link{dataprep} and \link{synth} for each unit 
-   identified in ``treated.units''. It saves the vector with predicted values 
-   for each synthetic control, to be used in estimating average treatment 
-   effects in applications of Synthetic Controls for multiple treated units.
+The function runs \code{\link[Synth]{dataprep}} and \code{\link[Synth]{synth}} 
+   for each unit identified in ``treated.units''. It saves the vector with 
+   predicted values for each synthetic control, to be used in estimating 
+   average treatment effects in applications of Synthetic Controls for 
+   multiple treated units.
    
-   For further details on the arguments, see the documentation of \link{Synth}.
+   For further details on the arguments, see the documentation of 
+   \code{\link[Synth:synth]{Synth}}.
 }

@@ -65,6 +65,6 @@ Abadie, A., Diamond, A., Hainmueller, J. (2014).
    105 (490) 493–505.
 }
 \seealso{
-See also \code{\link{generate.placebos}, \link{mspe.test}, 
-    \link{plot.placebos}, \link[Synth]{synth}}
+\code{\link{generate.placebos}}, \code{\link{mspe.test}}, 
+    \code{\link{plot_placebos}}, \code{\link[Synth]{synth}}
 }

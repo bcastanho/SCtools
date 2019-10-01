@@ -32,7 +32,7 @@ Default of 5.}
 \description{
 Constructs a synthetic control group for each unit in the 
    donor pool of an implementation of the synthetic control method for a 
-   single treated unit. Used for placebo tests (see \link{plot.placebos}, 
+   single treated unit. Used for placebo tests (see \link{plot_placebos}, 
    \link{mspe.test}, \link{mspe.plot}) to assess the strength and 
    significance of a causal inference based on the synthetic control method. 
    On placebo tests, see Abadie and Gardeazabal (2003), and Abadie, Diamond, 
@@ -40,7 +40,7 @@ Constructs a synthetic control group for each unit in the
 }
 \examples{
 ## First prepare the required objects
-
+library(Synth)
 # Load simulated data from Synth
 data(synth.data)
 
@@ -73,4 +73,5 @@ synth.out <- synth(dataprep.out)
 ## to each unit listed as control, one at a time, and generate their
 ## synthetic versions. 
 tdf <- generate.placebos(dataprep.out,synth.out)
+
 }

@@ -1,12 +1,12 @@
 #' @title Plot the distribution of placebo samples for synthetic control 
 #'     analysis with multiple treated units.
-#' @description Takes the output object of \link{multiple.synth} creates a 
+#' @description Takes the output object of \code{\link{multiple.synth}} creates a 
 #'     distribution of placebo average treatment effects, to test the 
 #'     significance of the observed ATE. Does so by sampling k placebos 
 #'     (where k = the number of treated units) nboots times, and calculating 
 #'     the average treatment effect of the k placebos each time.
 #' @param multiple.synth multiple.synth}{An object returned by the function 
-#'    \link{multiple.synth}
+#'    \code{\link{multiple.synth}}
 #' @param nboots Number of bootstrapped samples of placebos to take.
 #' @return \describe{
 #' \item{p}{The plot.}
@@ -16,7 +16,10 @@
 #' }
 #' @export
 
-plac.dist<-function(multiple.synth,nboots){
+plac.dist<-function(multiple.synth,
+                    nboots){
+  
+  year <- atts <- NULL
   
   post.treat.t<-subset(multiple.synth$b.path, 
                        year > multiple.synth$treatment.time)
@@ -28,12 +31,18 @@ plac.dist<-function(multiple.synth,nboots){
   storage.matrix<-matrix(NA, ncol=1, nrow=nboots)
   
   for(i in 1:nboots){
-    cs<-sample(c(1:length(multiple.synth$control.units)),length(multiple.synth$treated.units),rep=F)
+    cs<-sample(c(1:length(multiple.synth$control.units)),
+               length(multiple.synth$treated.units), 
+               replace =F)
+    
     df.cont.temp<-df.cont[,c(c(cs),c(cs+length(multiple.synth$control.units)))]
+    
     storage.vector<-matrix(NA,ncol=1,nrow=length(cs))
     
     for(j in 1:length(storage.vector)){
+      
       m<-mean(df.cont.temp[,j])-mean(df.cont.temp[,j+length(cs)])
+      
       storage.vector[j,1]<-m
     }
     storage.matrix[i,1]<-mean(storage.vector)

@@ -4,10 +4,11 @@
 usethis::use_readme_rmd()
 
 # PAckages Used
-usethis::use_package("Hmisc")
+usethis::use_package("cvTools")
 usethis::use_package("ggplot2")
 usethis::use_package("Synth")
 usethis::use_package("stringr")
+usethis::use_package("stats")
 
 # Unit Testing
 usethis::use_testthat()
@@ -28,6 +29,7 @@ usethis::use_cran_badge()
 # Use Vignettes
 
 # Build site website
+usethis::use_pkgdown()
 pkgdown::build_site()
 
 # Licensing

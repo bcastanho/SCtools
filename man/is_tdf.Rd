@@ -2,7 +2,7 @@
 % Please edit documentation in R/tdf.R
 \name{is_tdf}
 \alias{is_tdf}
-\title{Test if the object is a}
+\title{Test if the object is a tdf object}
 \usage{
 is_tdf(x)
 }

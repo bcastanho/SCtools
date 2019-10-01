@@ -6,3 +6,7 @@ init.R
 ^\.travis\.yml$
 ^codecov\.yml$
 ^LICENSE\.md$
+^cran-comments\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

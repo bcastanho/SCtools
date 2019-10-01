@@ -127,11 +127,24 @@ c(403L, 10L, -323786906L, 1585366017L, -2017054061L, 1066718530L,
 )
 
 
-#' Helper Tool use in Generating Placebos
-#' 
+# Helper Tool for Generating Placebos
 
-syn<-function(i){
-	dataprep.out<-dataprep(
+syn<-function(i,
+							foo,
+							predictors,
+							predictors.op,
+							dependent,
+							unit.variable,
+							time.variable,
+							special.predictors,
+							treated.units,
+							control.units,
+							time.predictors.prior,
+							time.optimize.ssr,
+							unit.names.variable,
+							time.plot,
+							Sigf.ipop){
+	dataprep.out<-Synth::dataprep(
 		foo = foo,
 		predictors = predictors,
 		predictors.op = predictors.op,
@@ -158,10 +171,13 @@ syn<-function(i){
 	return(out)
 }
 
-#' Function used in generate,placebos
-#' 
-
-syn.plac <- function(i, dataprep.out, Sigf.ipop) {
+# Function used in generate,placebos
+# 
+syn_plac <- function(i, 
+										 dataprep.out, 
+										 Sigf.ipop, 
+										 tr, 
+										 names.and.numbers) {
 	cases <- as.numeric(dataprep.out$tag$controls.identifier)
 	X0 <- dataprep.out$X0[, -i]
 	X1 <- matrix(dataprep.out$X0[, i, drop = F])
@@ -172,11 +188,13 @@ syn.plac <- function(i, dataprep.out, Sigf.ipop) {
 	foo <- character(length = length(dataprep.out$tag$foo))
 	id <- as.numeric(dataprep.out$tag$unit.variable)
 	d <-
-		which(regexpr(tr, stringr::str_split(dataprep.out$tag$foo[id], ', ')[[1]]) == T)
+		which(regexpr(tr, stringr::str_split(dataprep.out$tag$foo[id],
+																				 ', ')[[1]]) == T)
 	for (j in 1:length(dataprep.out$tag$foo)) {
 		foo[j] <-
-			paste(stringr::str_split(dataprep.out$tag$foo[j], ', ')[[1]][-c(d[1]:d[length(d)])], collapse =
-							', ')
+			paste(stringr::str_split(dataprep.out$tag$foo[j],
+															 ', ')[[1]][-c(d[1]:d[length(d)])], 
+						collapse =', ')
 	}
 	predictors <- dataprep.out$tag$predictors
 	predictors.op <- dataprep.out$tag$predictors.op

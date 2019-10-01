@@ -1,4 +1,4 @@
-#' Test if the object is a 
+#' Test if the object is a tdf object
 #'
 #' This function returns `TRUE` for the object returned from the 
 #' \code{generate.placebos} function.

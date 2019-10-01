@@ -42,9 +42,8 @@
 #'    Control Program. Journal of the American Statistical Association 
 #'    105 (490) 493–505.
 #' 
-#' @seealso See also \code{\link{generate.placebos}, \link{mspe.test}, 
-#'     \link{plot.placebos}, \link[Synth]{synth}}
-#'     
+#' @seealso \code{\link{generate.placebos}}, \code{\link{mspe.test}}, 
+#'     \code{\link{plot_placebos}}, \code{\link[Synth]{synth}}
 #' @export 
 
 mspe.plot <-
@@ -64,6 +63,7 @@ function(tdf,
     stop("`discard,extrene` should be one of TRUE or FALSE")
   }
   
+  MSPE.ratios<-unit<-treat<-year<-mspe <- NULL 
   
     data<-mspe.test(tdf,discard.extreme=discard.extreme,mspe.limit=mspe.limit)
     test<-data.frame(data$test)
@@ -71,7 +71,7 @@ function(tdf,
     test[nrow(test),3]<-as.character(test[nrow(test),2])
     if(!plot.hist) {
     p.dot<-ggplot2::ggplot(data=test,ggplot2::aes(x = MSPE.ratios,
-                                y=reorder(unit,MSPE.ratios,max),
+                                y=stats::reorder(unit,MSPE.ratios,max),
                                 colour=factor(treat),
                                 shape=factor(treat)))+
       ggplot2::geom_point(size=4)+

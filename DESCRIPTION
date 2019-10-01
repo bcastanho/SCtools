@@ -1,25 +1,32 @@
 Package: SCtools
 Title: Tools for Synthetic Controls Analysis
-Version: 0.2
-Date: 2018-05-22
+Version: 0.2.9000
 Authors@R: c(
     person(given = "Bruno",
            family = "Castanho Silva",
            role = c("aut", "cre"),
-           email = "bcsilva@wiso.uni-koeln.de")
-           )
-Maintainer: Bruno Castanho Silva <bcsilva@wiso.uni-koeln.de>
+           email = "bcsilva@wiso.uni-koeln.de",
+           comment = c(ORCID = "YOUR-ORCID-ID")),
+    person(given = "Michael",
+           family = "DeWitt",
+           role = c("ctb"),
+           email = "me.dewitt.jr@gmail.com",
+           comment = c(ORCID = "0000-0001-8940-1967")))
 Description: A set of functions to extend the synthetic controls analyses 
     performed by the package Synth. Includes generating and plotting placebos, 
     significance tests and plots, and calculating average treatment effects 
     for multiple treated units.
+Maintainer: Bruno Castanho Silva <bcsilva@wiso.uni-koeln.de>
 License: GPL-3
 Encoding: UTF-8
-Suggests: 
-    testthat (>= 2.1.0),
-    covr
+LazyData: true
 Imports: 
-    Hmisc,
+    ggplot2,
     Synth,
-    ggplot2
+    stringr,
+    stats,
+    cvTools
+Suggests: 
+    testthat,
+    covr
 RoxygenNote: 6.1.1

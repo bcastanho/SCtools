@@ -9,7 +9,7 @@ plac.dist(multiple.synth, nboots)
 }
 \arguments{
 \item{multiple.synth}{multiple.synth}{An object returned by the function 
-\link{multiple.synth}}
+\code{\link{multiple.synth}}}
 
 \item{nboots}{Number of bootstrapped samples of placebos to take.}
 }
@@ -22,7 +22,7 @@ plac.dist(multiple.synth, nboots)
 }
 }
 \description{
-Takes the output object of \link{multiple.synth} creates a 
+Takes the output object of \code{\link{multiple.synth}} creates a 
     distribution of placebo average treatment effects, to test the 
     significance of the observed ATE. Does so by sampling k placebos 
     (where k = the number of treated units) nboots times, and calculating 

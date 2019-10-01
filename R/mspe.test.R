@@ -32,12 +32,13 @@
 #'    \item{test}{Dataframe with two columns. The first is the post/pre MSPE 
 #'    ratio for each unit. The second indicates unit names}
 #'}
-#' @seealso See also \code{\link{generate.placebos}, \link{mspe.plot}, 
-#'    \link[Synth]{synth}}
+#' @seealso  \code{\link{generate.placebos}}, \code{\link{mspe.plot}}, 
+#'    \code{\link[Synth]{synth}}
 #'    
 #' @examples 
-#' ## First prepare the required objects
 #' 
+#' ## First prepare the required objects
+#' library(Synth)
 #' # Load simulated data from Synth
 #' data(synth.data)
 #' 
@@ -85,6 +86,9 @@ mspe.test <-
            discard.extreme = FALSE,
            mspe.limit = 20) {
     t.mspe <- tdf$loss.v
+    
+    year <- mspe <- NULL
+    
     if (!discard.extreme) {
       n <- tdf$n
       pre <- subset(tdf$df, year < tdf$t1 & year >= tdf$t0)
@@ -103,10 +107,10 @@ mspe.test <-
     }
     test <- data.frame(matrix(0, ncol = 1, nrow = n))
     for (i in 1:n) {
-      test[i, 1] <- mspe(post[, i], post[, i + n]) / mspe.placs[i, ]
+      test[i, 1] <- cvTools::mspe(post[, i], post[, i + n]) / mspe.placs[i, ]
     }
     test[n + 1, 1] <-
-      mspe(post[, ncol(post) - 2], post[, ncol(post) - 1]) / t.mspe
+      cvTools::mspe(post[, ncol(post) - 2], post[, ncol(post) - 1]) / t.mspe
     test[1:n, 2] <- unit.names
     test[nrow(test), 2] <- tdf$treated.name
     colnames(test) <- c('MSPE.ratios', 'unit')

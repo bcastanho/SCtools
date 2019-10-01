@@ -9,23 +9,27 @@
 status](https://travis-ci.org/medewitt/SCtools.svg?branch=master)](https://travis-ci.org/medewitt/SCtools)
 [![Codecov test
 coverage](https://codecov.io/gh/medewitt/SCtools/branch/master/graph/badge.svg)](https://codecov.io/gh/medewitt/SCtools?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/SCtools)](https://CRAN.R-project.org/package=SCtools)
 <!-- badges: end -->
 
 This package is a work in progress compiling functions to make it easier
 running placebo in space tests with synthetic control models and SCM
-with multiple treated units.
+with multiple treated units. It relies heavily on the {Synth} package.
 
 [Reference manual](SCtools-manual.pdf)
 
-You can install it with `devtools`.
+You can install it with {devtools}.
 
 ``` r
 library(devtools)
 
-install_github('bcastanho/SCtools')
+install_github("bcastanho/SCtools")
 ```
 
 Or with the {remotes} package
 
-    library(remotes)
-    install_github("bcastanho/SCtools")
+``` r
+library(remotes)
+install_github("bcastanho/SCtools")
+```
