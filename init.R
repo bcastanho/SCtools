@@ -27,7 +27,7 @@ usethis::use_badge("maturing")
 usethis::use_cran_badge()
 
 # Use Vignettes
-
+usethis::use_vignette(name = "replicating-basque", "Replicating the Basque Study")
 # Build site website
 usethis::use_pkgdown()
 pkgdown::build_site()

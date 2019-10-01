@@ -77,7 +77,7 @@
 #' ratio$p.val
 #' 
 ## Check visually how extreme is this value in the distribution:
-#' mspe.plot(tdf,discard.extreme=F)
+#' mspe.plot(tdf,discard, extreme=FALSE)
 #'    
 #' @export
 
