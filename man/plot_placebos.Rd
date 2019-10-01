@@ -73,7 +73,7 @@ tdf<-generate.placebos(dataprep.out,synth.out)
 ## Plot the gaps in outcome values over time of each unit --
 ## treated and placebos -- to their synthetic controls
 
-p <- plot_placebos(tdf,discard.extreme=T,mspe.limit=10,xlab='Year')
+p <- plot_placebos(tdf,discard.extreme=TRUE, mspe.limit=10, xlab='Year')
 p
 
 }

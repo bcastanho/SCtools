@@ -2,10 +2,13 @@
 % Please edit documentation in R/mspe.test.R
 \name{mspe.test}
 \alias{mspe.test}
+\alias{mspe_test}
 \title{Function to compute the post/pre treatment MSPE ratio for the 
     treated unit and placebos}
 \usage{
 mspe.test(tdf, discard.extreme = FALSE, mspe.limit = 20)
+
+mspe_test(tdf, discard.extreme = FALSE, mspe.limit = 20)
 }
 \arguments{
 \item{tdf}{An object constructed by \code{\link{generate.placebos}}}

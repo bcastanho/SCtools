@@ -2,12 +2,18 @@
 % Please edit documentation in R/multiple.synth.R
 \name{multiple.synth}
 \alias{multiple.synth}
+\alias{multiple_synth}
 \title{Function to Apply Synthetic Controls to Multiple Treated Units}
 \usage{
 multiple.synth(foo, predictors, predictors.op, dependent, unit.variable,
   time.variable, special.predictors, treated.units, control.units,
   time.predictors.prior, time.optimize.ssr, unit.names.variable, time.plot,
-  treatment.time, generate.placebos = F, Sigf.ipop = 5)
+  treatment.time, gen.placebos = F, Sigf.ipop = 5)
+
+multiple_synth(foo, predictors, predictors.op, dependent, unit.variable,
+  time.variable, special.predictors, treated.units, control.units,
+  time.predictors.prior, time.optimize.ssr, unit.names.variable, time.plot,
+  treatment.time, gen.placebos = F, Sigf.ipop = 5)
 }
 \arguments{
 \item{foo}{Dataframe with the panel data.}
@@ -52,7 +58,7 @@ to be plotted with \code{\link{path.plot}}}
 \item{treatment.time}{A numeric value with the value in ``time.variable'' 
 that marks the intervention.}
 
-\item{generate.placebos}{Logical. Whether a placebo (a synthetic control) 
+\item{gen.placebos}{Logical. Whether a placebo (a synthetic control) 
 for each unit in the donor pool should be constructed. Will increase 
 computation time.}
 

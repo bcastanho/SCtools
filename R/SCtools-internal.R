@@ -240,3 +240,20 @@ syn_plac <- function(i,
 	res <- list(a = a, s.mspe = s.mspe)
 	return(res)
 }
+
+# Pattern Matching on T/F arguments
+
+match_logical <- function(x){
+	
+	x <- as.character(x)
+	
+	out <- try(grepl(pattern = "T", x = x, ignore.case = T))
+	
+	if(class(out) == "try-error"){
+		stop("Please pass a logical (i.e. TRUE or FALSE)")
+	}
+	
+	out
+}
+
+

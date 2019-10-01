@@ -2,10 +2,13 @@
 % Please edit documentation in R/plac.dist.R
 \name{plac.dist}
 \alias{plac.dist}
+\alias{plac_dist}
 \title{Plot the distribution of placebo samples for synthetic control 
     analysis with multiple treated units.}
 \usage{
 plac.dist(multiple.synth, nboots)
+
+plac_dist(multiple.synth, nboots)
 }
 \arguments{
 \item{multiple.synth}{multiple.synth}{An object returned by the function 

@@ -55,6 +55,9 @@ function(tdf,
          xlab='Post/Pre MSPE ratio',
          ylab=NULL) {
   
+  discard.extreme <- match_logical(discard.extreme)
+  plot.hist <- match_logical(plot.hist)
+  
   if(!is_tdf(tdf)){
     stop("`tdf` should be generated from the `generate.placebos function.`")
   }
@@ -112,3 +115,8 @@ function(tdf,
   return(p.dens)
   }
 }
+
+#' @rdname mspe.plot
+#' @export
+mspe_plot <- mspe.plot
+

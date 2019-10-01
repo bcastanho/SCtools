@@ -35,7 +35,7 @@
 #'    to be plotted with \code{\link{path.plot}}
 #' @param treatment.time A numeric value with the value in ``time.variable'' 
 #'    that marks the intervention.
-#' @param generate.placebos Logical. Whether a placebo (a synthetic control) 
+#' @param gen.placebos Logical. Whether a placebo (a synthetic control) 
 #'    for each unit in the donor pool should be constructed. Will increase 
 #'    computation time.
 #' @param Sigf.ipop The Precision setting for the ipop optimization routine. 
@@ -66,9 +66,11 @@ multiple.synth<-function(foo,
                          unit.names.variable,
                          time.plot,
                          treatment.time,
-                         generate.placebos=F, 
+                         gen.placebos=F, 
                          Sigf.ipop = 5){
 
+  gen.placebos <- match_logical(gen.placebos)
+  
   df<-data.frame(time.plot)
   
   year <- tr <- cont <- NULL
@@ -144,7 +146,8 @@ multiple.synth<-function(foo,
                   unit.names.variable,
                   time.plot,
                   Sigf.ipop)
-    tdf<-generate.placebos(dataprep.out=out.temp$dataprep.out,synth.out=out.temp$synth.out)
+    tdf<-generate.placebos(dataprep.out=out.temp$dataprep.out,
+                           synth.out=out.temp$synth.out)
     df.plac<-data.frame(tdf$df)
     df.plac<-df.plac[,-c(ncol(df.plac)-1,ncol(df.plac)-2)]
     out2<-list(df=df,
@@ -162,7 +165,15 @@ multiple.synth<-function(foo,
               b.path=b.path,
               treatment.time=treatment.time,
               treated.units=treated.units,
-              control.units=control.units)}
+              control.units=control.units)
+  }
+  
+  class(out2) <- append(class(out2),"tdf_multi")
+  
   return(out2)
 }
+#' @rdname multiple.synth
+#' @export
+multiple_synth <- multiple.synth
+
 

@@ -67,8 +67,10 @@ generate.placebos <- function(dataprep.out,
   unit.numbers <- NULL
   
   tr <- as.numeric(dataprep.out$tag$treatment.identifier)
+  
   names.and.numbers <-
     subset(dataprep.out$names.and.numbers, unit.numbers != tr)
+  
   n <- length(dataprep.out$tag$controls.identifier)
   
   b <-
@@ -104,7 +106,9 @@ generate.placebos <- function(dataprep.out,
     1
   treated.name <-
     as.character(dataprep.out$names.and.numbers$unit.names[dataprep.out$names.and.numbers[, 2] %in% dataprep.out$tag$treatment.identifier])
+  
   loss.v <- synth.out$loss.v
+  
   res2 <-
     list(
       df = df,
@@ -122,3 +126,8 @@ generate.placebos <- function(dataprep.out,
   
   return(res2)
 }
+
+#' @rdname generate.placebos
+#' @export
+generate_placebos <- generate.placebos
+

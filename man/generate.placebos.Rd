@@ -2,9 +2,12 @@
 % Please edit documentation in R/generate.placebos.R
 \name{generate.placebos}
 \alias{generate.placebos}
+\alias{generate_placebos}
 \title{Function to generate placebo synthetic controls}
 \usage{
 generate.placebos(dataprep.out, synth.out, Sigf.ipop = 5)
+
+generate_placebos(dataprep.out, synth.out, Sigf.ipop = 5)
 }
 \arguments{
 \item{dataprep.out}{A data.prep object produced by the \code{dataprep} command}

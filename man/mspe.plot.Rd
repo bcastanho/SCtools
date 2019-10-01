@@ -2,9 +2,14 @@
 % Please edit documentation in R/mspe.plot.R
 \name{mspe.plot}
 \alias{mspe.plot}
+\alias{mspe_plot}
 \title{Plot the post/pre-treatment MSPE ratio}
 \usage{
 mspe.plot(tdf, discard.extreme = TRUE, mspe.limit = 20,
+  plot.hist = FALSE, title = NULL, xlab = "Post/Pre MSPE ratio",
+  ylab = NULL)
+
+mspe_plot(tdf, discard.extreme = TRUE, mspe.limit = 20,
   plot.hist = FALSE, title = NULL, xlab = "Post/Pre MSPE ratio",
   ylab = NULL)
 }
