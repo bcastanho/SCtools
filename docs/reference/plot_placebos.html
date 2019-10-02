@@ -80,6 +80,21 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/replicating-basque.html">Replicating the Basque Study</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -118,7 +133,7 @@
     <tr>
       <th>tdf</th>
       <td><p>An object with a list of outcome values for placebos, 
-constructed by <a href='generate.placebos.html'>generate.placebos</a>.</p></td>
+constructed by <code><a href='generate.placebos.html'>generate.placebos</a></code>.</p></td>
     </tr>
     <tr>
       <th>discard.extreme</th>
@@ -163,11 +178,12 @@ discarded. Default is <code>20</code>.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## First prepare the required objects</span>
 <span class='co'># Load simulated data from Synth</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>Synth</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>synth.data</span>)
 
 <span class='co'># Execute dataprep to produce the necessary matrices for synth</span>
 <span class='no'>dataprep.out</span><span class='kw'>&lt;-</span>
-  <span class='fu'>dataprep</span>(
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/Synth/topics/dataprep'>dataprep</a></span>(
     <span class='kw'>foo</span> <span class='kw'>=</span> <span class='no'>synth.data</span>,
     <span class='kw'>predictors</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"X1"</span>, <span class='st'>"X2"</span>, <span class='st'>"X3"</span>),
     <span class='kw'>predictors.op</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
@@ -188,7 +204,7 @@ discarded. Default is <code>20</code>.</p></td>
   )
 
 <span class='co'># run the synth command to create the synthetic control</span>
-<span class='no'>synth.out</span> <span class='kw'>&lt;-</span> <span class='fu'>synth</span>(<span class='no'>dataprep.out</span>)</div><div class='output co'>#&gt; 
+<span class='no'>synth.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/Synth/topics/synth'>synth</a></span>(<span class='no'>dataprep.out</span>)</div><div class='output co'>#&gt; 
 #&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
 #&gt; 
 #&gt; 
@@ -334,7 +350,7 @@ discarded. Default is <code>20</code>.</p></td>
 <span class='co'>## Plot the gaps in outcome values over time of each unit --</span>
 <span class='co'>## treated and placebos -- to their synthetic controls</span>
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_placebos</span>(<span class='no'>tdf</span>,<span class='kw'>discard.extreme</span><span class='kw'>=</span><span class='no'>T</span>,<span class='kw'>mspe.limit</span><span class='kw'>=</span><span class='fl'>10</span>,<span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>'Year'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Recycling array of length 1 in vector-array arithmetic is deprecated.</span>
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'>plot_placebos</span>(<span class='no'>tdf</span>,<span class='kw'>discard.extreme</span><span class='kw'>=</span><span class='fl'>TRUE</span>, <span class='kw'>mspe.limit</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>'Year'</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Recycling array of length 1 in vector-array arithmetic is deprecated.</span>
 #&gt; <span class='warning'>  Use c() or as.vector() instead.</span></div><div class='input'><span class='no'>p</span></div><div class='img'><img src='plot_placebos-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
@@ -353,7 +369,7 @@ discarded. Default is <code>20</code>.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Bruno Castanho Silva.</p>
+  <p>Developed by Bruno Castanho Silva, Michael DeWitt.</p>
 </div>
 
 <div class="pkgdown">

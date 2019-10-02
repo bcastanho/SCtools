@@ -48,6 +48,21 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/replicating-basque.html">Replicating the Basque Study</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -70,15 +85,16 @@
 <a href="#sctools" class="anchor"></a>SCtools</h1></div>
 <!-- badges: start -->
 
-<p>This package is a work in progress compiling functions to make it easier running placebo in space tests with synthetic control models and SCM with multiple treated units.</p>
+<p>This package is a work in progress compiling functions to make it easier running placebo in space tests with synthetic control models and SCM with multiple treated units. It relies heavily on the {Synth} package.</p>
 <p><a href="SCtools-manual.pdf">Reference manual</a></p>
-<p>You can install it with <code>devtools</code>.</p>
+<p>You can install it with {devtools}.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(devtools)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">'bcastanho/SCtools'</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"bcastanho/SCtools"</span>)</a></code></pre></div>
 <p>Or with the {remotes} package</p>
-<pre><code><a href="https://www.rdocumentation.org/packages/base/topics/library">library(remotes)
-install_github("bcastanho/SCtools")</a></code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(remotes)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"bcastanho/SCtools"</span>)</a></code></pre></div>
+<p>Please note that the ‘SCtools’ project is released with a <a href="https://github.com/medewitt/tidyqwi/blob/master/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
   </div>
 
@@ -94,7 +110,7 @@ install_github("bcastanho/SCtools")</a></code></pre>
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Bruno Castanho Silva <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/YOUR-ORCID-ID" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li>Michael DeWitt <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-8940-1967" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
 </ul>
 </div>
 
@@ -112,7 +128,7 @@ install_github("bcastanho/SCtools")</a></code></pre>
 
 
       <footer><div class="copyright">
-  <p>Developed by Bruno Castanho Silva.</p>
+  <p>Developed by Bruno Castanho Silva, Michael DeWitt.</p>
 </div>
 
 <div class="pkgdown">

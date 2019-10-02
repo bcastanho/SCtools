@@ -85,6 +85,21 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/replicating-basque.html">Replicating the Basque Study</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -118,7 +133,9 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>mspe.test</span>(<span class='no'>tdf</span>, <span class='kw'>discard.extreme</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>mspe.limit</span> <span class='kw'>=</span> <span class='fl'>20</span>)</pre>
+    <pre class="usage"><span class='fu'>mspe.test</span>(<span class='no'>tdf</span>, <span class='kw'>discard.extreme</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>mspe.limit</span> <span class='kw'>=</span> <span class='fl'>20</span>)
+
+<span class='fu'>mspe_test</span>(<span class='no'>tdf</span>, <span class='kw'>discard.extreme</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>mspe.limit</span> <span class='kw'>=</span> <span class='fl'>20</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -227,7 +244,7 @@ discarded. Default is <code>20</code>.</p></td>
 <span class='co'>## run the generate.placebos command to reassign treatment status</span>
 <span class='co'>## to each unit listed as control, one at a time, and generate their</span>
 <span class='co'>## synthetic versions. </span>
-<span class='no'>tdf</span><span class='kw'>&lt;-</span><span class='fu'><a href='generate.placebos.html'>generate.placebos</a></span>(<span class='no'>dataprep.out</span>,<span class='no'>synth.out</span>)</div><div class='output co'>#&gt; 
+<span class='no'>tdf</span><span class='kw'>&lt;-</span><span class='fu'><a href='generate.placebos.html'>generate.placebos</a></span>(<span class='no'>dataprep.out</span>, <span class='no'>synth.out</span>)</div><div class='output co'>#&gt; 
 #&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
 #&gt; 
 #&gt; 
@@ -348,9 +365,9 @@ discarded. Default is <code>20</code>.</p></td>
 #&gt;  5.17837e-05 1.4881e-06 0.9998792 4.41379e-05 2.33603e-05 
 #&gt; </div><div class='input'>
 <span class='co'>## Test how extreme was the observed treatment effect given the placebos:</span>
-<span class='no'>ratio</span><span class='kw'>&lt;-</span><span class='fu'>mspe.test</span>(<span class='no'>tdf</span>)
+<span class='no'>ratio</span> <span class='kw'>&lt;-</span> <span class='fu'>mspe.test</span>(<span class='no'>tdf</span>)
 <span class='no'>ratio</span>$<span class='no'>p.val</span></div><div class='output co'>#&gt; [1] 0.1428571</div><div class='input'>
-<span class='fu'><a href='mspe.plot.html'>mspe.plot</a></span>(<span class='no'>tdf</span>,<span class='kw'>discard.extreme</span><span class='kw'>=</span><span class='no'>F</span>)</div><div class='img'><img src='mspe.test-1.png' alt='' width='700' height='433' /></div><div class='input'>   
+<span class='fu'><a href='mspe.plot.html'>mspe.plot</a></span>(<span class='no'>tdf</span>,<span class='no'>discard</span>, <span class='kw'>discard.extreme</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='mspe.test-1.png' alt='' width='700' height='433' /></div><div class='input'>   
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -372,7 +389,7 @@ discarded. Default is <code>20</code>.</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Bruno Castanho Silva.</p>
+  <p>Developed by Bruno Castanho Silva, Michael DeWitt.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Synth Data — synth.data • SCtools</title>
+<title>Test if the object is a tdf_multi object — is_tdf_multi • SCtools</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="Synth Data — synth.data" />
+<meta property="og:title" content="Test if the object is a tdf_multi object — is_tdf_multi" />
 
-<meta property="og:description" content="Synth Data" />
+<meta property="og:description" content="This function returns `TRUE` for the object returned from the 
+multiple.synth function.
+and `FALSE` for all other objects, including regular data frames." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -109,39 +111,42 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Synth Data</h1>
+    <h1>Test if the object is a tdf_multi object</h1>
     
-    <div class="hidden name"><code>synth.data.Rd</code></div>
+    <div class="hidden name"><code>is_tdf_multi.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Synth Data</p>
+    <p>This function returns `TRUE` for the object returned from the 
+<code>multiple.synth</code> function.
+and `FALSE` for all other objects, including regular data frames.</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>synth.data</span></pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <pre class="usage"><span class='fu'>is_tdf_multi</span>(<span class='no'>x</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>An object</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data.frame with 168 rows and 7 columns:</p><dl class='dl-horizontal'>
-  <dt>unit.num</dt><dd><p>The experimental unit number</p></dd>
-  <dt>year</dt><dd><p>year</p></dd>
-  <dt>name</dt><dd><p>name of the experimental unit</p></dd>
-  <dt>Y</dt><dd><p>outcome of interest</p></dd>
-  <dt>X1</dt><dd><p>Covariate 1</p></dd>
-  <dt>X2</dt><dd><p>Covariate 2</p></dd>
-  <dt>X3</dt><dd><p>Covariate 3</p></dd>
-   ...
-</dl>
+    <p>`TRUE` if the object inherits from the `tdf_multi` class.</p>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#format">Format</a></li>
+      <li><a href="#value">Value</a></li>
           </ul>
 
   </div>
