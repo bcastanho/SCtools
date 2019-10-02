@@ -36,7 +36,7 @@
 #'    \code{\link[Synth]{synth}}
 #'    
 #' @examples 
-#' 
+#' \dontrun{
 #' ## First prepare the required objects
 #' library(Synth)
 #' # Load simulated data from Synth
@@ -78,6 +78,7 @@
 #' 
 ## Check visually how extreme is this value in the distribution:
 #' mspe.plot(tdf,discard, discard.extreme = FALSE)
+#' }
 #'    
 #' @export
 

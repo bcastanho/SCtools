@@ -18,6 +18,7 @@
 #' @seealso \code{\link{generate.placebos}}, \code{\link[Synth]{gaps.plot}}, 
 #'     \code{\link[Synth]{synth}}, \code{\link[Synth]{dataprep}}
 #' @examples 
+#' \dontrun{
 #' ## First prepare the required objects
 #' # Load simulated data from Synth
 #' library(Synth)
@@ -58,7 +59,7 @@
 #' 
 #' p <- plot_placebos(tdf,discard.extreme=TRUE, mspe.limit=10, xlab='Year')
 #' p
-#' 
+#' }
 #' @export
 
 plot_placebos <-

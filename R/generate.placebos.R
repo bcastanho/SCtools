@@ -1,5 +1,5 @@
 #' @title Function to generate placebo synthetic controls
-#' @description Constructs a synthetic control group for each unit in the 
+#' @description Constructs a synthetic control unit for each unit in the 
 #'    donor pool of an implementation of the synthetic control method for a 
 #'    single treated unit. Used for placebo tests (see \link{plot_placebos}, 
 #'    \link{mspe.test}, \link{mspe.plot}) to assess the strength and 
@@ -24,6 +24,7 @@
 #'    \item{treated.name}{Unit name of the treated unit}
 #'    \item{loss.v}{Pretreatment MSPE of the treated unit's synthetic control}}
 #' @examples 
+#' \dontrun{
 #' ## First prepare the required objects
 #' library(Synth)
 #' # Load simulated data from Synth
@@ -58,7 +59,7 @@
 #' ## to each unit listed as control, one at a time, and generate their
 #' ## synthetic versions. 
 #' tdf <- generate.placebos(dataprep.out,synth.out)
-#' 
+#' }
 #' @export
 
 generate.placebos <- function(dataprep.out,
