@@ -12,4 +12,6 @@
 #' \item Generate figures for inference on SCM outputs
 #' \item Extend the existing Synth package
 #' }
+#' @importFrom future plan
+#' 
 "_PACKAGE"

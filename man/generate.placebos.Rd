@@ -5,9 +5,11 @@
 \alias{generate_placebos}
 \title{Function to generate placebo synthetic controls}
 \usage{
-generate.placebos(dataprep.out, synth.out, Sigf.ipop = 5)
+generate.placebos(dataprep.out, synth.out, Sigf.ipop = 5,
+  strategy = "sequential")
 
-generate_placebos(dataprep.out, synth.out, Sigf.ipop = 5)
+generate_placebos(dataprep.out, synth.out, Sigf.ipop = 5,
+  strategy = "sequential")
 }
 \arguments{
 \item{dataprep.out}{A data.prep object produced by the \code{dataprep} command}
@@ -16,6 +18,9 @@ generate_placebos(dataprep.out, synth.out, Sigf.ipop = 5)
 
 \item{Sigf.ipop}{The Precision setting for the ipop optimization routine. 
 Default of 5.}
+
+\item{strategy}{The processing method you wish to use 
+"sequential" or "multiprocess".}
 }
 \value{
 \describe{
@@ -30,7 +35,8 @@ Default of 5.}
    numbers and names from control units}
    \item{n}{Number of control units}
    \item{treated.name}{Unit name of the treated unit}
-   \item{loss.v}{Pretreatment MSPE of the treated unit's synthetic control}}
+   \item{loss.v}{Pretreatment MSPE of the treated unit's synthetic control}
+}
 }
 \description{
 Constructs a synthetic control unit for each unit in the 

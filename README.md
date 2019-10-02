@@ -36,5 +36,5 @@ install_github("bcastanho/SCtools")
 
 Please note that the ‘SCtools’ project is released with a [Contributor
 Code of
-Conduct](https://github.com/medewitt/tidyqwi/blob/master/CODE_OF_CONDUCT.md).
+Conduct](https://github.com/bcastanho/SCtools/blob/master/CODE_OF_CONDUCT.md).
 By contributing to this project, you agree to abide by its terms.

@@ -87,7 +87,7 @@ At this point, `SCtools` extends the analysis from `Synth`, While `Synth` genera
 
 ```{r}
 placebo <- generate.placebos(dataprep.out = dataprep.out,
-                             synth.out = synth.out)
+                             synth.out = synth.out, strategy = "multiprocess")
 ```
 
 ```{r}
