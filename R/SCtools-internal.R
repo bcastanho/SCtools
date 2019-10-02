@@ -256,4 +256,24 @@ match_logical <- function(x){
 	out
 }
 
+# Names of objects in `Synth`
+
+synth_object_names <- c("solution.v",
+												"solution.w",
+												"loss.v",
+												"loss.w",
+												"custom.v",
+												"rgV.optim")
+
+dataprep_object_names <- c( "X0", 
+														"X1", 
+														"Z0",
+														"Z1",
+														"Y0plot",
+														"Y1plot",
+														"names.and.numbers",
+														"tag" )
+
+
+
 

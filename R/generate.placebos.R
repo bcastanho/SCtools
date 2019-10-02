@@ -72,6 +72,19 @@ generate.placebos <- function(dataprep.out,
                               Sigf.ipop = 5,
                               strategy = "sequential") {
   
+  # Inputs Checkss
+  if(!all(names(dataprep.out) %in% dataprep_object_names)){
+    stop("Invalid dataprep object. Have you run `dataprep` on your data?")
+  }
+  
+  if(!all(names(synth.out) %in% synth_object_names)){
+    stop("Invalid synth output. Have you run the `synth` function?")
+  }
+  
+  if(is.integer(Sigf.ipop) | Sigf.ipop <= 0){
+    stop("You have not passed a valid argument for Signf.ipop. Please pass a positive integer")
+  }
+  
   strategy_match <- match.arg(strategy, c("sequential", "multiprocess"))
   
   unit.numbers <- NULL
