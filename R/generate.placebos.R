@@ -10,6 +10,8 @@
 #' @param synth.out A synth.out object produced by the \code{synth} command
 #' @param Sigf.ipop The Precision setting for the ipop optimization routine. 
 #'     Default of 5.
+#' @param strategy The processing method you wish to use 
+#'    "sequential" or "multiprocess".
 #' @return \describe{
 #'    \item{df }{Data frame with outcome data for each control unit and their 
 #'    respective synthetic control and for the original treated and its control}
@@ -22,7 +24,8 @@
 #'    numbers and names from control units}
 #'    \item{n}{Number of control units}
 #'    \item{treated.name}{Unit name of the treated unit}
-#'    \item{loss.v}{Pretreatment MSPE of the treated unit's synthetic control}}
+#'    \item{loss.v}{Pretreatment MSPE of the treated unit's synthetic control}
+#'}
 #' @examples 
 #' \dontrun{
 #' ## First prepare the required objects
@@ -60,11 +63,17 @@
 #' ## synthetic versions. 
 #' tdf <- generate.placebos(dataprep.out,synth.out)
 #' }
+#' @importFrom future plan 
+#' @importFrom stats setNames
 #' @export
 
 generate.placebos <- function(dataprep.out,
                               synth.out,
-                              Sigf.ipop = 5) {
+                              Sigf.ipop = 5,
+                              strategy = "sequential") {
+  
+  strategy_match <- match.arg(strategy, c("sequential", "multiprocess"))
+  
   unit.numbers <- NULL
   
   tr <- as.numeric(dataprep.out$tag$treatment.identifier)
@@ -81,15 +90,34 @@ generate.placebos <- function(dataprep.out,
       nrow = length(dataprep.out$tag$time.plot)
     ))
   
-  mspe.placs <- data.frame(matrix(0, ncol = 1, nrow = n))
+  #mspe.placs <- data.frame(matrix(0, ncol = 1, nrow = n))
   
-  for (i in 1:n) {
-    temp <- syn_plac(i, dataprep.out, Sigf.ipop, tr, names.and.numbers)
-    b[, i] <- temp$a
-    colnames(b)[i] <-
-      paste('synthetic', as.character(names.and.numbers[i, 2]), sep = '.')
-    mspe.placs[i, ] <- temp$s.mspe
-  }
+  # for (i in 1:n) {
+  #   temp <- syn_plac(i, dataprep.out, Sigf.ipop, tr, names.and.numbers)
+  #   b[, i] <- temp$a
+  #   colnames(b)[i] <-
+  #     paste('synthetic', as.character(names.and.numbers[i, 2]), sep = '.')
+  #   mspe.placs[i, ] <- temp$s.mspe
+  # }
+  
+  strategy <- paste0("future::", strategy_match)
+  
+  plan(strategy)
+  oplan <- plan()
+  
+  mspe2 <- furrr::future_map(1:n, ~syn_plac(.x, 
+                                            dataprep.out, 
+                                            Sigf.ipop, 
+                                            tr, names.and.numbers))
+  
+  b <- dplyr::bind_cols(purrr::map(mspe2,"a"))
+  b <- setNames(b, paste('synthetic', as.character(names.and.numbers[ ,2]), sep = '.'))
+  
+  mspe.placs <- purrr::map(mspe2, "s.mspe")
+  mspe.placs <- as.data.frame(unlist(mspe.placs))
+    
+  
+  on.exit(plan(oplan), add = TRUE)
   
   df <-
     cbind(

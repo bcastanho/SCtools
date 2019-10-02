@@ -12,6 +12,10 @@ usethis::use_package("ggplot2")
 usethis::use_package("Synth")
 usethis::use_package("stringr")
 usethis::use_package("stats")
+usethis::use_package("furrr")
+usethis::use_package("purrr")
+usethis::use_package("dplyr")
+usethis::use_package("future", type = "Depends")
 
 # Unit Testing
 usethis::use_testthat()
