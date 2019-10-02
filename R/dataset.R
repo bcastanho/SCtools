@@ -1,4 +1,5 @@
 #' Synth Data
+#' @description Synthetic data that can be used to explore SCtools.
 #' @format a data.frame with 168 rows and 7 columns:
 #' \describe{
 #'   \item{unit.num}{The experimental unit number}
@@ -13,7 +14,8 @@
 
 "synth.data"
 
-#' Alcohol Data
+#' World Alcohol per Capita Consumption
+#' @description This
 #' @format a data.frame with 5107 rows and 8 columns:
 #' \describe{
 #'   \item{country_name}{The name of the country}
@@ -27,6 +29,10 @@
 #'   \item{country_num}{Covariate 3}
 #'    ...
 #' }
-#' @source World Health Organization, World Bank
+#' @source World Health Organization Alcohol Consumption available at  
+#'     \url{http://apps.who.int/gho/data/node.main.A1039?lang=en}
+#'     
+#'    World Bank economic indicators available at 
+#'    \url{https://data.worldbank.org/}
 
 "alcohol"

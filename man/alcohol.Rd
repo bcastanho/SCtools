@@ -18,7 +18,10 @@
    ...
 }}
 \source{
-World Health Organization, World Bank
+World Health Organization Alcohol Consumption available at  
+    \url{http://apps.who.int/gho/data/node.main.A1039?lang=en}
+   World Bank economic indicators available at 
+   \url{https://data.worldbank.org/}
 }
 \usage{
 alcohol
