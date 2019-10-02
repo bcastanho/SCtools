@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Introduction
 
-In order to demonstrate `SCtools` it is useful to start with a replication of the cannonical Basque study from Abadie.
+In order to demonstrate `SCtools` it is useful to start with a replication of the cannonical Basque study from Abadie and Gardeazabal (2003).
 
 ```{r setup}
 library(SCtools)
