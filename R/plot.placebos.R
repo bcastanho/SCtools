@@ -88,12 +88,12 @@ treated.name<-as.character(tdf$treated.name)
 df.plot<-NULL
 for(i in 1:n){
   a<-cbind(tdf$df$year,tdf$df[,i],tdf$df[,n+i],i)
-  df.plot<-rbind(df.plot,a)
+  df.plot<-rbind(df.plot, a)
 }
 df.plot<-data.frame(df.plot)
 colnames(df.plot)<-c('year','cont','tr','id')
 if(discard.extreme) {
-  df.plot<-df.plot[ ! df.plot$id %in% which(tdf$mspe.placs/tdf$loss.v >= mspe.limit),] 
+  df.plot<-df.plot[ ! df.plot$id %in% which(tdf$mspe.placs/tdf$loss.v[1] >= mspe.limit),] 
 }
 else {
   df.plot<-df.plot
