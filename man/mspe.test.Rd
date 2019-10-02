@@ -53,7 +53,7 @@ Post/pre-treatement mean square prediction error ratio is the
    and Hainmueller (2011, 2014).
 }
 \examples{
-
+\dontrun{
 ## First prepare the required objects
 library(Synth)
 # Load simulated data from Synth
@@ -94,6 +94,7 @@ ratio <- mspe.test(tdf)
 ratio$p.val
 
 mspe.plot(tdf,discard, discard.extreme = FALSE)
+}
    
 }
 \seealso{

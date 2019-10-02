@@ -35,6 +35,7 @@ Creates plots with the difference between observed units
     See Abadie, Diamond, and Hainmueller (2011).
 }
 \examples{
+\dontrun{
 ## First prepare the required objects
 # Load simulated data from Synth
 library(Synth)
@@ -75,7 +76,7 @@ tdf<-generate.placebos(dataprep.out,synth.out)
 
 p <- plot_placebos(tdf,discard.extreme=TRUE, mspe.limit=10, xlab='Year')
 p
-
+}
 }
 \seealso{
 \code{\link{generate.placebos}}, \code{\link[Synth]{gaps.plot}}, 

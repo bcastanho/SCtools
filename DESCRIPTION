@@ -6,7 +6,7 @@ Authors@R: c(
            family = "Castanho Silva",
            role = c("aut", "cre"),
            email = "bcsilva@wiso.uni-koeln.de",
-           comment = c(ORCID = "YOUR-ORCID-ID")),
+           comment = c(ORCID = "0000-0001-9363-4704")),
     person(given = "Michael",
            family = "DeWitt",
            role = c("aut"),

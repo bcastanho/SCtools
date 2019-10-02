@@ -33,7 +33,7 @@ Default of 5.}
    \item{loss.v}{Pretreatment MSPE of the treated unit's synthetic control}}
 }
 \description{
-Constructs a synthetic control group for each unit in the 
+Constructs a synthetic control unit for each unit in the 
    donor pool of an implementation of the synthetic control method for a 
    single treated unit. Used for placebo tests (see \link{plot_placebos}, 
    \link{mspe.test}, \link{mspe.plot}) to assess the strength and 
@@ -42,6 +42,7 @@ Constructs a synthetic control group for each unit in the
    and Hainmueller (2010, 2011, 2014).
 }
 \examples{
+\dontrun{
 ## First prepare the required objects
 library(Synth)
 # Load simulated data from Synth
@@ -76,5 +77,5 @@ synth.out <- synth(dataprep.out)
 ## to each unit listed as control, one at a time, and generate their
 ## synthetic versions. 
 tdf <- generate.placebos(dataprep.out,synth.out)
-
+}
 }
