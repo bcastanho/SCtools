@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Authors • SCtools</title>
+<title>World Alcohol per Capita Consumption — alcohol • SCtools</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -25,12 +25,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
 
 
 
-<meta property="og:title" content="Authors" />
+<meta property="og:title" content="World Alcohol per Capita Consumption — alcohol" />
+
+<meta property="og:description" content="This data set has been compiled from data from the World Health
+Organization (WHO) and the World Bank (WB). The primary purpose was to investigate
+the effects of policy changes in the Russian Federation enacted in 2003
+around alcohol consumption. This is an excellent case study for SCM 
+approaches to be used. You can read more about the policy changes at
+https://www.theguardian.com/world/2019/oct/01/russian-alcohol-consumption-down-40-since-2003-who" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -47,7 +55,7 @@
   </head>
 
   <body>
-    <div class="container template-authors">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -59,7 +67,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">SCtools</a>
+        <a class="navbar-link" href="../index.html">SCtools</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.9000</span>
       </span>
     </div>
@@ -67,13 +75,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -83,12 +91,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/replicating-basque.html">Replicating the Basque Study</a>
+      <a href="../articles/replicating-basque.html">Replicating the Basque Study</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -104,26 +112,59 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Authors</h1>
+    <h1>World Alcohol per Capita Consumption</h1>
+    
+    <div class="hidden name"><code>alcohol.Rd</code></div>
     </div>
 
-    <ul class="list-unstyled">
-      <li>
-        <p><strong>Bruno Castanho Silva</strong>. Author, maintainer. <a href='https://orcid.org/0000-0001-9363-4704' target='orcid.widget'><img src='https://members.orcid.org/sites/default/files/vector_iD_icon.svg' class='orcid' alt='ORCID' height='16'></a>
-        </p>
-      </li>
-      <li>
-        <p><strong>Michael DeWitt</strong>. Author. <a href='https://orcid.org/0000-0001-8940-1967' target='orcid.widget'><img src='https://members.orcid.org/sites/default/files/vector_iD_icon.svg' class='orcid' alt='ORCID' height='16'></a>
-        </p>
-      </li>
-    </ul>
+    <div class="ref-description">
+    
+    <p>This data set has been compiled from data from the World Health
+Organization (WHO) and the World Bank (WB). The primary purpose was to investigate
+the effects of policy changes in the Russian Federation enacted in 2003
+around alcohol consumption. This is an excellent case study for SCM 
+approaches to be used. You can read more about the policy changes at
+<a href='https://www.theguardian.com/world/2019/oct/01/russian-alcohol-consumption-down-40-since-2003-who'>https://www.theguardian.com/world/2019/oct/01/russian-alcohol-consumption-down-40-since-2003-who</a></p>
+    
+    </div>
+
+    <pre class="usage"><span class='no'>alcohol</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>a data.frame with 5107 rows and 8 columns:</p>
+<dl class='dl-horizontal'>
+  <dt>country_name</dt><dd><p>The name of the country</p></dd>
+  <dt>year</dt><dd><p>year</p></dd>
+  <dt>consumption</dt><dd><p>Alcohol consumption per capita (liters/person); all types</p></dd>
+  <dt>country_code</dt><dd><p>Three letter country code</p></dd>
+  <dt>labor_force_participation_rate</dt><dd><p>Labor force participation rate, total (percent of total population ages 15+)</p></dd>
+  <dt>mobile_cellular_subscriptions</dt><dd><p>Mobile cellular subscriptions (per 100 people)</p></dd>
+  <dt>inflation</dt><dd><p>Inflation, consumer prices (annual percent)</p></dd>
+  <dt>manufacturing</dt><dd><p>Manufacturing, value added (percent of GDP)</p></dd>
+  <dt>country_num</dt><dd><p>The country number</p></dd>
+</dl>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>WHO data available at <a href='http://apps.who.int/gho/data/node.main.A1039?lang=en'>http://apps.who.int/gho/data/node.main.A1039?lang=en</a>.</p>
+<p>WB data available at <a href='https://data.worldbank.org/'>https://data.worldbank.org/</a>.</p>
+    
 
   </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      
+      <li><a href="#format">Format</a></li>
 
+      <li><a href="#details">Details</a></li>
+          </ul>
+
+  </div>
 </div>
-
 
       <footer>
       <div class="copyright">

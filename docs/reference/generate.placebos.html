@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Function to generate placebo synthetic controls — generate.placebos" />
 
-<meta property="og:description" content="Constructs a synthetic control group for each unit in the 
+<meta property="og:description" content="Constructs a synthetic control unit for each unit in the 
    donor pool of an implementation of the synthetic control method for a 
    single treated unit. Used for placebo tests (see plot_placebos, 
    mspe.test, mspe.plot) to assess the strength and 
@@ -122,7 +122,7 @@
 
     <div class="ref-description">
     
-    <p>Constructs a synthetic control group for each unit in the 
+    <p>Constructs a synthetic control unit for each unit in the 
    donor pool of an implementation of the synthetic control method for a 
    single treated unit. Used for placebo tests (see <a href='plot_placebos.html'>plot_placebos</a>, 
    <a href='mspe.test.html'>mspe.test</a>, <a href='mspe.plot.html'>mspe.plot</a>) to assess the strength and 
@@ -132,9 +132,11 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>generate.placebos</span>(<span class='no'>dataprep.out</span>, <span class='no'>synth.out</span>, <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+    <pre class="usage"><span class='fu'>generate.placebos</span>(<span class='no'>dataprep.out</span>, <span class='no'>synth.out</span>, <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>strategy</span> <span class='kw'>=</span> <span class='st'>"sequential"</span>)
 
-<span class='fu'>generate_placebos</span>(<span class='no'>dataprep.out</span>, <span class='no'>synth.out</span>, <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>5</span>)</pre>
+<span class='fu'>generate_placebos</span>(<span class='no'>dataprep.out</span>, <span class='no'>synth.out</span>, <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>strategy</span> <span class='kw'>=</span> <span class='st'>"sequential"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,6 +153,11 @@
       <th>Sigf.ipop</th>
       <td><p>The Precision setting for the ipop optimization routine. 
 Default of 5.</p></td>
+    </tr>
+    <tr>
+      <th>strategy</th>
+      <td><p>The processing method you wish to use 
+"sequential" or "multiprocess".</p></td>
     </tr>
     </table>
     
@@ -169,15 +176,16 @@ Default of 5.</p></td>
    numbers and names from control units</p></dd>
    <dt>n</dt><dd><p>Number of control units</p></dd>
    <dt>treated.name</dt><dd><p>Unit name of the treated unit</p></dd>
-   <dt>loss.v</dt><dd><p>Pretreatment MSPE of the treated unit's synthetic control</p></dd></dl>
+   <dt>loss.v</dt><dd><p>Pretreatment MSPE of the treated unit's synthetic control</p></dd>
+</dl>
 
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## First prepare the required objects</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>Synth</span>)</div><div class='output co'>#&gt; <span class='message'>##</span>
-#&gt; <span class='message'>## Synth Package: Implements Synthetic Control Methods.</span></div><div class='output co'>#&gt; <span class='message'>## See http://www.mit.edu/~jhainm/software.htm for additional information.</span>
-#&gt; <span class='message'></span></div><div class='input'><span class='co'># Load simulated data from Synth</span>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'>## First prepare the required objects</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>Synth</span>)
+<span class='co'># Load simulated data from Synth</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='no'>synth.data</span>)
 
 <span class='co'># Execute dataprep to produce the necessary matrices for synth</span>
@@ -203,150 +211,13 @@ Default of 5.</p></td>
 )
 
 <span class='co'># run the synth command to create the synthetic control</span>
-<span class='no'>synth.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/Synth/topics/synth'>synth</a></span>(<span class='no'>dataprep.out</span>)</div><div class='output co'>#&gt; 
-#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
-#&gt; 
-#&gt; 
-#&gt; **************** 
-#&gt;  searching for synthetic control unit  
-#&gt;  
-#&gt; 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; 
-#&gt; MSPE (LOSS V): 4.714688 
-#&gt; 
-#&gt; solution.v:
-#&gt;  0.00490263 0.003884407 0.1972011 0.2707289 0.0007091301 0.5225738 
-#&gt; 
-#&gt; solution.w:
-#&gt;  0.0001407318 0.004851527 0.1697786 0.2173031 0.6079231 2.9419e-06 
-#&gt; </div><div class='input'>
+<span class='no'>synth.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/Synth/topics/synth'>synth</a></span>(<span class='no'>dataprep.out</span>)
+
 <span class='co'>## run the generate.placebos command to reassign treatment status</span>
 <span class='co'>## to each unit listed as control, one at a time, and generate their</span>
 <span class='co'>## synthetic versions. </span>
-<span class='no'>tdf</span> <span class='kw'>&lt;-</span> <span class='fu'>generate.placebos</span>(<span class='no'>dataprep.out</span>,<span class='no'>synth.out</span>)</div><div class='output co'>#&gt; 
-#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
-#&gt; 
-#&gt; 
-#&gt; **************** 
-#&gt;  searching for synthetic control unit  
-#&gt;  
-#&gt; 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; 
-#&gt; MSPE (LOSS V): 1.919039 
-#&gt; 
-#&gt; solution.v:
-#&gt;  4.26e-08 0.3314532 2.50708e-05 0.273401 0.1669915 0.2281292 
-#&gt; 
-#&gt; solution.w:
-#&gt;  0.05832822 0.5057193 0.001459438 0.432908 0.00158504 
-#&gt; 
-#&gt; 
-#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
-#&gt; 
-#&gt; 
-#&gt; **************** 
-#&gt;  searching for synthetic control unit  
-#&gt;  
-#&gt; 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; 
-#&gt; MSPE (LOSS V): 2656.617 
-#&gt; 
-#&gt; solution.v:
-#&gt;  0.05378089 0.03614492 0.1033622 0.3066906 0.1146891 0.3853323 
-#&gt; 
-#&gt; solution.w:
-#&gt;  5.5359e-06 6.589e-07 0.2873189 0.7126745 3.908e-07 
-#&gt; 
-#&gt; 
-#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
-#&gt; 
-#&gt; 
-#&gt; **************** 
-#&gt;  searching for synthetic control unit  
-#&gt;  
-#&gt; 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; 
-#&gt; MSPE (LOSS V): 4.417489 
-#&gt; 
-#&gt; solution.v:
-#&gt;  4.16708e-05 2.2374e-06 0.0002522976 0.312786 0.3920212 0.2948966 
-#&gt; 
-#&gt; solution.w:
-#&gt;  0.2640319 0.05262123 0.000396628 0.001012998 0.6819372 
-#&gt; 
-#&gt; 
-#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
-#&gt; 
-#&gt; 
-#&gt; **************** 
-#&gt;  searching for synthetic control unit  
-#&gt;  
-#&gt; 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; 
-#&gt; MSPE (LOSS V): 93.9186 
-#&gt; 
-#&gt; solution.v:
-#&gt;  0.3067778 0.01604218 0.01562176 0.006057079 0.5752435 0.08025769 
-#&gt; 
-#&gt; solution.w:
-#&gt;  1.7048e-06 0.2398606 0.7601323 2.138e-06 3.2977e-06 
-#&gt; 
-#&gt; 
-#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
-#&gt; 
-#&gt; 
-#&gt; **************** 
-#&gt;  searching for synthetic control unit  
-#&gt;  
-#&gt; 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; 
-#&gt; MSPE (LOSS V): 6.180212 
-#&gt; 
-#&gt; solution.v:
-#&gt;  0.0002384139 0.02854083 3.08429e-05 0.8305712 0.1359355 0.00468322 
-#&gt; 
-#&gt; solution.w:
-#&gt;  0.5634249 0.1701299 3.351e-07 0.0002552697 0.2661896 
-#&gt; 
-#&gt; 
-#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
-#&gt; 
-#&gt; 
-#&gt; **************** 
-#&gt;  searching for synthetic control unit  
-#&gt;  
-#&gt; 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; 
-#&gt; MSPE (LOSS V): 61.19353 
-#&gt; 
-#&gt; solution.v:
-#&gt;  0.01419207 6.4e-08 0.0178097 0.187153 0.5235156 0.2573296 
-#&gt; 
-#&gt; solution.w:
-#&gt;  5.17837e-05 1.4881e-06 0.9998792 4.41379e-05 2.33603e-05 
-#&gt; </div><div class='input'>
-</div></pre>
+<span class='no'>tdf</span> <span class='kw'>&lt;-</span> <span class='fu'>generate.placebos</span>(<span class='no'>dataprep.out</span>,<span class='no'>synth.out</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
