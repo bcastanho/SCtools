@@ -3,7 +3,8 @@
 \docType{data}
 \name{synth.data}
 \alias{synth.data}
-\title{Synth Data}
+\title{Synth Data
+Synthetic data that can be used to explore SCtools.}
 \format{a data.frame with 168 rows and 7 columns:
 \describe{
   \item{unit.num}{The experimental unit number}
@@ -13,12 +14,12 @@
   \item{X1}{Covariate 1}
   \item{X2}{Covariate 2}
   \item{X3}{Covariate 3}
-   ...
 }}
 \usage{
 synth.data
 }
 \description{
 Synth Data
+Synthetic data that can be used to explore SCtools.
 }
 \keyword{datasets}
