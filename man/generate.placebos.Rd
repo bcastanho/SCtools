@@ -20,7 +20,8 @@ generate_placebos(dataprep.out, synth.out, Sigf.ipop = 5,
 Default of 5.}
 
 \item{strategy}{The processing method you wish to use 
-"sequential" or "multiprocess".}
+"sequential" or "multiprocess". Use "multiprocess" to parallelize operations
+ and reduce computing time. Default is \code{sequential}.}
 }
 \value{
 \describe{
@@ -77,7 +78,7 @@ dataprep.out<-
 )
 
 # run the synth command to create the synthetic control
-synth.out <- synth(dataprep.out2)
+synth.out <- synth(dataprep.out)
 
 ## run the generate.placebos command to reassign treatment status
 ## to each unit listed as control, one at a time, and generate their

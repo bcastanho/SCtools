@@ -1,0 +1,87 @@
+---
+title: "SCM Case Study on Alcohol Consumption"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SCM Case Study on Alcohol Consumption}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+```{r}
+library(dplyr)
+alcohol %>% 
+  filter(country_name == "Russian Federation")
+```
+
+
+# Setting Up the Data
+
+
+
+
+```{r setup}
+library(SCtools)
+library(Synth)
+names(alcohol)
+alcohol$unit.variable <- as.numeric(alcohol$country_num)
+alcohol$year <- as.numeric(alcohol$year)
+
+glimpse(synth.data)
+
+```
+
+```{r}
+my_all <- alcohol
+```
+
+
+```{r}
+names(my_all)
+dataprep.out<-dataprep(
+	    foo = as.data.frame(my_all),
+	    predictors = c("labor_force_participation_rate",
+	                   "inflation",
+	                   "mobile_cellular_subscriptions",
+	                   "manufacturing"),
+	    predictors.op = "mean",
+	    dependent = "consumption",
+	    unit.variable = "country_num",
+	    time.variable = "year",
+	    treatment.identifier = 142,
+	    controls.identifier = c(182, 180, 67, 160, 85, 62, 164),
+	    time.predictors.prior = c(1991:2002),
+	    time.optimize.ssr = c(1991:2003),
+	    unit.names.variable = "country_code",
+	    time.plot = 1991:2012
+	)
+```
+
+```{r}
+out <- synth(dataprep.out, Sigf.ipop = 3)
+```
+
+```{r}
+path.plot(synth.res = out, dataprep.res = dataprep.out)
+```
+
+```{r}
+dataprep.out$Y1plot - (dataprep.out$Y0plot %*% out$solution.w)
+```
+
+```{r}
+placebo <- generate.placebos(dataprep.out = dataprep.out,
+                             synth.out = out, strategy = "multiprocess")
+```
+
+```{r}
+plot_placebos(placebo)
+```

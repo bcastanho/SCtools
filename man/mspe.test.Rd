@@ -93,7 +93,7 @@ tdf<-generate.placebos(dataprep.out, synth.out)
 ratio <- mspe.test(tdf)
 ratio$p.val
 
-mspe.plot(tdf,discard, discard.extreme = FALSE)
+mspe.plot(tdf,discard.extreme = FALSE)
 }
    
 }

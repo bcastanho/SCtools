@@ -8,12 +8,14 @@
 multiple.synth(foo, predictors, predictors.op, dependent, unit.variable,
   time.variable, special.predictors, treated.units, control.units,
   time.predictors.prior, time.optimize.ssr, unit.names.variable, time.plot,
-  treatment.time, gen.placebos = FALSE, Sigf.ipop = 5)
+  treatment.time, gen.placebos = FALSE, strategy = "sequential",
+  Sigf.ipop = 5)
 
 multiple_synth(foo, predictors, predictors.op, dependent, unit.variable,
   time.variable, special.predictors, treated.units, control.units,
   time.predictors.prior, time.optimize.ssr, unit.names.variable, time.plot,
-  treatment.time, gen.placebos = FALSE, Sigf.ipop = 5)
+  treatment.time, gen.placebos = FALSE, strategy = "sequential",
+  Sigf.ipop = 5)
 }
 \arguments{
 \item{foo}{Dataframe with the panel data.}
@@ -102,24 +104,28 @@ multi <- multiple.synth(foo = synth.data,
                        dependent = "Y",
                        unit.variable = "unit.num",
                        time.variable = "year",
-                       treatment.time = 1983,
+                       treatment.time = 1990,
                        special.predictors = list(
                          list("Y", 1991, "mean"),
                          list("Y", 1985, "mean"),
                          list("Y", 1980, "mean")
                        ),
-                       treated.units = 7,
-                       control.units = c(29, 2, 13, 17, 32, 38),
+                       treated.units = c(2,7),
+                       control.units = c(29, 13, 17, 32, 38),
                        time.predictors.prior = c(1984:1989),
                        time.optimize.ssr = c(1984:1990),
                        unit.names.variable = "name",
                        time.plot = 1984:1996, gen.placebos = TRUE, Sigf.ipop = 3 )
+## Plot with the average path of the treated units and the average of their
+## respective synthetic controls:
 
-multi
+multi$p
+
+## Bootstrap the placebo units to get a distribution of placebo average
+## treatment effects, and plot the distribution with a vertical line 
+## indicating the actual ATT:
 
 plac_dist(multi)
-
-
 }
 
 
