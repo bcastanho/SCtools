@@ -56,7 +56,7 @@
 #' )
 #' 
 #' # run the synth command to create the synthetic control
-#' synth.out <- synth(dataprep.out)
+#' synth.out <- synth(dataprep.out2)
 #' 
 #' ## run the generate.placebos command to reassign treatment status
 #' ## to each unit listed as control, one at a time, and generate their

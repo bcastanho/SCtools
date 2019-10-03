@@ -129,7 +129,7 @@ c(403L, 10L, -323786906L, 1585366017L, -2017054061L, 1066718530L,
 
 # Helper Tool for Generating Placebos
 
-syn<-function(i,
+make_syn<-function(index,
 							foo,
 							predictors,
 							predictors.op,
@@ -144,6 +144,9 @@ syn<-function(i,
 							unit.names.variable,
 							time.plot,
 							Sigf.ipop){
+	
+	treated.units <- treated.units[index]
+	
 	dataprep.out<-Synth::dataprep(
 		foo = foo,
 		predictors = predictors,
@@ -152,19 +155,18 @@ syn<-function(i,
 		unit.variable = unit.variable,
 		time.variable = time.variable,
 		special.predictors = special.predictors,
-		treatment.identifier = treated.units[[i]],
+		treatment.identifier = treated.units,
 		controls.identifier = control.units,
 		time.predictors.prior = time.predictors.prior,
 		time.optimize.ssr = time.optimize.ssr,
 		unit.names.variable = unit.names.variable,
 		time.plot = time.plot)
 	
-	synth.out<-Synth::synth(dataprep.out, 
-													Sigf.ipop = Sigf.ipop)
+	synth.out<-Synth::synth(data.prep.obj = dataprep.out )
 	
 	a<-data.frame(dataprep.out$Y0plot %*% synth.out$solution.w)
 	
-	colnames(a)<-paste('unit',i,sep='')
+	colnames(a)<-paste('unit',index,sep='')
 	
 	out<-list(a = a, synth.out=synth.out, dataprep.out = dataprep.out)
 	

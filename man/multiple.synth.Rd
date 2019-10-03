@@ -8,12 +8,12 @@
 multiple.synth(foo, predictors, predictors.op, dependent, unit.variable,
   time.variable, special.predictors, treated.units, control.units,
   time.predictors.prior, time.optimize.ssr, unit.names.variable, time.plot,
-  treatment.time, gen.placebos = F, Sigf.ipop = 5)
+  treatment.time, gen.placebos = FALSE, Sigf.ipop = 5)
 
 multiple_synth(foo, predictors, predictors.op, dependent, unit.variable,
   time.variable, special.predictors, treated.units, control.units,
   time.predictors.prior, time.optimize.ssr, unit.names.variable, time.plot,
-  treatment.time, gen.placebos = F, Sigf.ipop = 5)
+  treatment.time, gen.placebos = FALSE, Sigf.ipop = 5)
 }
 \arguments{
 \item{foo}{Dataframe with the panel data.}
@@ -22,7 +22,7 @@ multiple_synth(foo, predictors, predictors.op, dependent, unit.variable,
 that identifies the predictors' columns. All predictors have to be numeric.}
 
 \item{predictors.op}{A character string identifying the method (operator) 
-to be used on the predictors. Default is ``mean''.}
+to be used on the predictors. Default is \code{mean}.}
 
 \item{dependent}{The column number or a string with the column name that 
 corresponds to the dependent variable.}
@@ -36,10 +36,10 @@ that identifies the period (time) data. The variable must be numeric.}
 \item{special.predictors}{A list object identifying additional predictors and 
 their pre-treatment years and operators.}
 
-\item{treated.units}{A vector identifying the ``unit.variable'' numbers of 
+\item{treated.units}{A vector identifying the \code{unit.variable} numbers of 
 the treated units.}
 
-\item{control.units}{A vector identifying the ``unit.variable'' numbers of 
+\item{control.units}{A vector identifying the \code{unit.variable} numbers of 
 the control units.}
 
 \item{time.predictors.prior}{A numeric vector identifying the pretreatment 
@@ -55,7 +55,7 @@ identifying the variable with units' names. The variable must be a character.}
 \item{time.plot}{A vector identifying the periods over which results are 
 to be plotted with \code{\link{path.plot}}}
 
-\item{treatment.time}{A numeric value with the value in ``time.variable'' 
+\item{treatment.time}{A numeric value with the value in \code{time.variable}
 that marks the intervention.}
 
 \item{gen.placebos}{Logical. Whether a placebo (a synthetic control) 
@@ -66,7 +66,9 @@ computation time.}
 Default of 5.}
 }
 \value{
-Data frame. Each column contains the outcome values for every time-point for one unit or its synthetic control. The last column contains the time-points.
+Data frame. Each column contains the outcome values for every 
+time-point for one unit or its synthetic control. The last column contains 
+the time-points.
 }
 \description{
 Generates one synthetic control for each treated unit and calculates 
@@ -80,7 +82,7 @@ Generates one synthetic control for each treated unit and calculates
 }
 \details{
 The function runs \code{\link[Synth]{dataprep}} and \code{\link[Synth]{synth}} 
-   for each unit identified in ``treated.units''. It saves the vector with 
+   for each unit identified in \code{treated.units}. It saves the vector with 
    predicted values for each synthetic control, to be used in estimating 
    average treatment effects in applications of Synthetic Controls for 
    multiple treated units.

@@ -11,7 +11,7 @@
 #' @param predictors Vector of column numbers or column-name character strings 
 #'     that identifies the predictors' columns. All predictors have to be numeric.
 #' @param predictors.op A character string identifying the method (operator) 
-#'    to be used on the predictors. Default is ``mean''.
+#'    to be used on the predictors. Default is \code{mean}.
 #' @param dependent The column number or a string with the column name that 
 #'    corresponds to the dependent variable.
 #' @param unit.variable The column number or a string with the column name 
@@ -20,9 +20,9 @@
 #'    that identifies the period (time) data. The variable must be numeric.
 #' @param special.predictors A list object identifying additional predictors and 
 #'    their pre-treatment years and operators. 
-#' @param treated.units A vector identifying the ``unit.variable'' numbers of 
+#' @param treated.units A vector identifying the \code{unit.variable} numbers of 
 #'    the treated units.
-#' @param control.units A vector identifying the ``unit.variable'' numbers of 
+#' @param control.units A vector identifying the \code{unit.variable} numbers of 
 #'    the control units.
 #' @param time.predictors.prior A numeric vector identifying the pretreatment 
 #'    periods over which the values for the outcome predictors should be averaged.
@@ -33,7 +33,7 @@
 #'    identifying the variable with units' names. The variable must be a character.
 #' @param time.plot A vector identifying the periods over which results are 
 #'    to be plotted with \code{\link{path.plot}}
-#' @param treatment.time A numeric value with the value in ``time.variable'' 
+#' @param treatment.time A numeric value with the value in \code{time.variable}
 #'    that marks the intervention.
 #' @param gen.placebos Logical. Whether a placebo (a synthetic control) 
 #'    for each unit in the donor pool should be constructed. Will increase 
@@ -41,14 +41,17 @@
 #' @param Sigf.ipop The Precision setting for the ipop optimization routine. 
 #'    Default of 5.
 #' @details The function runs \code{\link[Synth]{dataprep}} and \code{\link[Synth]{synth}} 
-#'    for each unit identified in ``treated.units''. It saves the vector with 
+#'    for each unit identified in \code{treated.units}. It saves the vector with 
 #'    predicted values for each synthetic control, to be used in estimating 
 #'    average treatment effects in applications of Synthetic Controls for 
 #'    multiple treated units.
 #'    
 #'    For further details on the arguments, see the documentation of 
 #'    \code{\link[Synth:synth]{Synth}}.
-#' @return Data frame. Each column contains the outcome values for every time-point for one unit or its synthetic control. The last column contains the time-points.
+#'    
+#' @return Data frame. Each column contains the outcome values for every 
+#' time-point for one unit or its synthetic control. The last column contains 
+#' the time-points.
 #'@export
 
 
@@ -66,17 +69,36 @@ multiple.synth<-function(foo,
                          unit.names.variable,
                          time.plot,
                          treatment.time,
-                         gen.placebos=F, 
+                         gen.placebos=FALSE, 
                          Sigf.ipop = 5){
-
+  # Input Checking
+  if(!is.data.frame(foo)){
+    stop("Please pass a data.frame to the argument for `foo`")
+  }
+  
+  if(!all(predictors %in% names(foo))){
+    stop("One or more of `predictors` is not found in `foo`.")
+  }
+  
+  
+  if(Sigf.ipop <0 | !is.integer(as.integer(Sigf.ipop))){
+    stop("Please pass a positive integer to the Sigf.ipop argument.")
+  }
+  
   gen.placebos <- match_logical(gen.placebos)
+  
+  if(!all(is.numeric(foo[[unit.variable]]))){
+    stop("`unit.variable` must be a numeric column in `foo`")
+  }
+  
+  # Now run code
   
   df<-data.frame(time.plot)
   
   year <- tr <- cont <- NULL
   
   for(i in 1:length(treated.units)){
-    df[,i]<-syn(i,
+    df[,i]<-make_syn(index = i,
                 foo,
                 predictors,
                 predictors.op,
@@ -130,8 +152,8 @@ multiple.synth<-function(foo,
     ggplot2::geom_vline(xintercept = treatment.time)+
     ggplot2::theme_bw()
   
-  if(generate.placebos){
-    out.temp<-syn(treated.units[[1]],
+  if(gen.placebos){
+    out.temp<-make_syn(index = 1,
                   foo,
                   predictors,
                   predictors.op,
