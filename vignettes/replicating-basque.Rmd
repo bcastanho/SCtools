@@ -90,6 +90,8 @@ placebo <- generate.placebos(dataprep.out = dataprep.out,
                              synth.out = synth.out, strategy = "multiprocess")
 ```
 
+We can then use the `plot_placebos` function to replicate the figure found in Abadie and Gardeazabal (2003).
+
 ```{r}
 plot_placebos(placebo)
 ```

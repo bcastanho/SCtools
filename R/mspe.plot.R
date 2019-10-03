@@ -66,6 +66,7 @@ function(tdf,
     stop("`discard,extrene` should be one of TRUE or FALSE")
   }
   
+  
   MSPE.ratios<-unit<-treat<-year<-mspe <- NULL 
   
     data<-mspe.test(tdf,discard.extreme=discard.extreme,mspe.limit=mspe.limit)
