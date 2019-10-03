@@ -5,11 +5,11 @@
 \alias{mspe_plot}
 \title{Plot the post/pre-treatment MSPE ratio}
 \usage{
-mspe.plot(tdf, discard.extreme = TRUE, mspe.limit = 20,
+mspe.plot(tdf, discard.extreme = FALSE, mspe.limit = 20,
   plot.hist = FALSE, title = NULL, xlab = "Post/Pre MSPE ratio",
   ylab = NULL)
 
-mspe_plot(tdf, discard.extreme = TRUE, mspe.limit = 20,
+mspe_plot(tdf, discard.extreme = FALSE, mspe.limit = 20,
   plot.hist = FALSE, title = NULL, xlab = "Post/Pre MSPE ratio",
   ylab = NULL)
 }
@@ -51,6 +51,51 @@ Post/pre-treatement mean square prediction error ratio is the
     the result obtained for a single treated case with a synthetic control 
     analysis could have occurred by chance given no treatement. 
     For more detailed description, see Abadie, Diamond, and Hainmueller (2011, 2014).
+}
+\examples{
+\dontrun{
+## First prepare the required objects
+# Load simulated data from Synth
+library(Synth)
+data(synth.data)
+
+# Execute dataprep to produce the necessary matrices for synth
+dataprep.out<-
+  dataprep(
+    foo = synth.data,
+    predictors = c("X1", "X2", "X3"),
+    predictors.op = "mean",
+    dependent = "Y",
+    unit.variable = "unit.num",
+    time.variable = "year",
+    special.predictors = list(
+      list("Y", 1991, "mean"),
+      list("Y", 1985, "mean"),
+      list("Y", 1980, "mean")
+    ),
+    treatment.identifier = 7,
+    controls.identifier = c(29, 2, 13, 17, 32, 38),
+    time.predictors.prior = c(1984:1989),
+    time.optimize.ssr = c(1984:1990),
+    unit.names.variable = "name",
+    time.plot = 1984:1996
+  )
+
+# run the synth command to create the synthetic control
+synth.out <- synth(dataprep.out)
+
+## run the generate.placebos command to reassign treatment status
+## to each unit listed as control, one at a time, and generate their
+## synthetic versions. 
+tdf<-generate.placebos(dataprep.out,synth.out)
+
+## Test how extreme was the observed treatment effect given the placebos:
+ratio <- mspe.test(tdf)
+ratio$p.val
+
+mspe.plot(tdf, discard.extreme = FALSE)
+}
+   
 }
 \references{
 Abadie, A., Diamond, A., Hainmueller, J. (2014). 

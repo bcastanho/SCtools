@@ -18,9 +18,6 @@ generate_placebos(dataprep.out, synth.out, Sigf.ipop = 5,
 
 \item{Sigf.ipop}{The Precision setting for the ipop optimization routine. 
 Default of 5.}
-
-\item{strategy}{The processing method you wish to use 
-"sequential" or "multiprocess".}
 }
 \value{
 \describe{
@@ -77,7 +74,7 @@ dataprep.out<-
 )
 
 # run the synth command to create the synthetic control
-synth.out <- synth(dataprep.out2)
+synth.out <- synth(dataprep.out)
 
 ## run the generate.placebos command to reassign treatment status
 ## to each unit listed as control, one at a time, and generate their
