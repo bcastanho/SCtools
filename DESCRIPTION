@@ -1,6 +1,6 @@
 Package: SCtools
 Title: Tools for Synthetic Controls Analysis
-Version: 0.2.9000
+Version: 0.3.0
 Authors@R: c(
     person(given = "Bruno",
            family = "Castanho Silva",
@@ -16,6 +16,7 @@ Description: A set of functions to extend the synthetic controls analyses
     performed by the package Synth. Includes generating and plotting placebos, 
     significance tests and plots, and calculating average treatment effects 
     for multiple treated units.
+BugReports: https://github.com/bcastanho/SCtools/issues
 Maintainer: Bruno Castanho Silva <bcsilva@wiso.uni-koeln.de>
 License: GPL-3
 Encoding: UTF-8

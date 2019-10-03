@@ -20,6 +20,13 @@ It has several goals:
 \item Extend the existing Synth package
 }
 }
+\seealso{
+Useful links:
+\itemize{
+  \item Report bugs at \url{https://github.com/bcastanho/SCtools/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Bruno Castanho Silva \email{bcsilva@wiso.uni-koeln.de} (0000-0001-9363-4704)
 
