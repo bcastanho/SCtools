@@ -18,6 +18,13 @@ generate_placebos(dataprep.out, synth.out, Sigf.ipop = 5,
 
 \item{Sigf.ipop}{The Precision setting for the ipop optimization routine. 
 Default of 5.}
+<<<<<<< HEAD
+=======
+
+\item{strategy}{The processing method you wish to use 
+"sequential" or "multiprocess". Use "multiprocess" to parallelize operations
+ and reduce computing time. Default is \code{sequential}.}
+>>>>>>> 9bf84d9977c9ec1f404cfa315708dfcf99c0596b
 }
 \value{
 \describe{

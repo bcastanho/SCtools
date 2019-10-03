@@ -12,7 +12,7 @@
 #'     Default of 5.
 #' @param strategy The processing method you wish to use 
 #'    "sequential" or "multiprocess". Use "multiprocess" to parallelize operations
-#'     and reduce computing time. Default is \code\{sequential}.
+#'     and reduce computing time. Default is \code{sequential}.
 #' @return \describe{
 #'    \item{df }{Data frame with outcome data for each control unit and their 
 #'    respective synthetic control and for the original treated and its control}

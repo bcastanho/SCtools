@@ -39,6 +39,7 @@ usethis::use_news_md()
 
 # Use Vignettes
 usethis::use_vignette(name = "replicating-basque", "Replicating the Basque Study")
+usethis::use_vignette(name = "case-study", "SCM Case Study on Alcohol Consumption")
 
 # Some fun raw data?
 
