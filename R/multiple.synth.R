@@ -63,24 +63,29 @@
 #'                        dependent = "Y",
 #'                        unit.variable = "unit.num",
 #'                        time.variable = "year",
-#'                        treatment.time = 1983,
+#'                        treatment.time = 1990,
 #'                        special.predictors = list(
 #'                          list("Y", 1991, "mean"),
 #'                          list("Y", 1985, "mean"),
 #'                          list("Y", 1980, "mean")
 #'                        ),
-#'                        treated.units = 7,
-#'                        control.units = c(29, 2, 13, 17, 32, 38),
+#'                        treated.units = c(2,7),
+#'                        control.units = c(29, 13, 17, 32, 38),
 #'                        time.predictors.prior = c(1984:1989),
 #'                        time.optimize.ssr = c(1984:1990),
 #'                        unit.names.variable = "name",
 #'                        time.plot = 1984:1996, gen.placebos = TRUE, Sigf.ipop = 3 )
+
+#' ## Plot with the average path of the treated units and the average of their
+#' ## respective synthetic controls:
 #' 
-#' multi
+#' multi$p
+#' 
+#' ## Bootstrap the placebo units to get a distribution of placebo average
+#' ## treatment effects, and plot the distribution with a vertical line 
+#' ## indicating the actual ATT:
 #' 
 #' plac_dist(multi)
-#' 
-#' 
 #' }
 #' 
 #' 
@@ -101,7 +106,8 @@ multiple.synth<-function(foo,
                          unit.names.variable,
                          time.plot,
                          treatment.time,
-                         gen.placebos=FALSE, 
+                         gen.placebos=FALSE,
+												 strategy = 'sequential',
                          Sigf.ipop = 5){
   # Input Checking
   if(!is.data.frame(foo)){
@@ -118,6 +124,8 @@ multiple.synth<-function(foo,
   }
   
   gen.placebos <- match_logical(gen.placebos)
+  
+  strategy_match <- match.arg(strategy, c("sequential", "multiprocess"))
   
   if(!all(is.numeric(foo[[unit.variable]]))){
     stop("`unit.variable` must be a numeric column in `foo`")
@@ -201,7 +209,8 @@ multiple.synth<-function(foo,
                   time.plot,
                   Sigf.ipop)
     tdf<-generate.placebos(dataprep.out=out.temp$dataprep.out,
-                           synth.out=out.temp$synth.out)
+                           synth.out=out.temp$synth.out,
+    											 strategy=strategy)
     df.plac<-data.frame(tdf$df)
     df.plac<-df.plac[,-c(ncol(df.plac)-1,ncol(df.plac)-2)]
     out2<-list(df=df,

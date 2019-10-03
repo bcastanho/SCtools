@@ -79,6 +79,11 @@ function(tdf=tdf,
   }
   
   discard.extreme <- match_logical(discard.extreme)
+
+  if(!discard.extreme & mspe.limit != 20){
+  	warning('discard.extreme is FALSE. mspe.limit will be ignored.')
+  }
+  
   
 n<-tdf$n
 t1<-tdf$t1

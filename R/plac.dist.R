@@ -8,16 +8,56 @@
 #' @param multiple.synth multiple.synth}{An object returned by the function 
 #'    \code{\link{multiple.synth}}
 #' @param nboots Number of bootstrapped samples of placebos to take.
+#' Default is \code{500}. It should be higher for more reliable inference.
 #' @return \describe{
 #' \item{p}{The plot.}
 #' \item{att.t}{The observed average treatment effect.}
 #' \item{df}{Dataframe where each row is the ATT for one bootstrapped placebo 
 #'    sample, used to build the distribution plot.}
+#' \item{p.value}{Proportion of bootstrapped placebo samples ATTs which are
+#' more extreme than the observed average treatment effect. Equivalent to a 
+#' p-value in a two-tailed test.}
 #' }
+#' @examples \dontrun{
+#' library(Synth)
+#' data(synth.data)
+#' set.seed(42)
+#' ## Run the function similar to the dataprep() setup:
+#' multi <- multiple.synth(foo = synth.data,
+#'                        predictors = c("X1", "X2", "X3"),
+#'                        predictors.op = "mean",
+#'                        dependent = "Y",
+#'                        unit.variable = "unit.num",
+#'                        time.variable = "year",
+#'                        treatment.time = 1990,
+#'                        special.predictors = list(
+#'                          list("Y", 1991, "mean"),
+#'                          list("Y", 1985, "mean"),
+#'                          list("Y", 1980, "mean")
+#'                        ),
+#'                        treated.units = c(2,7),
+#'                        control.units = c(29, 13, 17, 32, 38),
+#'                        time.predictors.prior = c(1984:1989),
+#'                        time.optimize.ssr = c(1984:1990),
+#'                        unit.names.variable = "name",
+#'                        time.plot = 1984:1996, gen.placebos = TRUE, Sigf.ipop = 3 )
+#' 
+#' ## Plot with the average path of the treated units and the average of their
+#' ## respective synthetic controls:
+#' 
+#' multi$p
+#' 
+#' ## Bootstrap the placebo units to get a distribution of placebo average
+#' ## treatment effects, and plot the distribution with a vertical line 
+#' ## indicating the actual ATT:
+#' 
+#' plac_dist(multi)
+#' }
+#' 
 #' @export
 
 plac.dist<-function(multiple.synth,
-                    nboots){
+                    nboots = 500){
   
   if(!is.numeric(nboots) || nboots < 10){
     stop("`nboots` is not numeric or is less than 10.\nPlease use a number greater than 10 in order to make valid inferences")
@@ -62,12 +102,28 @@ plac.dist<-function(multiple.synth,
   p<-ggplot2::ggplot(data=storage.matrix,
                      ggplot2::aes(x = atts))+
     ggplot2::geom_histogram()+
-    ggplot2::geom_vline(xintercept=att.t,linetype='dotted',size=2)+
-    ggplot2::theme_bw()
+  	ggplot2::ylab(NULL) + 
+  	ggplot2::xlab('Distribution of boostrapped ATTs') +
+    ggplot2::geom_vline(xintercept=att.t,size=1, linetype = 'dotted')+
+  	ggplot2::scale_x_continuous(breaks = c(pretty(storage.matrix$atts), att.t), 
+  															labels = c(pretty(storage.matrix$atts), 'ATT'))+
+  	ggplot2::theme(panel.grid.major = ggplot2::element_line(colour = 'gray80'),
+  								 panel.grid.minor=ggplot2::element_line(colour='gray90'),
+  								 panel.background = ggplot2::element_blank(),
+  								 axis.line.x = ggplot2::element_line(colour = 'black'),
+  								 axis.line.y = ggplot2::element_line(colour = 'black'),
+  								 axis.text.y=ggplot2::element_text(colour='black'),
+  								 axis.text.x=ggplot2::element_text(colour='black'),
+  								 legend.position='bottom',
+  								 legend.key=ggplot2::element_blank()
+  	)
+  
+  p.value = sum(abs(att.t) >= abs(storage.matrix$atts))
   
     out<-list(p = p, 
               att.t = att.t, 
-              df = storage.matrix)
+              df = storage.matrix,
+    					p.value)
   
     return(out)
 }
