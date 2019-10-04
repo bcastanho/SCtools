@@ -1,7 +1,6 @@
 ---
 title: "SCM Case Study on Alcohol Consumption"
 output: rmarkdown::html_vignette
-fig_width: 12
 vignette: >
   %\VignetteIndexEntry{SCM Case Study on Alcohol Consumption}
   %\VignetteEngine{knitr::rmarkdown}
@@ -47,6 +46,19 @@ alcohol %>%
 	)
 ```
 
+We can also examine some of the trends in our predictors.
+
+```{r fig.cap="Trends in Predictors in Russian Federation"}
+alcohol %>% 
+  filter(country_name == "Russian Federation") %>% 
+	select(year, consumption,labor_force_participation_rate:manufacturing) %>% 
+	tidyr::gather(predictor, value, -year) %>% 
+	ggplot(aes(year, value))+
+	geom_line()+
+		facet_wrap(~predictor, scales = "free")
+```
+
+
 One feature of SCM is selecting donor states. These donor states help us to generate our synthetic control (synthetic version of Russian in the absence of the policy change). There are several key assumptions regarding choosing donor states including
 
 * No spillover effects (e.g. the policy change in Russia did not cause a huge migration of drinkers to another country, did not change trade patterns, etc) 
@@ -75,7 +87,7 @@ Now that we have an idea of the donors, we can build the pool.
 comparison_states <- c("USA", "UK", "UKR", "KAZ",
 											 "GBR", "ESP", "DEU", "POL",
 											 "FIN", "FRA", "GRC", "IRL",
-											 "LTU", "ROU", "EST", "GEO",
+											 "LTU", "ROU", "GEO",
 											 "SWE", "BEL", "BLR")
 
 control_ids <- alcohol %>% 
@@ -103,6 +115,8 @@ dataprep.out<-dataprep(
 	    controls.identifier = control_ids,
 	    time.predictors.prior = c(1991:2002),
 	    time.optimize.ssr = c(1994:2002),
+	    special.predictors = list(
+      list("consumption", 2000:2003 ,"mean")),
 	    unit.names.variable = "country_code",
 	    time.plot = 1991:2015
 	)
@@ -139,7 +153,7 @@ solution %>%
 	)
 ```
 
-Unsurprisingly, we can see that Belarus, Ukraine, and Kazakhstan contribute the most to counterfactual Russia. Let's continue with our analysis.
+Unsurprisingly, we can see that France and Belarus contribute the most to counterfactual Russia. Let's continue with our analysis.
 
 Now we can plot our real Russia vs our Synthetic Russia using the `plot.path` function from Synth.
 
@@ -151,20 +165,20 @@ path.plot(synth.res = out, dataprep.res = dataprep.out,
 We can also look at the delta between our real and synthetic Russia.
 
 ```{r}
-out <- (dataprep.out$Y1plot - (dataprep.out$Y0plot %*% out$solution.w)) %>% 
+delta_out <- (dataprep.out$Y1plot - (dataprep.out$Y0plot %*% out$solution.w)) %>% 
 	as.data.frame()
 
-out$year <- rownames(out)
+delta_out$year <- rownames(delta_out)
 
-out%>% 
+delta_out%>% 
 	knitr::kable(caption = "Difference in Alcohol Consumption Between Synthetic and Actual Russia", digits = 2)
 ```
 
-It appears that the policy took a while to take effect, with a decrease in alcohol consumed per capita beginning in 2010. However, it must be mentioned that this isn't the "40%" that the Guardian reports and that one may glean from the WHO graph at first glance.
+It appears that the policy took a while to take effect, with a decrease in alcohol consumed per capita beginning in 2009. However, it must be mentioned that this isn't the "40%" that the Guardian reports and that one may glean from the WHO graph at first glance.
 
 # The Next Steps
 
-The next steps in a SCM controls analysis is to generate Synthetic controls for the donor states in order to assess if the results observed are plausible (e.g. are the results we obtained due from chance, or reflect the true effect). The SCtools provides the `generate.placebos` function to automate this process. This includes the option to parallelise the operation (which greatly speeds up processing time). 
+The next steps in a SCM controls analysis is to permute the data set to understand the sensitivity of our Synthetic controls to assess if the results observed are plausible (e.g. are the results we obtained due from chance, or reflect the true effect). The SCtools provides the `generate.placebos` function to automate this process. This includes the option to parallelise the operation (which greatly speeds up processing time). 
 
 ```{r}
 placebo <- generate.placebos(dataprep.out = dataprep.out,
