@@ -40,6 +40,9 @@
 #'    computation time.
 #' @param Sigf.ipop The Precision setting for the ipop optimization routine. 
 #'    Default of 5.
+#' @param strategy The processing method you wish to use 
+#'    "sequential" or "multiprocess". Use "multiprocess" to parallelize operations
+#'     and reduce computing time. Default is \code{sequential}.
 #' @details The function runs \code{\link[Synth]{dataprep}} and \code{\link[Synth]{synth}} 
 #'    for each unit identified in \code{treated.units}. It saves the vector with 
 #'    predicted values for each synthetic control, to be used in estimating 
