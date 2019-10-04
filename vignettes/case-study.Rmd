@@ -151,9 +151,12 @@ path.plot(synth.res = out, dataprep.res = dataprep.out,
 We can also look at the delta between our real and synthetic Russia.
 
 ```{r}
-(dataprep.out$Y1plot - (dataprep.out$Y0plot %*% out$solution.w)) %>% 
-	as.data.frame() %>% 
-	rownames_to_column(var = "Year") %>% 
+out <- (dataprep.out$Y1plot - (dataprep.out$Y0plot %*% out$solution.w)) %>% 
+	as.data.frame()
+
+out$year <- rownames(out)
+
+out%>% 
 	knitr::kable(caption = "Difference in Alcohol Consumption Between Synthetic and Actual Russia", digits = 2)
 ```
 
