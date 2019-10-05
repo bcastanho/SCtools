@@ -8,46 +8,101 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 7, fig.height = 7, fig.align = "center")
 ```
 
 # Introduction
 
+Synthetic control provides a powerful approach at establishing a counterfactual for policy changes. One such example of a policy change is in Russian surrounding alcohol consumption. A recent Guardian article^[Available at <https://www.theguardian.com/world/2019/oct/01/russian-alcohol-consumption-down-40-since-2003-who>] chronicled the fall of alcohol consumption in Russia based policy changes made by Mr Putin's governments. These policy changes all occurred roughly around 2003 and included reclassifying what counted as a "foodstuff" and levying of hefty taxes on alcohol. Based on recent trends, observers say that these policies are having the desired effect. But how much of this drop in alcohol consumption is due to the policy implementation and not changes in consumer preference?^[Yes, we all know as good economists that as goods get more expensive, consumers will buy less of them. However, _how much less_ is another question.]
+
+This underlines the need for a counterfactual. We would like to know what _would have been_ the alcohol consumption in Russia but for these policy changes. Here is where Synthetic Control (and the SCtools package) can help us answer these questions.
+
+# Implementing Synthetic Controls
+
+In order to understand the policy impact on Russian Alcohol Consumption, we will first load the SCtools, Synth, and some of the tidyverse packages. 
+
 ```{r}
 library(dplyr)
-alcohol %>% 
-  filter(country_name == "Russian Federation")
-```
-
-
-# Setting Up the Data
-
-
-
-
-```{r setup}
+library(ggplot2)
 library(SCtools)
 library(Synth)
-names(alcohol)
-alcohol$unit.variable <- as.numeric(alcohol$country_num)
-alcohol$year <- as.numeric(alcohol$year)
-
-glimpse(synth.data)
-
+theme_set(theme_minimal())
 ```
 
-```{r}
-my_all <- alcohol
+After those are loaded, we can look at the `alcohol` data that is inside of the `SCtools` package. We can build the graphic in the Guardian using these data to see the trend in alcohol consumption.
+
+```{r russia-graph, fig.cap="Trend of Alcohol Consumption in Russia"}
+alcohol %>% 
+  filter(country_name == "Russian Federation") %>% 
+	ggplot(aes(year, consumption))+
+	geom_line()+
+	geom_vline(xintercept = 2003, color  = "orange")+
+	labs(
+		title = "Per Capita Alcohol Consumption in the Russian Federation Since 1990",
+		subtitle = "The Russian government began a series of policy changes in 2003\nto reduce alcohol consumption",
+		y = "Per Capita Consumption (L/person)",
+		x = NULL,
+		caption = "Data: World Health Organization"
+	)
+```
+
+We can also examine some of the trends in our predictors.
+
+```{r fig.cap="Trends in Predictors in Russian Federation"}
+alcohol %>% 
+  filter(country_name == "Russian Federation") %>% 
+	select(year, consumption,labor_force_participation_rate:manufacturing) %>% 
+	tidyr::gather(predictor, value, -year) %>% 
+	ggplot(aes(year, value))+
+	geom_line()+
+		facet_wrap(~predictor, scales = "free")
 ```
 
 
+One feature of SCM is selecting donor states. These donor states help us to generate our synthetic control (synthetic version of Russian in the absence of the policy change). There are several key assumptions regarding choosing donor states including
+
+* No spillover effects (e.g. the policy change in Russia did not cause a huge migration of drinkers to another country, did not change trade patterns, etc) 
+* Donor states do not enact similar policies 
+
+In the absence of evidence of other changes in other states, we can look at the potential donor states graphically:
+
+```{r fig.cap="Review of Possible Donors", fig.width=5}
+p1 <- alcohol %>% 
+	mutate(my_color = ifelse(country_code == "RUS", "Russia", "Other")) %>% 
+	ggplot(aes(year, consumption, group = country_code, color = my_color))+
+	geom_line() +
+	scale_color_manual(values = c("grey", "black", "white"))+
+	ylim(5,15)+
+	xlim(1990,2002)
+p1
+```
+
+When we look at the potential donors we see the usual suspects: France, United States, as well as some of the neighbouring Baltic states. This makes some intuitive sense. Baltic states share similar cultural habits. SCM is insensitive to having donors that are not neighbouring, which will allow us to include countries like Great Britain and the United States in the donor pool.^[I would recommend using the `plotly` package which allows you to hover over the different lines and see the country codes.]
+
+## Experimental Design
+
+Now that we have an idea of the donors, we can build the pool.
+
 ```{r}
-names(my_all)
+comparison_states <- c("USA", "UK", "UKR", "KAZ",
+											 "GBR", "ESP", "DEU", "POL",
+											 "FIN", "FRA", "GRC", "IRL",
+											 "LTU", "ROU", "GEO",
+											 "SWE", "BEL", "BLR")
+
+control_ids <- alcohol %>% 
+	select(country_code,country_num) %>% 
+	filter(country_code %in% comparison_states) %>% 
+	distinct() %>% 
+	pull(country_num)
+```
+
+
+Now we will use the `dataprep` function from Synth to format our data.
+
+```{r}
 dataprep.out<-dataprep(
-	    foo = as.data.frame(my_all),
+	    foo = as.data.frame(alcohol),
 	    predictors = c("labor_force_participation_rate",
 	                   "inflation",
 	                   "mobile_cellular_subscriptions",
@@ -57,31 +112,99 @@ dataprep.out<-dataprep(
 	    unit.variable = "country_num",
 	    time.variable = "year",
 	    treatment.identifier = 142,
-	    controls.identifier = c(182, 180, 67, 160, 85, 62, 164),
+	    controls.identifier = control_ids,
 	    time.predictors.prior = c(1991:2002),
-	    time.optimize.ssr = c(1991:2003),
+	    time.optimize.ssr = c(1994:2002),
+	    special.predictors = list(
+      list("consumption", 2000:2003 ,"mean")),
 	    unit.names.variable = "country_code",
-	    time.plot = 1991:2012
+	    time.plot = 1991:2015
 	)
 ```
+
+There are some missing values, but that should be ok. Now we will run the `synth` function to generate our synthetic controls.
+
 
 ```{r}
 out <- synth(dataprep.out, Sigf.ipop = 3)
 ```
 
-```{r}
-path.plot(synth.res = out, dataprep.res = dataprep.out)
-```
+After running the SCM, we can look at the weights from the donors and see if we see anything that is surprising.
 
 ```{r}
-dataprep.out$Y1plot - (dataprep.out$Y0plot %*% out$solution.w)
+solution <- out$solution.w %>% 
+	as.data.frame()
+
+solution$country_num <- rownames(solution)
+
+solution %>% 
+	mutate(country_num = as.numeric(country_num)) %>% 
+	left_join(alcohol %>% 
+	select(country_code,country_num) %>% 
+	filter(country_code %in% comparison_states) %>% 
+		distinct(), by = "country_num") %>% 
+	ggplot(aes(reorder(country_code, w.weight), w.weight))+
+	geom_col()+
+	coord_flip()+
+	labs(
+		title = "Donor Weights by Country",
+		y = NULL,
+		x = "Weight"
+	)
 ```
+
+Unsurprisingly, we can see that France and Belarus contribute the most to counterfactual Russia. Let's continue with our analysis.
+
+Now we can plot our real Russia vs our Synthetic Russia using the `plot.path` function from Synth.
+
+```{r fig.cap="Synthetic Russia vs Actual Russia for Alcohol Consumption per Capita"}
+path.plot(synth.res = out, dataprep.res = dataprep.out, 
+					Xlab = "per Capita Alcohol Consumption")
+```
+
+We can also look at the delta between our real and synthetic Russia.
+
+```{r}
+delta_out <- (dataprep.out$Y1plot - (dataprep.out$Y0plot %*% out$solution.w)) %>% 
+	as.data.frame()
+
+delta_out$year <- rownames(delta_out)
+
+delta_out%>% 
+	knitr::kable(caption = "Difference in Alcohol Consumption Between Synthetic and Actual Russia", digits = 2)
+```
+
+It appears that the policy took a while to take effect, with a decrease in alcohol consumed per capita beginning in 2009. However, it must be mentioned that this isn't the "40%" that the Guardian reports and that one may glean from the WHO graph at first glance.
+
+# The Next Steps
+
+The next steps in a SCM controls analysis is to permute the data set to understand the sensitivity of our Synthetic controls to assess if the results observed are plausible (e.g. are the results we obtained due from chance, or reflect the true effect). The SCtools provides the `generate.placebos` function to automate this process. This includes the option to parallelise the operation (which greatly speeds up processing time). 
 
 ```{r}
 placebo <- generate.placebos(dataprep.out = dataprep.out,
                              synth.out = out, strategy = "multiprocess")
 ```
 
-```{r}
+Now that we have our placebo object, we can represent it graphically with `plot_placebos`. Here we can see our donors (control unit) and our actual treated group. 
+
+```{r fig.cap="Placebo Plot for Control Units"}
 plot_placebos(placebo)
 ```
+
+
+Equally important we can test the Mean Squared Prediction Error (MSPE). Additionally, because we generated the controls for the placebos, we can see how extreme our values are and thus generate a pseudo p-value to see if our results are significant.
+
+```{r}
+test_out <- mspe.test(placebo)
+test_out$p.val
+```
+
+Why look at single number summary, when you can look at a plot? With `mspe.plot` we can visualise the ratios of MSPE for each donor. Here we see very little difference in Russia, which supports our higher p-value. 
+
+```{r fig.cap="Mean Squared Prediction Error Ratios for Russia and Donors"}
+mspe.plot(tdf = placebo)
+```
+
+# Conclusion
+
+In the case of this study, it doesn't look like the policy had an impact. However, this brings into question the model specification. The predictors in the model did not necessarily generate the best pre-treatment MSPE. Different predictors may help us better construct a Synthetic Russia. Additionally, this model could be tuned by including some lagged predictors. We won't go into details regarding this process, but with SCtools, you now have tools to help you with your model inference and tuning.
