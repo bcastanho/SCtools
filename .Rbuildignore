@@ -14,3 +14,4 @@ init.R
 ^\.github$
 ^data-raw$
 ^appveyor\.yml$
+^hexsticker.R$

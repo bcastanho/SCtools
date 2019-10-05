@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# SCtools
+# SCtools <a href='https://github.com/bcastanho/SCtools'><img src='man/figures/hexsticker.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
