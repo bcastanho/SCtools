@@ -13,3 +13,5 @@ init.R
 ^CODE_OF_CONDUCT\.md$
 ^\.github$
 ^data-raw$
+^appveyor\.yml$
+^hexsticker.R$

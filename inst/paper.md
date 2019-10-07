@@ -3,6 +3,7 @@ title: "SCtools: Tools for Synthetic Controls Analysis"
 tags:
   - r
   - Causal Inferences
+  - Synthetic Control
   - Econometrics
   - Political Science
   - Economics
@@ -22,6 +23,28 @@ date: 1 October 2019
 bibliography: paper.bib
 ---
 
-# Summary
+# Introduction
+
+<!--
+* What is SCM?
+* Application Areas
+* Introduce Synth
+  * Limitations
+  * How SCtools fills in
+-->
+
+# Examples of Features
+
+## Generation of Placebos
+
+## MSPE Testing
+
+## Multiple Synthetic Control
+
+# Future Work
+
+# Licensing and Availability
+
+**SCtools** is licensed under the GNU General Public License (v3.0), with all source code stored at GitHub (https://github.com/bcastanho/SCtools), and with a corresponding issue tracker for bug reporting and feature enhancements.   
 
 # References

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# SCtools
+# SCtools <a href='https://github.com/bcastanho/SCtools'><img src='man/figures/hexsticker.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
@@ -11,6 +11,8 @@ status](https://travis-ci.org/medewitt/SCtools.svg?branch=master)](https://travi
 coverage](https://codecov.io/gh/medewitt/SCtools/branch/master/graph/badge.svg)](https://codecov.io/gh/medewitt/SCtools?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/SCtools)](https://CRAN.R-project.org/package=SCtools)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/bcastanho/SCtools?branch=master&svg=true)](https://ci.appveyor.com/project/bcastanho/SCtools)
 <!-- badges: end -->
 
 This package is a work in progress compiling functions to make it easier

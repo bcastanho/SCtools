@@ -33,6 +33,7 @@ usethis::use_coverage()
 usethis::use_badge("maturing")
 usethis::use_cran_badge()
 usethis::use_code_of_conduct()
+usethis::use_appveyor()
 
 # NEws!
 usethis::use_news_md()
