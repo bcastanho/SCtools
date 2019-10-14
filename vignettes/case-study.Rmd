@@ -192,7 +192,7 @@ plot_placebos(placebo)
 ```
 
 
-Equally important we can test the Mean Squared Prediction Error (MSPE). Additionally, because we generated the controls for the placebos, we can see how extreme our values are and thus generate a pseudo p-value to see if our results are significant.
+Equally important we can test the Mean Squared Prediction Error (MSPE). Additionally, because we generated the controls for the placebos, we can see how extreme our values are and thus generate a pseudo p-value to see if our results are significant. Now, it should be mentioned that this test is relatively underpowered as it looks only at the donor states.
 
 ```{r}
 test_out <- mspe.test(placebo)
