@@ -90,9 +90,14 @@ placebo <- generate.placebos(dataprep.out = dataprep.out,
                              synth.out = synth.out, strategy = "multiprocess")
 ```
 
-We can then use the `plot_placebos` function to replicate the figure found in Abadie and Gardeazabal (2003).
+We can then use the `plot_placebos` to run a placebo test for the findings in Abadie and Gardeazabal (2003).
 
 ```{r}
 plot_placebos(placebo)
 ```
 
+Finally, we can also run the `mspe_plot` function to run a post/pre MPSE test for that case, and find how unlikely it would be to find by chance the effects identified.
+
+```{r}
+mspe_plot(placebo)
+```
