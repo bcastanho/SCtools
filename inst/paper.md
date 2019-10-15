@@ -19,7 +19,7 @@ affiliations:
    index: 1
  - name: Cone Health
    index: 2
-date: 1 October 2019
+date: 15 October 2019
 bibliography: paper.bib
 ---
 
@@ -53,10 +53,9 @@ However, `Synth` has not kept up to date with recent developments in synthetic c
 
 `SCtools` automates the generation of placebos from the donor pool, based on objects created when running synthetic control analysis with `Synth`. It returns the estimated synthetic control for each donor unit, and a `gaps plot` with the respective curves comparing each donor pool unit to its synthetic control, along with the treated unit. Figure 1 shows this plot for the case of the Basque Country, from @abadie_economic_2003, made with the `plot_placebos` function in `SCtools`, after running the Basque Country example from `Synth`. 
 
-![Example Placebos Plot Using Basque Country Data from Abadie and Gardeazabal (2003)](unnamed-chunk-8-1.png)
+![Figure 1: Example Placebos Plot Using Basque Country Data from Abadie and Gardeazabal (2003)](unnamed-chunk-8-1.png)
 
 Placebos can then be used for another test proposed by @abadie_comparative_2015, the post/pre Mean Square Prediction Error (MSPE) test. It is the difference between the observed outcome of a unit and its synthetic control, before and after treatement. A higher ratio means a small  pre-treatment prediction error (a good synthetic control), combined with a high post-treatment MSPE, meaning a large difference between the unit  and its synthetic control after the intervention. By calculating this ratio for all placebos, the test can be interpreted  as looking at how likely the result obtained for a single treated case  with a synthetic control analysis could have occurred by chance given no treatement. `SCtools` also provides a post/pre MSPE plot and its associated pseudo p-value.
-
 
 
 ## Multiple Synthetic Control
@@ -67,7 +66,7 @@ Inference of causal effects with multiple treated units is also done using place
 
 # Future Work
 
-
+Other developments in synthetic controls recently include the Generalized Synthetic Controls [@xu_generalized_2017] and Augmented Synthetic Controls [@ben_michael_augmented_2018] -- both of which would also rely on placebo tests for inference and which could be integrated with `SCtools`.
 
 
 # Licensing and Availability
