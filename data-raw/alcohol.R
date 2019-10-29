@@ -38,12 +38,18 @@ combined_consumption <- bind_rows(who_1, who_2) %>%
 	mutate(country_name = ifelse(country_name=="United States of America",
 															 "United States", country_name)) %>% 
 	mutate(country_name = ifelse(grepl("United Kingdom", country_name),
-															 "United Kingdom", country_name))
+															 "United Kingdom", country_name)) %>% 
+	mutate(country_name = ifelse(grepl("Moldova", country_name),
+															 "Moldova", country_name)) %>% 
+	mutate(country_name = ifelse(grepl("Czech", country_name),
+															 "Czech Republic", country_name))
 
 # covariates --------------------------------------------------------------
 
 wb_1 <- read_csv(here("data-raw", "WB-additional-covariates-data.csv")) %>% 
-	janitor::clean_names()
+	janitor::clean_names() %>% 
+	mutate(country_name = ifelse(grepl("Kyrg", country_name),
+															 "Kyrgyzstan", country_name))
 
 wb_1_clean <- wb_1 %>% 
 	gather(year, value, -c(country_name:series_name)) %>% 
@@ -71,7 +77,9 @@ alcohol_data_1 <- combined_consumption %>%
 alcohol_data_2 <- alcohol_data_1 %>% 
 	filter(year >= 1990) %>% 
 	select(-literacy_rate,-gini_index) %>% 
-	mutate(country_num = as.integer(as.factor(country_name)))
+	mutate(country_code = ifelse(grepl(pattern = "Moldova", 
+																		 x = country_name), "MDA", country_code)) %>% 
+	mutate(country_num = as.integer(as.factor(country_name))) 
 
 alcohol <- alcohol_data_2
 # read out ----------------------------------------------------------------

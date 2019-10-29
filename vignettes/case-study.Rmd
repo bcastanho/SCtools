@@ -5,6 +5,7 @@ vignette: >
   %\VignetteIndexEntry{SCM Case Study on Alcohol Consumption}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+bibliography: russia.bib
 ---
 
 ```{r, include = FALSE}
@@ -13,7 +14,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 7, fig.height
 
 # Introduction
 
-Synthetic control provides a powerful approach at establishing a counterfactual for policy changes. One such example of a policy change is in Russian surrounding alcohol consumption. A recent Guardian article^[Available at <https://www.theguardian.com/world/2019/oct/01/russian-alcohol-consumption-down-40-since-2003-who>] chronicled the fall of alcohol consumption in Russia based policy changes made by Mr Putin's governments. These policy changes all occurred roughly around 2003 and included reclassifying what counted as a "foodstuff" and levying of hefty taxes on alcohol. Based on recent trends, observers say that these policies are having the desired effect. But how much of this drop in alcohol consumption is due to the policy implementation and not changes in consumer preference?^[Yes, we all know as good economists that as goods get more expensive, consumers will buy less of them. However, _how much less_ is another question.]
+Synthetic control provides a powerful approach at establishing a counterfactual for policy changes. One such example of a policy change is in Russian surrounding alcohol consumption. A recent Guardian article^[Available at <https://www.theguardian.com/world/2019/oct/01/russian-alcohol-consumption-down-40-since-2003-who>] chronicled the fall of alcohol consumption in Russia based policy changes made by Mr Putin's governments. These policy changes all occurred roughly around 2006 and included reclassifying what counted as a "foodstuff" and levying of hefty taxes on alcohol [@levintova_russian_2007]. Based on recent trends, observers say that these policies are having the desired effect. But how much of this drop in alcohol consumption is due to the policy implementation and not changes in consumer preference?^[Yes, we all know as good economists that as goods get more expensive, consumers will buy less of them. However, _how much less_ is another question.]
 
 This underlines the need for a counterfactual. We would like to know what _would have been_ the alcohol consumption in Russia but for these policy changes. Here is where Synthetic Control (and the SCtools package) can help us answer these questions.
 
@@ -36,7 +37,7 @@ alcohol %>%
   filter(country_name == "Russian Federation") %>% 
 	ggplot(aes(year, consumption))+
 	geom_line()+
-	geom_vline(xintercept = 2003, color  = "orange")+
+	geom_vline(xintercept = 2006, color  = "orange")+
 	labs(
 		title = "Per Capita Alcohol Consumption in the Russian Federation Since 1990",
 		subtitle = "The Russian government began a series of policy changes in 2003\nto reduce alcohol consumption",
@@ -73,7 +74,7 @@ p1 <- alcohol %>%
 	geom_line() +
 	scale_color_manual(values = c("grey", "black", "white"))+
 	ylim(5,15)+
-	xlim(1990,2002)
+	xlim(1990,2005)
 p1
 ```
 
@@ -87,8 +88,9 @@ Now that we have an idea of the donors, we can build the pool.
 comparison_states <- c("USA", "UK", "UKR", "KAZ",
 											 "GBR", "ESP", "DEU", "POL",
 											 "FIN", "FRA", "GRC", "IRL",
-											 "LTU", "ROU", "GEO",
-											 "SWE", "BEL", "BLR")
+											 "LTU", "ROU", "GEO", "MDA",
+											 "SWE", "BEL", "BLR", "KGZ",
+											 "CZE", "MEX", "SVN")
 
 control_ids <- alcohol %>% 
 	select(country_code,country_num) %>% 
@@ -96,7 +98,6 @@ control_ids <- alcohol %>%
 	distinct() %>% 
 	pull(country_num)
 ```
-
 
 Now we will use the `dataprep` function from Synth to format our data.
 
@@ -113,12 +114,12 @@ dataprep.out<-dataprep(
 	    time.variable = "year",
 	    treatment.identifier = 142,
 	    controls.identifier = control_ids,
-	    time.predictors.prior = c(1991:2002),
-	    time.optimize.ssr = c(1994:2002),
+	    time.predictors.prior = c(1991:2005),
+	    time.optimize.ssr = c(2000:2005),
 	    special.predictors = list(
-      list("consumption", 2000:2003 ,"mean")),
+      list("consumption", 2000:2005 ,"mean")),
 	    unit.names.variable = "country_code",
-	    time.plot = 1991:2015
+	    time.plot = 1992:2015
 	)
 ```
 
@@ -153,13 +154,13 @@ solution %>%
 	)
 ```
 
-Unsurprisingly, we can see that France and Belarus contribute the most to counterfactual Russia. Let's continue with our analysis.
+Unsurprisingly, we can see that Kazakstan and Lithuania contribute to counterfactual Russia, however, interestingly Great Britain and the Chzech Republic are amongst the top donors to the counterfactual. This highlights one of the powerful features of Synthetic Control - the donors do not need to be geographically connected, Let's continue with our analysis.
 
-Now we can plot our real Russia vs our Synthetic Russia using the `plot.path` function from Synth.
+Now we can plot our real Russia vs our Synthetic Russia using the `plot.path` function from Synth. Here we see that the synthetic control matches 2000-2005 fairly well (which is what we specified to optimize), but there is some opportunity to more closely match actual Russia.
 
 ```{r fig.cap="Synthetic Russia vs Actual Russia for Alcohol Consumption per Capita"}
 path.plot(synth.res = out, dataprep.res = dataprep.out, 
-					Xlab = "per Capita Alcohol Consumption")
+					Xlab = "per Capita Alcohol Consumption", )
 ```
 
 We can also look at the delta between our real and synthetic Russia.
@@ -174,7 +175,7 @@ delta_out%>%
 	knitr::kable(caption = "Difference in Alcohol Consumption Between Synthetic and Actual Russia", digits = 2)
 ```
 
-It appears that the policy took a while to take effect, with a decrease in alcohol consumed per capita beginning in 2009. However, it must be mentioned that this isn't the "40%" that the Guardian reports and that one may glean from the WHO graph at first glance.
+It appears that the policy took a while to take effect, with a decrease in alcohol consumed per capita beginning in 2014. However, it must be mentioned that this isn't the "40%" that the Guardian reports and that one may glean from the WHO graph at first glance.
 
 # The Next Steps
 
