@@ -125,8 +125,12 @@ dataprep.out<-dataprep(
 
 There are some missing values, but that should be ok. Now we will run the `synth` function to generate our synthetic controls.
 
+```{r echo=FALSE}
+out <- readRDS("out.rds")
+```
 
-```{r}
+
+```{r eval=FALSE}
 out <- synth(dataprep.out, Sigf.ipop = 3)
 ```
 
@@ -181,7 +185,12 @@ It appears that the policy took a while to take effect, with a decrease in alcoh
 
 The next steps in a SCM controls analysis is to permute the data set to understand the sensitivity of our Synthetic controls to assess if the results observed are plausible (e.g. are the results we obtained due from chance, or reflect the true effect). The SCtools provides the `generate.placebos` function to automate this process. This includes the option to parallelise the operation (which greatly speeds up processing time). 
 
-```{r}
+```{r echo=FALSE}
+placebo <- readRDS("placebo.rds")
+```
+
+
+```{r eval=FALSE}
 placebo <- generate.placebos(dataprep.out = dataprep.out,
                              synth.out = out, strategy = "multiprocess")
 ```
