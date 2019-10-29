@@ -8,10 +8,7 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", fig.width = 7, fig.height = 7, fig.align = "center")
 ```
 
 ## Introduction
@@ -60,7 +57,12 @@ dataprep.out <- dataprep(
 
 Now, we can run the SCM algorithm using the `synth` function.
 
-```{r}
+```{r echo=FALSE}
+synth.out <- readRDS("synth_out.rds")
+```
+
+
+```{r eval=FALSE}
 synth.out <- synth(data.prep.obj = dataprep.out, method = "BFGS")
 ```
 
@@ -85,7 +87,12 @@ path.plot(synth.res = synth.out, dataprep.res = dataprep.out,
 
 At this point, `SCtools` extends the analysis from `Synth`, While `Synth` generates an analysis on one configured dataset, `SCtools` provides the tooling to permute the dataset and generate multiple placebos to test the sensitivity of our SCM output.
 
-```{r}
+```{r echo=FALSE}
+placebo <- readRDS("basque_placebo.rds")
+```
+
+
+```{r eval=FALSE}
 placebo <- generate.placebos(dataprep.out = dataprep.out,
                              synth.out = synth.out, strategy = "multiprocess")
 ```
