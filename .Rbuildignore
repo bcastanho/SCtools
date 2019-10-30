@@ -15,3 +15,4 @@ init.R
 ^data-raw$
 ^appveyor\.yml$
 ^hexsticker.R$
+^CRAN-RELEASE$
