@@ -1,2 +1,17 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^README\.Rmd$
+init.R
+.pdf
+^\.travis\.yml$
+^codecov\.yml$
+^LICENSE\.md$
+^cran-comments\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^CODE_OF_CONDUCT\.md$
+^\.github$
+^data-raw$
+^appveyor\.yml$
+^hexsticker.R$
