@@ -1,5 +1,9 @@
 ## Release Summary 
-* This is a new release.
+* This is resubmission
+
+* References added in DESCRIPTION file for theoretical background of 
+tools implemented
+* Several typo fixes
 
 ## Test environments
 * local OS X install, R 3.6.1
