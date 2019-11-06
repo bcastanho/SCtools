@@ -1,5 +1,5 @@
 Package: SCtools
-Title: Tools for Synthetic Controls Analysis
+Title: Extensions for Synthetic Controls Analysis
 Version: 0.3.0
 Authors@R: c(
     person(given = "Bruno",
@@ -15,10 +15,9 @@ Authors@R: c(
 Description: A set of functions to extend the synthetic controls analyses 
     performed by the package 'Synth' as detailed in Abadie, Diamond,
     and Hainmueller (2011)<doi:	10.18637/jss.v042.i13>. Includes generating 
-    and plotting placebos, significance tests and plots, and calculating 
-    average treatment effects for multiple treated units. The significance 
-    testing methods report pseudo p-values from generated Synthetic Control
-    Placebos. This package represents an implementation of those methods 
+    and plotting placebos, post/pre-MSPE significance tests and plots, 
+    and calculating average treatment effects for multiple treated units. 
+    This package represents an implementation of those methods 
     suggested in 
     Abadie, Diamond,and Hainmueller (2010) <doi:10.1198/jasa.2009.ap08746> for
     use in Synthetic Control Analysis.
