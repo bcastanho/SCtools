@@ -28,10 +28,9 @@
 #'    \item{loss.v}{Pretreatment MSPE of the treated unit's synthetic control}
 #'}
 #' @examples 
-#' \dontrun{
-#' ## First prepare the required objects
+#' ## Example with toy data from Synth
 #' library(Synth)
-#' # Load simulated data from Synth
+#' # Load the simulated data
 #' data(synth.data)
 #' 
 #' # Execute dataprep to produce the necessary matrices for synth
@@ -49,7 +48,7 @@
 #'       list("Y", 1980, "mean")
 #'     ),
 #'     treatment.identifier = 7,
-#'     controls.identifier = c(29, 2, 13, 17, 32, 38),
+#'     controls.identifier = c(29, 2, 13, 17),
 #'     time.predictors.prior = c(1984:1989),
 #'     time.optimize.ssr = c(1984:1990),
 #'     unit.names.variable = "name",
@@ -61,9 +60,9 @@
 #' 
 #' ## run the generate.placebos command to reassign treatment status
 #' ## to each unit listed as control, one at a time, and generate their
-#' ## synthetic versions. 
-#' tdf <- generate.placebos(dataprep.out,synth.out)
-#' }
+#' ## synthetic versions. Sigf.ipop = 2 for faster computing time. 
+#' ## Increase to the default of 5 for better estimates. 
+#' tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 2, strategy='multiprocess')
 #' @importFrom future plan 
 #' @importFrom stats setNames
 #' @export

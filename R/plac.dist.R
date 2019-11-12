@@ -18,7 +18,34 @@
 #' more extreme than the observed average treatment effect. Equivalent to a 
 #' p-value in a two-tailed test.}
 #' }
-#' @examples \dontrun{
+#' @examples 
+#' \dontshow{
+#' library(Synth)
+#' data(synth.data)
+#' set.seed(42)
+#' ## Run the function similar to the dataprep() setup:
+#' multi <- multiple.synth(foo = synth.data,
+#'                        predictors = c("X1"),
+#'                        predictors.op = "mean",
+#'                        dependent = "Y",
+#'                        unit.variable = "unit.num",
+#'                        time.variable = "year",
+#'                        treatment.time = 1990,
+#'                        special.predictors = list(
+#'                          list("Y", 1991, "mean")
+#'                        ),
+#'                        treated.units = c(2,7),
+#'                        control.units = c(29, 13, 17, 32),
+#'                        time.predictors.prior = c(1984:1989),
+#'                        time.optimize.ssr = c(1988:1990),
+#'                        unit.names.variable = "name",
+#'                        time.plot = 1984:1996, gen.placebos = TRUE, Sigf.ipop = 2,
+#'                        strategy = 'multiprocess' )
+#' att.test <- plac.dist(multi)
+#' att.test$p
+#' }
+#' \dontrun{
+#' ## Using the toy data from Synth:
 #' library(Synth)
 #' data(synth.data)
 #' set.seed(42)
@@ -36,11 +63,12 @@
 #'                          list("Y", 1980, "mean")
 #'                        ),
 #'                        treated.units = c(2,7),
-#'                        control.units = c(29, 13, 17, 32, 38),
+#'                        control.units = c(29, 13, 17, 32),
 #'                        time.predictors.prior = c(1984:1989),
 #'                        time.optimize.ssr = c(1984:1990),
 #'                        unit.names.variable = "name",
-#'                        time.plot = 1984:1996, gen.placebos = TRUE, Sigf.ipop = 3 )
+#'                        time.plot = 1984:1996, gen.placebos = TRUE, Sigf.ipop = 2,
+#'                        strategy = 'multiprocess' )
 #' 
 #' ## Plot with the average path of the treated units and the average of their
 #' ## respective synthetic controls:
@@ -51,7 +79,8 @@
 #' ## treatment effects, and plot the distribution with a vertical line 
 #' ## indicating the actual ATT:
 #' 
-#' plac_dist(multi)
+#' att.test <- plac.dist(multi)
+#' att.test$p
 #' }
 #' 
 #' @export

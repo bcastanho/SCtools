@@ -55,7 +55,9 @@
 #' @return Data frame. Each column contains the outcome values for every 
 #' time-point for one unit or its synthetic control. The last column contains 
 #' the time-points.
-#' @examples \dontrun{
+#' @examples 
+#' ## Using the toy data from Synth:
+#' 
 #' library(Synth)
 #' data(synth.data)
 #' set.seed(42)
@@ -73,24 +75,17 @@
 #'                          list("Y", 1980, "mean")
 #'                        ),
 #'                        treated.units = c(2,7),
-#'                        control.units = c(29, 13, 17, 32, 38),
+#'                        control.units = c(29, 13, 17, 32),
 #'                        time.predictors.prior = c(1984:1989),
 #'                        time.optimize.ssr = c(1984:1990),
 #'                        unit.names.variable = "name",
-#'                        time.plot = 1984:1996, gen.placebos = TRUE, Sigf.ipop = 3 )
+#'                        time.plot = 1984:1996, gen.placebos =  F, Sigf.ipop = 2, 
+#'                        strategy = 'multiprocess' )
 
 #' ## Plot with the average path of the treated units and the average of their
 #' ## respective synthetic controls:
 #' 
 #' multi$p
-#' 
-#' ## Bootstrap the placebo units to get a distribution of placebo average
-#' ## treatment effects, and plot the distribution with a vertical line 
-#' ## indicating the actual ATT:
-#' 
-#' plac_dist(multi)
-#' }
-#' 
 #' 
 #'@export
 

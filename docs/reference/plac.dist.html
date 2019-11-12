@@ -172,7 +172,170 @@ p-value in a two-tailed test.</p></dd>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'># \dontshow{</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>Synth</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>synth.data</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>42</span>)
+<span class='co'>## Run the function similar to the dataprep() setup:</span>
+<span class='no'>multi</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='multiple.synth.html'>multiple.synth</a></span>(<span class='kw'>foo</span> <span class='kw'>=</span> <span class='no'>synth.data</span>,
+                       <span class='kw'>predictors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X1"</span>),
+                       <span class='kw'>predictors.op</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
+                       <span class='kw'>dependent</span> <span class='kw'>=</span> <span class='st'>"Y"</span>,
+                       <span class='kw'>unit.variable</span> <span class='kw'>=</span> <span class='st'>"unit.num"</span>,
+                       <span class='kw'>time.variable</span> <span class='kw'>=</span> <span class='st'>"year"</span>,
+                       <span class='kw'>treatment.time</span> <span class='kw'>=</span> <span class='fl'>1990</span>,
+                       <span class='kw'>special.predictors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+                         <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"Y"</span>, <span class='fl'>1991</span>, <span class='st'>"mean"</span>)
+                       ),
+                       <span class='kw'>treated.units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>7</span>),
+                       <span class='kw'>control.units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>29</span>, <span class='fl'>13</span>, <span class='fl'>17</span>, <span class='fl'>32</span>),
+                       <span class='kw'>time.predictors.prior</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1984</span>:<span class='fl'>1989</span>),
+                       <span class='kw'>time.optimize.ssr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1988</span>:<span class='fl'>1990</span>),
+                       <span class='kw'>unit.names.variable</span> <span class='kw'>=</span> <span class='st'>"name"</span>,
+                       <span class='kw'>time.plot</span> <span class='kw'>=</span> <span class='fl'>1984</span>:<span class='fl'>1996</span>, <span class='kw'>gen.placebos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+                       <span class='kw'>strategy</span> <span class='kw'>=</span> <span class='st'>'multiprocess'</span> )</div><div class='output co'>#&gt; 
+#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
+#&gt; 
+#&gt; 
+#&gt; **************** 
+#&gt;  searching for synthetic control unit  
+#&gt;  
+#&gt; 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; 
+#&gt; MSPE (LOSS V): 4.044186 
+#&gt; 
+#&gt; solution.v:
+#&gt;  1.20332e-05 0.999988 
+#&gt; 
+#&gt; solution.w:
+#&gt;  0.1088339 0.6143543 0.0001630855 0.2766487 
+#&gt; 
+#&gt; 
+#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
+#&gt; 
+#&gt; 
+#&gt; **************** 
+#&gt;  searching for synthetic control unit  
+#&gt;  
+#&gt; 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; 
+#&gt; MSPE (LOSS V): 116.028 
+#&gt; 
+#&gt; solution.v:
+#&gt;  0.9041169 0.09588306 
+#&gt; 
+#&gt; solution.w:
+#&gt;  0.01010725 0.004815182 0.9819524 0.003125157 
+#&gt; 
+#&gt; 
+#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
+#&gt; 
+#&gt; 
+#&gt; **************** 
+#&gt;  searching for synthetic control unit  
+#&gt;  
+#&gt; 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; 
+#&gt; MSPE (LOSS V): 4.044186 
+#&gt; 
+#&gt; solution.v:
+#&gt;  1.20332e-05 0.999988 
+#&gt; 
+#&gt; solution.w:
+#&gt;  0.1088339 0.6143543 0.0001630855 0.2766487 
+#&gt; 
+#&gt; 
+#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
+#&gt; 
+#&gt; 
+#&gt; **************** 
+#&gt;  searching for synthetic control unit  
+#&gt;  
+#&gt; 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; 
+#&gt; MSPE (LOSS V): 2726.171 
+#&gt; 
+#&gt; solution.v:
+#&gt;  0.06231261 0.9376874 
+#&gt; 
+#&gt; solution.w:
+#&gt;  2.172e-07 2.888e-07 0.9999995 
+#&gt; 
+#&gt; 
+#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
+#&gt; 
+#&gt; 
+#&gt; **************** 
+#&gt;  searching for synthetic control unit  
+#&gt;  
+#&gt; 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; 
+#&gt; MSPE (LOSS V): 276.8108 
+#&gt; 
+#&gt; solution.v:
+#&gt;  0.3030217 0.6969783 
+#&gt; 
+#&gt; solution.w:
+#&gt;  0.0002814378 0.5948414 0.4048771 
+#&gt; 
+#&gt; 
+#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
+#&gt; 
+#&gt; 
+#&gt; **************** 
+#&gt;  searching for synthetic control unit  
+#&gt;  
+#&gt; 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; 
+#&gt; MSPE (LOSS V): 324.0281 
+#&gt; 
+#&gt; solution.v:
+#&gt;  0.4658744 0.5341256 
+#&gt; 
+#&gt; solution.w:
+#&gt;  0.004784567 0.9947682 0.0004471493 
+#&gt; 
+#&gt; 
+#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
+#&gt; 
+#&gt; 
+#&gt; **************** 
+#&gt;  searching for synthetic control unit  
+#&gt;  
+#&gt; 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; 
+#&gt; MSPE (LOSS V): 0.1077773 
+#&gt; 
+#&gt; solution.v:
+#&gt;  0.09180787 0.9081921 
+#&gt; 
+#&gt; solution.w:
+#&gt;  0.2526164 0.7473776 5.9656e-06 
+#&gt; </div><div class='input'><span class='no'>att.test</span> <span class='kw'>&lt;-</span> <span class='fu'>plac.dist</span>(<span class='no'>multi</span>)
+<span class='no'>att.test</span>$<span class='no'>p</span></div><div class='output co'>#&gt; <span class='message'>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></div><div class='img'><img src='plac.dist-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'>## Using the toy data from Synth:</span>
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>Synth</span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>synth.data</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>42</span>)
@@ -190,11 +353,12 @@ p-value in a two-tailed test.</p></dd>
                          <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"Y"</span>, <span class='fl'>1980</span>, <span class='st'>"mean"</span>)
                        ),
                        <span class='kw'>treated.units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>7</span>),
-                       <span class='kw'>control.units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>29</span>, <span class='fl'>13</span>, <span class='fl'>17</span>, <span class='fl'>32</span>, <span class='fl'>38</span>),
+                       <span class='kw'>control.units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>29</span>, <span class='fl'>13</span>, <span class='fl'>17</span>, <span class='fl'>32</span>),
                        <span class='kw'>time.predictors.prior</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1984</span>:<span class='fl'>1989</span>),
                        <span class='kw'>time.optimize.ssr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1984</span>:<span class='fl'>1990</span>),
                        <span class='kw'>unit.names.variable</span> <span class='kw'>=</span> <span class='st'>"name"</span>,
-                       <span class='kw'>time.plot</span> <span class='kw'>=</span> <span class='fl'>1984</span>:<span class='fl'>1996</span>, <span class='kw'>gen.placebos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>3</span> )
+                       <span class='kw'>time.plot</span> <span class='kw'>=</span> <span class='fl'>1984</span>:<span class='fl'>1996</span>, <span class='kw'>gen.placebos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+                       <span class='kw'>strategy</span> <span class='kw'>=</span> <span class='st'>'multiprocess'</span> )
 
 <span class='co'>## Plot with the average path of the treated units and the average of their</span>
 <span class='co'>## respective synthetic controls:</span>
@@ -205,7 +369,8 @@ p-value in a two-tailed test.</p></dd>
 <span class='co'>## treatment effects, and plot the distribution with a vertical line </span>
 <span class='co'>## indicating the actual ATT:</span>
 
-<span class='fu'>plac_dist</span>(<span class='no'>multi</span>)
+<span class='no'>att.test</span> <span class='kw'>&lt;-</span> <span class='fu'>plac.dist</span>(<span class='no'>multi</span>)
+<span class='no'>att.test</span>$<span class='no'>p</span>
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
