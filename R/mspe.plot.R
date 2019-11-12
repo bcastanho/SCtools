@@ -45,12 +45,12 @@
 #' @seealso \code{\link{generate.placebos}}, \code{\link{mspe.test}}, 
 #'     \code{\link{plot_placebos}}, \code{\link[Synth]{synth}}
 #' @examples 
-## Example with toy data from Synth
+## Example with toy data from 'Synth'
 #' library(Synth)
 #' # Load the simulated data
 #' data(synth.data)
 #' 
-#' # Execute dataprep to produce the necessary matrices for synth
+#' # Execute dataprep to produce the necessary matrices for 'Synth'
 #' dataprep.out<-
 #'   dataprep(
 #'     foo = synth.data,
