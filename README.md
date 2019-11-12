@@ -17,7 +17,7 @@ status](https://ci.appveyor.com/api/projects/status/github/bcastanho/SCtools?bra
 
 This package is a work in progress compiling functions to make it easier
 running placebo in space tests with synthetic control models and SCM
-with multiple treated units. It relies heavily on the {Synth} package.
+with multiple treated units. It relies heavily on the ‘Synth’ package.
 
 You can install it on CRAN with:
 
@@ -25,7 +25,7 @@ You can install it on CRAN with:
 install.packages("SCtools")
 ```
 
-You can install it with {devtools}.
+You can install it with ‘devtools’.
 
 ``` r
 library(devtools)
@@ -33,7 +33,7 @@ library(devtools)
 install_github("bcastanho/SCtools")
 ```
 
-Or with the {remotes} package
+Or with the ‘remotes’ package
 
 ``` r
 library(remotes)
