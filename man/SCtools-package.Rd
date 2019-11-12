@@ -7,7 +7,7 @@
 \title{SCTools: Tools for Synthetic Control Methods}
 \description{
 A set of functions to extend the synthetic controls analyses 
-performed by the package Synth. Includes generating and plotting placebos, 
+performed by the package 'Synth'. Includes generating and plotting placebos, 
 significance tests and plots, and calculating average treatment effects 
 for multiple treated units.
 }
