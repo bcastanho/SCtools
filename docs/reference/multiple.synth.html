@@ -261,7 +261,8 @@ the time-points.</p>
    <code><a href='https://rdrr.io/pkg/Synth/man/synth.html'>Synth</a></code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'>## Using the toy data from 'Synth':</span>
+
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>Synth</span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>synth.data</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>42</span>)
@@ -279,22 +280,56 @@ the time-points.</p>
                          <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"Y"</span>, <span class='fl'>1980</span>, <span class='st'>"mean"</span>)
                        ),
                        <span class='kw'>treated.units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>7</span>),
-                       <span class='kw'>control.units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>29</span>, <span class='fl'>13</span>, <span class='fl'>17</span>, <span class='fl'>32</span>, <span class='fl'>38</span>),
+                       <span class='kw'>control.units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>29</span>, <span class='fl'>13</span>, <span class='fl'>17</span>, <span class='fl'>32</span>),
                        <span class='kw'>time.predictors.prior</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1984</span>:<span class='fl'>1989</span>),
                        <span class='kw'>time.optimize.ssr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1984</span>:<span class='fl'>1990</span>),
                        <span class='kw'>unit.names.variable</span> <span class='kw'>=</span> <span class='st'>"name"</span>,
-                       <span class='kw'>time.plot</span> <span class='kw'>=</span> <span class='fl'>1984</span>:<span class='fl'>1996</span>, <span class='kw'>gen.placebos</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>3</span> )
-<span class='co'>## Plot with the average path of the treated units and the average of their</span>
+                       <span class='kw'>time.plot</span> <span class='kw'>=</span> <span class='fl'>1984</span>:<span class='fl'>1996</span>, <span class='kw'>gen.placebos</span> <span class='kw'>=</span>  <span class='fl'>FALSE</span>,
+                       <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+                       <span class='kw'>strategy</span> <span class='kw'>=</span> <span class='st'>'multiprocess'</span> )</div><div class='output co'>#&gt; 
+#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
+#&gt; 
+#&gt; 
+#&gt; **************** 
+#&gt;  searching for synthetic control unit  
+#&gt;  
+#&gt; 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; 
+#&gt; MSPE (LOSS V): 1.858825 
+#&gt; 
+#&gt; solution.v:
+#&gt;  0.0001343847 0.4182965 5.196e-06 0.2208002 0.1681828 0.1925809 
+#&gt; 
+#&gt; solution.w:
+#&gt;  0.0600808 0.5131245 0.004744006 0.4220507 
+#&gt; 
+#&gt; 
+#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
+#&gt; 
+#&gt; 
+#&gt; **************** 
+#&gt;  searching for synthetic control unit  
+#&gt;  
+#&gt; 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; 
+#&gt; MSPE (LOSS V): 4.717187 
+#&gt; 
+#&gt; solution.v:
+#&gt;  0.003725274 0.01538125 0.1736298 0.00173208 0.000179908 0.8053517 
+#&gt; 
+#&gt; solution.w:
+#&gt;  0.004277386 0.1699176 0.2240579 0.6017472 
+#&gt; </div><div class='input'><span class='co'>## Plot with the average path of the treated units and the average of their</span>
 <span class='co'>## respective synthetic controls:</span>
 
-<span class='no'>multi</span>$<span class='no'>p</span>
-
-<span class='co'>## Bootstrap the placebo units to get a distribution of placebo average</span>
-<span class='co'>## treatment effects, and plot the distribution with a vertical line </span>
-<span class='co'>## indicating the actual ATT:</span>
-
-<span class='fu'><a href='plac.dist.html'>plac_dist</a></span>(<span class='no'>multi</span>)
-}</div></pre>
+<span class='no'>multi</span>$<span class='no'>p</span></div><div class='img'><img src='multiple.synth-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

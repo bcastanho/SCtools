@@ -35,10 +35,8 @@ Creates plots with the difference between observed units
     See Abadie, Diamond, and Hainmueller (2011).
 }
 \examples{
-\dontrun{
-## First prepare the required objects
-# Load simulated data from Synth
 library(Synth)
+# Load the simulated data
 data(synth.data)
 
 # Execute dataprep to produce the necessary matrices for synth
@@ -56,27 +54,28 @@ dataprep.out<-
       list("Y", 1980, "mean")
     ),
     treatment.identifier = 7,
-    controls.identifier = c(29, 2, 13, 17, 32, 38),
+    controls.identifier = c(29, 2, 13, 17),
     time.predictors.prior = c(1984:1989),
     time.optimize.ssr = c(1984:1990),
     unit.names.variable = "name",
     time.plot = 1984:1996
-  )
+)
 
 # run the synth command to create the synthetic control
 synth.out <- synth(dataprep.out)
 
 ## run the generate.placebos command to reassign treatment status
 ## to each unit listed as control, one at a time, and generate their
-## synthetic versions. 
-tdf<-generate.placebos(dataprep.out,synth.out)
+## synthetic versions. Sigf.ipop = 2 for faster computing time. 
+## Increase to the default of 5 for better estimates. 
+tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 2, strategy='multiprocess')
 
 ## Plot the gaps in outcome values over time of each unit --
 ## treated and placebos -- to their synthetic controls
 
 p <- plot_placebos(tdf,discard.extreme=TRUE, mspe.limit=10, xlab='Year')
 p
-}
+
 }
 \seealso{
 \code{\link{generate.placebos}}, \code{\link[Synth]{gaps.plot}}, 
