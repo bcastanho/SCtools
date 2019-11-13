@@ -57,7 +57,7 @@ library(Synth)
 # Load the simulated data
 data(synth.data)
 
-# Execute dataprep to produce the necessary matrices for synth
+# Execute dataprep to produce the necessary matrices for 'Synth'
 dataprep.out<-
   dataprep(
     foo = synth.data,

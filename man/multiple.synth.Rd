@@ -97,7 +97,7 @@ The function runs \code{\link[Synth]{dataprep}} and \code{\link[Synth]{synth}}
    \code{\link[Synth:synth]{Synth}}.
 }
 \examples{
-## Using the toy data from Synth:
+## Using the toy data from 'Synth':
 
 library(Synth)
 data(synth.data)
@@ -120,7 +120,8 @@ multi <- multiple.synth(foo = synth.data,
                        time.predictors.prior = c(1984:1989),
                        time.optimize.ssr = c(1984:1990),
                        unit.names.variable = "name",
-                       time.plot = 1984:1996, gen.placebos =  F, Sigf.ipop = 2, 
+                       time.plot = 1984:1996, gen.placebos =  FALSE, 
+                       Sigf.ipop = 2, 
                        strategy = 'multiprocess' )
 ## Plot with the average path of the treated units and the average of their
 ## respective synthetic controls:
