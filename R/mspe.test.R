@@ -45,15 +45,13 @@
 #' dataprep.out<-
 #'   dataprep(
 #'     foo = synth.data,
-#'     predictors = c("X1", "X2", "X3"),
+#'     predictors = c("X1"),
 #'     predictors.op = "mean",
 #'     dependent = "Y",
 #'     unit.variable = "unit.num",
 #'     time.variable = "year",
 #'     special.predictors = list(
-#'       list("Y", 1991, "mean"),
-#'       list("Y", 1985, "mean"),
-#'       list("Y", 1980, "mean")
+#'       list("Y", 1991, "mean")
 #'     ),
 #'     treatment.identifier = 7,
 #'     controls.identifier = c(29, 2, 13, 17),
@@ -64,7 +62,7 @@
 #' )
 #' 
 #' # run the synth command to create the synthetic control
-#' synth.out <- synth(dataprep.out)
+#' synth.out <- synth(dataprep.out, Sigf.ipop=2)
 #' 
 #' ## run the generate.placebos command to reassign treatment status
 #' ## to each unit listed as control, one at a time, and generate their

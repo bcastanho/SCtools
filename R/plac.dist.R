@@ -35,11 +35,11 @@
 #'                          list("Y", 1991, "mean")
 #'                        ),
 #'                        treated.units = c(2,7),
-#'                        control.units = c(29, 13, 17, 32),
+#'                        control.units = c(29, 13, 17),
 #'                        time.predictors.prior = c(1984:1989),
 #'                        time.optimize.ssr = c(1988:1990),
 #'                        unit.names.variable = "name",
-#'                        time.plot = 1984:1996, gen.placebos = TRUE, Sigf.ipop = 2,
+#'                        time.plot = 1984:1996, gen.placebos = TRUE, Sigf.ipop = 1,
 #'                        strategy = 'multiprocess' )
 #' att.test <- plac.dist(multi)
 #' att.test$p
