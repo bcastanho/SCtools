@@ -104,25 +104,22 @@ data(synth.data)
 set.seed(42)
 
 multi <- multiple.synth(foo = synth.data,
-                       predictors = c("X1", "X2", "X3"),
+                       predictors = c("X1"),
                        predictors.op = "mean",
                        dependent = "Y",
                        unit.variable = "unit.num",
                        time.variable = "year",
                        treatment.time = 1990,
                        special.predictors = list(
-                         list("Y", 1991, "mean"),
-                         list("Y", 1985, "mean"),
-                         list("Y", 1980, "mean")
+                         list("Y", 1991, "mean")
                        ),
                        treated.units = c(2,7),
-                       control.units = c(29, 13, 17, 32),
+                       control.units = c(29, 13, 17),
                        time.predictors.prior = c(1984:1989),
                        time.optimize.ssr = c(1984:1990),
                        unit.names.variable = "name",
                        time.plot = 1984:1996, gen.placebos =  FALSE, 
-                       Sigf.ipop = 2, 
-                       strategy = 'multiprocess' )
+                       Sigf.ipop = 2)
 ## Plot with the average path of the treated units and the average of their
 ## respective synthetic controls:
 

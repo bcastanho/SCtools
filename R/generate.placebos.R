@@ -28,7 +28,41 @@
 #'    \item{loss.v}{Pretreatment MSPE of the treated unit's synthetic control}
 #'}
 #' @examples 
-#' ## Example with toy data from Synth
+#' \dontshow{## Example with toy data from Synth
+#' library(Synth)
+#' # Load the simulated data
+#' data(synth.data)
+#' 
+#' # Execute dataprep to produce the necessary matrices for synth
+#' dataprep.out<-
+#'   dataprep(
+#'     foo = synth.data,
+#'     predictors = c("X1"),
+#'     predictors.op = "mean",
+#'     dependent = "Y",
+#'     unit.variable = "unit.num",
+#'     time.variable = "year",
+#'     special.predictors = list(
+#'       list("Y", 1991, "mean")
+#'     ),
+#'     treatment.identifier = 7,
+#'     controls.identifier = c(29, 2, 13),
+#'     time.predictors.prior = c(1984:1989),
+#'     time.optimize.ssr = c(1984:1990),
+#'     unit.names.variable = "name",
+#'     time.plot = 1984:1996
+#' )
+#' 
+#' # run the synth command to create the synthetic control
+#' synth.out <- synth(dataprep.out, Sigf.ipop=2)
+#' 
+#' ## run the generate.placebos command to reassign treatment status
+#' ## to each unit listed as control, one at a time, and generate their
+#' ## synthetic versions. Sigf.ipop = 2 for faster computing time. 
+#' ## Increase to the default of 5 for better estimates. 
+#' tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 2)
+#' }
+#' \dontrun{## Example with toy data from Synth
 #' library(Synth)
 #' # Load the simulated data
 #' data(synth.data)
@@ -60,7 +94,8 @@
 #' ## to each unit listed as control, one at a time, and generate their
 #' ## synthetic versions. Sigf.ipop = 2 for faster computing time. 
 #' ## Increase to the default of 5 for better estimates. 
-#' tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 2, strategy='multiprocess')
+#' tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 2)
+#' }
 #' @importFrom future plan 
 #' @importFrom stats setNames
 #' @export
