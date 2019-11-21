@@ -19,31 +19,6 @@
 #' p-value in a two-tailed test.}
 #' }
 #' @examples 
-#' \dontshow{
-#' library(Synth)
-#' data(synth.data)
-#' set.seed(42)
-#' ## Run the function similar to the dataprep() setup:
-#' multi <- multiple.synth(foo = synth.data,
-#'                        predictors = c("X1"),
-#'                        predictors.op = "mean",
-#'                        dependent = "Y",
-#'                        unit.variable = "unit.num",
-#'                        time.variable = "year",
-#'                        treatment.time = 1990,
-#'                        special.predictors = list(
-#'                          list("Y", 1991, "mean")
-#'                        ),
-#'                        treated.units = c(2,7),
-#'                        control.units = c(29, 13, 17),
-#'                        time.predictors.prior = c(1984:1989),
-#'                        time.optimize.ssr = c(1988:1990),
-#'                        unit.names.variable = "name",
-#'                        time.plot = 1984:1996, gen.placebos = TRUE, Sigf.ipop = 1,
-#'                        strategy = 'multiprocess' )
-#' att.test <- plac.dist(multi)
-#' att.test$p
-#' }
 #' \dontrun{
 #' ## Using the toy data from Synth:
 #' library(Synth)
