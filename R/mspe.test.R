@@ -36,12 +36,48 @@
 #'    \code{\link[Synth]{synth}}
 #'    
 #' @examples 
-## Example with toy data from Synth
+#' \dontshow{## Example with toy data from Synth
 #' library(Synth)
 #' # Load the simulated data
 #' data(synth.data)
 #' 
 #' # Execute dataprep to produce the necessary matrices for synth
+#' dataprep.out<-
+#'   dataprep(
+#'     foo = synth.data,
+#'     predictors = c("X1"),
+#'     predictors.op = "mean",
+#'     dependent = "Y",
+#'     unit.variable = "unit.num",
+#'     time.variable = "year",
+#'     special.predictors = list(
+#'       list("Y", 1991, "mean")
+#'     ),
+#'     treatment.identifier = 7,
+#'     controls.identifier = c(29, 2, 17),
+#'     time.predictors.prior = c(1984:1989),
+#'     time.optimize.ssr = c(1984:1990),
+#'     unit.names.variable = "name",
+#'     time.plot = 1984:1996
+#' )
+#' 
+#' # run the synth command to create the synthetic control
+#' synth.out <- synth(dataprep.out, Sigf.ipop=1)
+#' 
+#' tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 1)
+#' ## Test how extreme was the observed treatment effect given the placebos:
+#' ratio <- mspe.test(tdf)
+#' ratio$p.val
+#' 
+## Check visually how extreme is this value in the distribution:
+#' mspe.plot(tdf, discard.extreme = FALSE)
+#' }
+#' \dontrun{## Example with toy data from 'Synth'
+#' library(Synth)
+#' # Load the simulated data
+#' data(synth.data)
+#' 
+#' # Execute dataprep to produce the necessary matrices for 'Synth'
 #' dataprep.out<-
 #'   dataprep(
 #'     foo = synth.data,
@@ -75,9 +111,8 @@
 #' ratio$p.val
 #' 
 ## Check visually how extreme is this value in the distribution:
-#' mspe.plot(tdf,discard.extreme = FALSE)
-#' 
-#'    
+#' mspe.plot(tdf, discard.extreme = FALSE)
+#' }   
 #' @export
 
 mspe.test <-
