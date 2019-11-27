@@ -67,7 +67,7 @@ dataprep.out<-
       list("Y", 1991, "mean")
     ),
     treatment.identifier = 7,
-    controls.identifier = c(29, 2, 13),
+    controls.identifier = c(29, 2, 17),
     time.predictors.prior = c(1984:1989),
     time.optimize.ssr = c(1984:1990),
     unit.names.variable = "name",
@@ -75,13 +75,9 @@ dataprep.out<-
 )
 
 # run the synth command to create the synthetic control
-synth.out <- synth(dataprep.out, Sigf.ipop=2)
+synth.out <- synth(dataprep.out, Sigf.ipop=1)
 
-## run the generate.placebos command to reassign treatment status
-## to each unit listed as control, one at a time, and generate their
-## synthetic versions. Sigf.ipop = 2 for faster computing time. 
-## Increase to the default of 5 for better estimates. 
-tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 2)
+tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 1)
 }
 \dontrun{## Example with toy data from Synth
 library(Synth)

@@ -1,8 +1,9 @@
 ## Release Summary 
 * This is resubmission
 
-* Acronyms explained in DESCRIPTION file
+* Acronyms (MSPE) explained in DESCRIPTION file
 * Typos fixed DESCRIPTION file
+* Redundant sentence removed from DESCRIPTION
 
 ## Test environments
 * local OS X install, R 3.5.3
