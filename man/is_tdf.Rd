@@ -10,10 +10,10 @@ is_tdf(x)
 \item{x}{An object}
 }
 \value{
-`TRUE` if the object inherits from the `tdf` class.
+\code{TRUE} if the object inherits from the `tdf` class.
 }
 \description{
 This function returns `TRUE` for the object returned from the 
 \code{generate.placebos} function.
-and `FALSE` for all other objects, including regular data frames.
+and \code{FALSE} for all other objects, including regular data frames.
 }

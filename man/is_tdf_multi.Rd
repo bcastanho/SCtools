@@ -10,10 +10,10 @@ is_tdf_multi(x)
 \item{x}{An object}
 }
 \value{
-`TRUE` if the object inherits from the `tdf_multi` class.
+\code{TRUE} if the object inherits from the `tdf_multi` class.
 }
 \description{
 This function returns `TRUE` for the object returned from the 
 \code{multiple.synth} function.
-and `FALSE` for all other objects, including regular data frames.
+and \code{FALSE} for all other objects, including regular data frames.
 }
