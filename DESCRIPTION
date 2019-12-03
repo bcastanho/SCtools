@@ -13,13 +13,13 @@ Authors@R: c(
            email = 'me.dewitt.jr@gmail.com',
            comment = c(ORCID = '0000-0001-8940-1967')))
 Description: Extensions to the synthetic controls analyses 
-    performed by the package 'Synth' as detailed in Abadie, Diamond, and Hainmueller (2011) <doi: 10.18637/jss.v042.i13>. Includes generating 
-    and plotting placebos, post/pre-MSPE (Mean Squared Prediction Error) significance tests and plots, 
-    and calculating average treatment effects for multiple treated units. 
-    This package represents an implementation of those methods 
-    suggested in 
-    Abadie, Diamond,and Hainmueller (2010) <doi:10.1198/jasa.2009.ap08746> for
-    use in Synthetic Control Analysis.
+    performed by the package 'Synth' as detailed in Abadie, Diamond, and Hainmueller (2011) 
+    <doi:10.18637/jss.v042.i13>. Includes generating 
+    and plotting placebos, post/pre-MSPE (mean squared prediction error) 
+    significance tests and plots, and calculating average treatment effects 
+    for multiple treated units. This package represents an implementation of 
+    those methods suggested in  Abadie, Diamond,and Hainmueller (2010) <doi:10.1198/jasa.2009.ap08746> for
+    use in synthetic control analysis.
 BugReports: https://github.com/bcastanho/SCtools/issues
 Maintainer: Bruno Castanho Silva <bcsilva@wiso.uni-koeln.de>
 License: GPL-3

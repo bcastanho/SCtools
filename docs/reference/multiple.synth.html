@@ -268,25 +268,22 @@ the time-points.</p>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>42</span>)
 
 <span class='no'>multi</span> <span class='kw'>&lt;-</span> <span class='fu'>multiple.synth</span>(<span class='kw'>foo</span> <span class='kw'>=</span> <span class='no'>synth.data</span>,
-                       <span class='kw'>predictors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X1"</span>, <span class='st'>"X2"</span>, <span class='st'>"X3"</span>),
+                       <span class='kw'>predictors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X1"</span>),
                        <span class='kw'>predictors.op</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
                        <span class='kw'>dependent</span> <span class='kw'>=</span> <span class='st'>"Y"</span>,
                        <span class='kw'>unit.variable</span> <span class='kw'>=</span> <span class='st'>"unit.num"</span>,
                        <span class='kw'>time.variable</span> <span class='kw'>=</span> <span class='st'>"year"</span>,
                        <span class='kw'>treatment.time</span> <span class='kw'>=</span> <span class='fl'>1990</span>,
                        <span class='kw'>special.predictors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-                         <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"Y"</span>, <span class='fl'>1991</span>, <span class='st'>"mean"</span>),
-                         <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"Y"</span>, <span class='fl'>1985</span>, <span class='st'>"mean"</span>),
-                         <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"Y"</span>, <span class='fl'>1980</span>, <span class='st'>"mean"</span>)
+                         <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"Y"</span>, <span class='fl'>1991</span>, <span class='st'>"mean"</span>)
                        ),
                        <span class='kw'>treated.units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>7</span>),
-                       <span class='kw'>control.units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>29</span>, <span class='fl'>13</span>, <span class='fl'>17</span>, <span class='fl'>32</span>),
+                       <span class='kw'>control.units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>29</span>, <span class='fl'>13</span>, <span class='fl'>17</span>),
                        <span class='kw'>time.predictors.prior</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1984</span>:<span class='fl'>1989</span>),
                        <span class='kw'>time.optimize.ssr</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1984</span>:<span class='fl'>1990</span>),
                        <span class='kw'>unit.names.variable</span> <span class='kw'>=</span> <span class='st'>"name"</span>,
                        <span class='kw'>time.plot</span> <span class='kw'>=</span> <span class='fl'>1984</span>:<span class='fl'>1996</span>, <span class='kw'>gen.placebos</span> <span class='kw'>=</span>  <span class='fl'>FALSE</span>,
-                       <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-                       <span class='kw'>strategy</span> <span class='kw'>=</span> <span class='st'>'multiprocess'</span> )</div><div class='output co'>#&gt; 
+                       <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; 
 #&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
 #&gt; 
 #&gt; 
@@ -298,13 +295,13 @@ the time-points.</p>
 #&gt; **************** 
 #&gt; **************** 
 #&gt; 
-#&gt; MSPE (LOSS V): 1.858825 
+#&gt; MSPE (LOSS V): 5.60058 
 #&gt; 
 #&gt; solution.v:
-#&gt;  0.0001343847 0.4182965 5.196e-06 0.2208002 0.1681828 0.1925809 
+#&gt;  0.0001064523 0.9998935 
 #&gt; 
 #&gt; solution.w:
-#&gt;  0.0600808 0.5131245 0.004744006 0.4220507 
+#&gt;  0.1728629 0.8270615 7.56699e-05 
 #&gt; 
 #&gt; 
 #&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
@@ -318,13 +315,13 @@ the time-points.</p>
 #&gt; **************** 
 #&gt; **************** 
 #&gt; 
-#&gt; MSPE (LOSS V): 4.717187 
+#&gt; MSPE (LOSS V): 80.81988 
 #&gt; 
 #&gt; solution.v:
-#&gt;  0.003725274 0.01538125 0.1736298 0.00173208 0.000179908 0.8053517 
+#&gt;  1 0 
 #&gt; 
 #&gt; solution.w:
-#&gt;  0.004277386 0.1699176 0.2240579 0.6017472 
+#&gt;  0.002266006 0.004655154 0.9930788 
 #&gt; </div><div class='input'><span class='co'>## Plot with the average path of the treated units and the average of their</span>
 <span class='co'>## respective synthetic controls:</span>
 

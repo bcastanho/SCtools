@@ -197,23 +197,22 @@ discarded. Default is <code>20</code>.</p></td>
    <code><a href='https://rdrr.io/pkg/Synth/man/synth.html'>synth</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>Synth</span>)
+    <pre class="examples"><div class='input'><span class='co'>## Example with toy data from 'Synth'</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>Synth</span>)
 <span class='co'># Load the simulated data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>synth.data</span>)
 
-<span class='co'># Execute dataprep to produce the necessary matrices for synth</span>
+<span class='co'># Execute dataprep to produce the necessary matrices for 'Synth'</span>
 <span class='no'>dataprep.out</span><span class='kw'>&lt;-</span>
   <span class='fu'><a href='https://rdrr.io/pkg/Synth/man/dataprep.html'>dataprep</a></span>(
     <span class='kw'>foo</span> <span class='kw'>=</span> <span class='no'>synth.data</span>,
-    <span class='kw'>predictors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X1"</span>, <span class='st'>"X2"</span>, <span class='st'>"X3"</span>),
+    <span class='kw'>predictors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"X1"</span>),
     <span class='kw'>predictors.op</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
     <span class='kw'>dependent</span> <span class='kw'>=</span> <span class='st'>"Y"</span>,
     <span class='kw'>unit.variable</span> <span class='kw'>=</span> <span class='st'>"unit.num"</span>,
     <span class='kw'>time.variable</span> <span class='kw'>=</span> <span class='st'>"year"</span>,
     <span class='kw'>special.predictors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-      <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"Y"</span>, <span class='fl'>1991</span>, <span class='st'>"mean"</span>),
-      <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"Y"</span>, <span class='fl'>1985</span>, <span class='st'>"mean"</span>),
-      <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"Y"</span>, <span class='fl'>1980</span>, <span class='st'>"mean"</span>)
+      <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"Y"</span>, <span class='fl'>1991</span>, <span class='st'>"mean"</span>)
     ),
     <span class='kw'>treatment.identifier</span> <span class='kw'>=</span> <span class='fl'>7</span>,
     <span class='kw'>controls.identifier</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>29</span>, <span class='fl'>2</span>, <span class='fl'>13</span>, <span class='fl'>17</span>),
@@ -224,7 +223,7 @@ discarded. Default is <code>20</code>.</p></td>
 )
 
 <span class='co'># run the synth command to create the synthetic control</span>
-<span class='no'>synth.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Synth/man/synth.html'>synth</a></span>(<span class='no'>dataprep.out</span>)</div><div class='output co'>#&gt; 
+<span class='no'>synth.out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Synth/man/synth.html'>synth</a></span>(<span class='no'>dataprep.out</span>, <span class='kw'>Sigf.ipop</span><span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt; 
 #&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
 #&gt; 
 #&gt; 
@@ -236,19 +235,19 @@ discarded. Default is <code>20</code>.</p></td>
 #&gt; **************** 
 #&gt; **************** 
 #&gt; 
-#&gt; MSPE (LOSS V): 11.69471 
+#&gt; MSPE (LOSS V): 19.33618 
 #&gt; 
 #&gt; solution.v:
-#&gt;  0.03083419 0.008788295 0.439072 0.3008163 0.1845091 0.03598008 
+#&gt;  0 1 
 #&gt; 
 #&gt; solution.w:
-#&gt;  0.01647626 0.1397253 0.6151521 0.2286464 
+#&gt;  0.2559408 0.1232918 0.3053249 0.315439 
 #&gt; </div><div class='input'>
 <span class='co'>## run the generate.placebos command to reassign treatment status</span>
 <span class='co'>## to each unit listed as control, one at a time, and generate their</span>
 <span class='co'>## synthetic versions. Sigf.ipop = 2 for faster computing time. </span>
 <span class='co'>## Increase to the default of 5 for better estimates. </span>
-<span class='no'>tdf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generate.placebos.html'>generate.placebos</a></span>(<span class='no'>dataprep.out</span>,<span class='no'>synth.out</span>, <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>strategy</span><span class='kw'>=</span><span class='st'>'multiprocess'</span>)</div><div class='output co'>#&gt; 
+<span class='no'>tdf</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='generate.placebos.html'>generate.placebos</a></span>(<span class='no'>dataprep.out</span>,<span class='no'>synth.out</span>, <span class='kw'>Sigf.ipop</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; 
 #&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
 #&gt; 
 #&gt; 
@@ -260,33 +259,13 @@ discarded. Default is <code>20</code>.</p></td>
 #&gt; **************** 
 #&gt; **************** 
 #&gt; 
-#&gt; MSPE (LOSS V): 8.05617 
+#&gt; MSPE (LOSS V): 89.19944 
 #&gt; 
 #&gt; solution.v:
-#&gt;  0.004292489 0.1380736 0.00582828 0.07443277 0.2806333 0.4967396 
+#&gt;  0.02942986 0.9705701 
 #&gt; 
 #&gt; solution.w:
-#&gt;  0.1225372 0.636979 0.2404719 
-#&gt; 
-#&gt; 
-#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
-#&gt; 
-#&gt; 
-#&gt; **************** 
-#&gt;  searching for synthetic control unit  
-#&gt;  
-#&gt; 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; **************** 
-#&gt; 
-#&gt; MSPE (LOSS V): 2918.111 
-#&gt; 
-#&gt; solution.v:
-#&gt;  0.2902882 7.887e-07 4.054e-07 0.0002118806 0.4672674 0.2422313 
-#&gt; 
-#&gt; solution.w:
-#&gt;  0.2922553 0.05078967 0.6569231 
+#&gt;  0.2112062 0.4493425 0.3394498 
 #&gt; 
 #&gt; 
 #&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
@@ -300,13 +279,13 @@ discarded. Default is <code>20</code>.</p></td>
 #&gt; **************** 
 #&gt; **************** 
 #&gt; 
-#&gt; MSPE (LOSS V): 127.0044 
+#&gt; MSPE (LOSS V): 3209.434 
 #&gt; 
 #&gt; solution.v:
-#&gt;  1e-10 0.3503472 9.4e-09 0.6496528 8e-10 1.2e-09 
+#&gt;  0 1 
 #&gt; 
 #&gt; solution.w:
-#&gt;  0.9729072 0.001422063 0.02567068 
+#&gt;  0.9858452 0.00739644 0.006758148 
 #&gt; 
 #&gt; 
 #&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
@@ -320,19 +299,38 @@ discarded. Default is <code>20</code>.</p></td>
 #&gt; **************** 
 #&gt; **************** 
 #&gt; 
-#&gt; MSPE (LOSS V): 89.6011 
+#&gt; MSPE (LOSS V): 357.7047 
 #&gt; 
 #&gt; solution.v:
-#&gt;  0.007225619 3.38944e-05 0.1380941 0.1733409 0.2607464 0.420559 
+#&gt;  8.2e-09 1 
 #&gt; 
 #&gt; solution.w:
-#&gt;  0.2824798 0.1968938 0.5205952 
+#&gt;  0.1678859 0.03788081 0.7942333 
+#&gt; 
+#&gt; 
+#&gt; X1, X0, Z1, Z0 all come directly from dataprep object.
+#&gt; 
+#&gt; 
+#&gt; **************** 
+#&gt;  searching for synthetic control unit  
+#&gt;  
+#&gt; 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; **************** 
+#&gt; 
+#&gt; MSPE (LOSS V): 91.49109 
+#&gt; 
+#&gt; solution.v:
+#&gt;  0.6683888 0.3316112 
+#&gt; 
+#&gt; solution.w:
+#&gt;  0.1545103 0.2152758 0.6299727 
 #&gt; </div><div class='input'>
 <span class='co'>## Test how extreme was the observed treatment effect given the placebos:</span>
 <span class='no'>ratio</span> <span class='kw'>&lt;-</span> <span class='fu'>mspe.test</span>(<span class='no'>tdf</span>)
 <span class='no'>ratio</span>$<span class='no'>p.val</span></div><div class='output co'>#&gt; [1] 0.2</div><div class='input'>
-<span class='fu'><a href='mspe.plot.html'>mspe.plot</a></span>(<span class='no'>tdf</span>,<span class='kw'>discard.extreme</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='mspe.test-1.png' alt='' width='700' height='433' /></div><div class='input'>
-   
+<span class='fu'><a href='mspe.plot.html'>mspe.plot</a></span>(<span class='no'>tdf</span>, <span class='kw'>discard.extreme</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='mspe.test-1.png' alt='' width='700' height='433' /></div><div class='input'>   
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
