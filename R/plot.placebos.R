@@ -18,7 +18,42 @@
 #' @seealso \code{\link{generate.placebos}}, \code{\link[Synth]{gaps.plot}}, 
 #'     \code{\link[Synth]{synth}}, \code{\link[Synth]{dataprep}}
 #' @examples 
-#' \donttest{## Example with toy data from Synth
+#' \dontshow{## Example with toy data from Synth
+#' library(Synth)
+#' # Load the simulated data
+#' data(synth.data)
+#' 
+#' # Execute dataprep to produce the necessary matrices for synth
+#' dataprep.out<-
+#'   dataprep(
+#'     foo = synth.data,
+#'     predictors = c("X1"),
+#'     predictors.op = "mean",
+#'     dependent = "Y",
+#'     unit.variable = "unit.num",
+#'     time.variable = "year",
+#'     special.predictors = list(
+#'       list("Y", 1991, "mean")
+#'     ),
+#'     treatment.identifier = 7,
+#'     controls.identifier = c(29, 2, 17),
+#'     time.predictors.prior = c(1984:1989),
+#'     time.optimize.ssr = c(1984:1990),
+#'     unit.names.variable = "name",
+#'     time.plot = 1984:1996
+#' )
+#' 
+#' # run the synth command to create the synthetic control
+#' synth.out <- synth(dataprep.out, Sigf.ipop=1)
+#' 
+#' tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 1)
+#' ## Plot the gaps in outcome values over time of each unit --
+#' ## treated and placebos -- to their synthetic controls
+#' 
+#' p <- plot_placebos(tdf,discard.extreme=TRUE, mspe.limit=10, xlab='Year')
+#' p
+#' }
+#' \dontrun{## Example with toy data from Synth
 #' library(Synth)
 #' # Load the simulated data
 #' data(synth.data)
@@ -84,7 +119,7 @@ function(tdf=tdf,
   
   
 n<-tdf$n
-t1<-tdf$t1
+t1 <- unique(tdf$df$year)[which(tdf$df$year == tdf$t1) - 1]
 tr<-tdf$tr
 names.and.numbers<-tdf$names.and.numbers
 treated.name<-as.character(tdf$treated.name)

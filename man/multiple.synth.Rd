@@ -5,17 +5,45 @@
 \alias{multiple_synth}
 \title{Function to Apply Synthetic Controls to Multiple Treated Units}
 \usage{
-multiple.synth(foo, predictors, predictors.op, dependent, unit.variable,
-  time.variable, special.predictors, treated.units, control.units,
-  time.predictors.prior, time.optimize.ssr, unit.names.variable, time.plot,
-  treatment.time, gen.placebos = FALSE, strategy = "sequential",
-  Sigf.ipop = 5)
+multiple.synth(
+  foo,
+  predictors,
+  predictors.op,
+  dependent,
+  unit.variable,
+  time.variable,
+  special.predictors,
+  treated.units,
+  control.units,
+  time.predictors.prior,
+  time.optimize.ssr,
+  unit.names.variable,
+  time.plot,
+  treatment.time,
+  gen.placebos = FALSE,
+  strategy = "sequential",
+  Sigf.ipop = 5
+)
 
-multiple_synth(foo, predictors, predictors.op, dependent, unit.variable,
-  time.variable, special.predictors, treated.units, control.units,
-  time.predictors.prior, time.optimize.ssr, unit.names.variable, time.plot,
-  treatment.time, gen.placebos = FALSE, strategy = "sequential",
-  Sigf.ipop = 5)
+multiple_synth(
+  foo,
+  predictors,
+  predictors.op,
+  dependent,
+  unit.variable,
+  time.variable,
+  special.predictors,
+  treated.units,
+  control.units,
+  time.predictors.prior,
+  time.optimize.ssr,
+  unit.names.variable,
+  time.plot,
+  treatment.time,
+  gen.placebos = FALSE,
+  strategy = "sequential",
+  Sigf.ipop = 5
+)
 }
 \arguments{
 \item{foo}{Dataframe with the panel data.}

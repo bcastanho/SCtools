@@ -28,7 +28,37 @@
 #'    \item{loss.v}{Pretreatment MSPE of the treated unit's synthetic control}
 #'}
 #' @examples 
-#' \donttest{## Example with toy data from Synth
+#' \dontshow{## Example with toy data from Synth
+#' library(Synth)
+#' # Load the simulated data
+#' data(synth.data)
+#' 
+#' # Execute dataprep to produce the necessary matrices for synth
+#' dataprep.out<-
+#'   dataprep(
+#'     foo = synth.data,
+#'     predictors = c("X1"),
+#'     predictors.op = "mean",
+#'     dependent = "Y",
+#'     unit.variable = "unit.num",
+#'     time.variable = "year",
+#'     special.predictors = list(
+#'       list("Y", 1991, "mean")
+#'     ),
+#'     treatment.identifier = 7,
+#'     controls.identifier = c(29, 2, 17),
+#'     time.predictors.prior = c(1984:1989),
+#'     time.optimize.ssr = c(1984:1990),
+#'     unit.names.variable = "name",
+#'     time.plot = 1984:1996
+#' )
+#' 
+#' # run the synth command to create the synthetic control
+#' synth.out <- synth(dataprep.out, Sigf.ipop=1)
+#' 
+#' tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 1)
+#' }
+#' \dontrun{## Example with toy data from Synth
 #' library(Synth)
 #' # Load the simulated data
 #' data(synth.data)

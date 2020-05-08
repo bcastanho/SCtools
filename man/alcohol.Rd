@@ -4,7 +4,8 @@
 \name{alcohol}
 \alias{alcohol}
 \title{World Alcohol per Capita Consumption}
-\format{a data.frame with 5107 rows and 8 columns:
+\format{
+a data.frame with 5107 rows and 8 columns:
 
 \describe{
   \item{country_name}{The name of the country}
@@ -16,7 +17,8 @@
   \item{inflation}{Inflation, consumer prices (annual percent)}
   \item{manufacturing}{Manufacturing, value added (percent of GDP)}
   \item{country_num}{The country number}
-}}
+}
+}
 \usage{
 alcohol
 }

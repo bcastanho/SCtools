@@ -28,11 +28,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Bruno Castanho Silva \email{bcsilva@wiso.uni-koeln.de} (0000-0001-9363-4704)
+\strong{Maintainer}: Bruno Castanho Silva \email{bcsilva@wiso.uni-koeln.de} (\href{https://orcid.org/0000-0001-9363-4704}{ORCID})
 
 Authors:
 \itemize{
-  \item Michael DeWitt \email{me.dewitt.jr@gmail.com} (0000-0001-8940-1967)
+  \item Michael DeWitt \email{me.dewitt.jr@gmail.com} (\href{https://orcid.org/0000-0001-8940-1967}{ORCID})
 }
 
 }

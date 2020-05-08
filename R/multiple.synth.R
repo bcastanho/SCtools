@@ -86,6 +86,8 @@
 #' multi$p
 #' 
 #'@export
+#'@importFrom magrittr "%>%"
+
 
 
 multiple.synth<-function(foo,
@@ -129,65 +131,66 @@ multiple.synth<-function(foo,
   
   # Now run code
   
-  df<-data.frame(time.plot)
+
+  strategy <- paste0("future::", strategy_match)
   
-  year <- tr <- cont <- NULL
   
-  for(i in 1:length(treated.units)){
-    df[,i]<-make_syn(index = i,
-                foo,
-                predictors,
-                predictors.op,
-                dependent,
-                unit.variable,
-                time.variable,
-                special.predictors,
-                treated.units,
-                control.units,
-                time.predictors.prior,
-                time.optimize.ssr,
-                unit.names.variable,
-                time.plot,
-                Sigf.ipop)$a
-    }
-  for(i in 1:length(treated.units)){
-    df[,i+length(treated.units)]<-foo[,dependent][foo[,unit.variable] == treated.units[[i]] & foo[,time.variable] %in% time.plot]
-    }
-  var<-NULL
-  var1<-NULL
-  for(i in 1:length(treated.units)){
-    var[[i]]<-paste('control',i,sep='')
-    }
-  for(i in 1:length(treated.units)){
-    var1[[i]]<-paste('treated',i,sep='')
-    }
-  colnames(df)<-c(var,var1)
-  df$year<-time.plot
-  b<-NULL
-  for(i in 1:length(treated.units)) {
-    a<-cbind(df$year,df[,i],df[,length(treated.units)+i],i)
-    b<-rbind(b,a)
-  }
-  b<-data.frame(b)
-  colnames(b)<-c('year','cont','tr','id')
-  b.path<-data.frame(matrix(time.plot,length(time.plot),1))
-  years<-time.plot
-  for(i in 1:length(time.plot)) {
-    b.path[i,2]<-mean(b$tr[b$year==years[[i]]])
-    }
-  for(i in 1:length(time.plot)) {
-    b.path[i,3]<-mean(b$cont[b$year==years[[i]]])
-    }
-  colnames(b.path)<-c('year','tr','cont')
+  plan(strategy)
+  oplan <- plan()
   
-  p<-ggplot2::ggplot(data=b.path,
-                     ggplot2::aes(x = year, y=tr))+
-    ggplot2::geom_line()+
-    ggplot2::geom_line(ggplot2::aes(y=cont),
-                       linetype='dashed')+
-    ggplot2::geom_vline(xintercept = treatment.time)+
-    ggplot2::theme_bw()
+  n <- length(treated.units)
   
+  df <- furrr::future_map(1:n, ~make_syn(.x,
+  																			 foo,
+  																			 predictors,
+  																			 predictors.op,
+  																			 dependent,
+  																			 unit.variable,
+  																			 time.variable,
+  																			 special.predictors,
+  																			 treated.units,
+  																			 control.units,
+  																			 time.predictors.prior,
+  																			 time.optimize.ssr,
+  																			 unit.names.variable,
+  																			 time.plot,
+  																			 Sigf.ipop))
+  b <- dplyr::bind_cols(purrr::map(df,'a'))
+  colnames(b)<-purrr::map_chr(treated.units,~paste0('Control.',.x))
+  
+  temp<-foo %>% 
+  	dplyr::filter(!!as.name(unit.variable) %in% treated.units) %>%
+  	dplyr::select(!!as.name(unit.variable), !!as.name(dependent), !!as.name(time.variable)) %>% 
+  	tidyr::spread(!!as.name(unit.variable), !!as.name(dependent)) %>%
+  	dplyr::filter(!!as.name(time.variable) %in% time.plot)
+  
+  colnames(temp)[2:(n+1)]<-purrr::map_chr(treated.units,~paste0('Treated.',.x))  
+  
+  b<-dplyr::bind_cols(temp,b)
+  c1<-colnames(b)[2]
+  c2<-colnames(b)[ncol(b)]
+  
+  v <- var <- value <- NULL
+  
+	df.plot <- b %>% tidyr::pivot_longer(!!as.name(c1):!!as.name(c2), names_to = 'v', values_to = 'value') %>%
+  						tidyr::separate(v, c('var','id')) %>%
+  						dplyr::group_by(!!as.name(time.variable),var) %>%
+  						dplyr::summarise(value = mean(value))
+	
+	p <- ggplot2::ggplot(df.plot, ggplot2::aes(!!as.name(time.variable), value, linetype = var)) + 
+		ggplot2::geom_path() +
+		ggplot2::scale_linetype_manual(values = c('dashed','solid')) + 
+		ggplot2::theme_minimal() +
+		ggplot2::theme(legend.position = 'bottom', legend.title = ggplot2::element_blank()) + 
+		ggplot2::ylab(dependent) + ggplot2::geom_vline(xintercept = treatment.time, linetype = 'dotted')
+	
+  
+ 	b <- b %>% tidyr::pivot_longer(!!as.name(c1):!!as.name(c2), names_to = 'v', values_to = 'value') %>%
+ 	   tidyr::separate(v, c('var','id')) %>%
+ 	   tidyr::spread(var, value)
+ 	
+ 	colnames(b)[c(1,2)] <- c('Time','id')
+
   if(gen.placebos){
     out.temp<-make_syn(index = 1,
                   foo,
@@ -206,13 +209,13 @@ multiple.synth<-function(foo,
                   Sigf.ipop)
     tdf<-generate.placebos(dataprep.out=out.temp$dataprep.out,
                            synth.out=out.temp$synth.out,
-    											 strategy=strategy)
+    											 strategy=strategy_match)
     df.plac<-data.frame(tdf$df)
     df.plac<-df.plac[,-c(ncol(df.plac)-1,ncol(df.plac)-2)]
     out2<-list(df=df,
                p=p,
                b=b,
-               b.path=b.path,
+               df.plot=df.plot,
                treatment.time=treatment.time,
                treated.units=treated.units,
                control.units=control.units,
@@ -221,7 +224,7 @@ multiple.synth<-function(foo,
     out2<-list(df = df, 
               p=p, 
               b = b,
-              b.path=b.path,
+              df.plot=df.plot,
               treatment.time=treatment.time,
               treated.units=treated.units,
               control.units=control.units)
