@@ -127,7 +127,7 @@ plac.dist<-function(multiple.synth,
     out<-list(p = p, 
               att.t = att.t, 
               df = storage.matrix,
-    					p.value)
+    					p.value = p.value)
   
     return(out)
 }
