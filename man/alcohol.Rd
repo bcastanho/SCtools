@@ -31,7 +31,7 @@ approaches to be used. You can read more about the policy changes at
 \url{https://www.theguardian.com/world/2019/oct/01/russian-alcohol-consumption-down-40-since-2003-who}
 }
 \details{
-WHO data available at \url{http://apps.who.int/gho/data/node.main.A1039?lang=en}.
+WHO data available at \url{https://apps.who.int/gho/data/node.main.A1039?lang=en}.
 
 WB data available at \url{https://data.worldbank.org/}.
 }
