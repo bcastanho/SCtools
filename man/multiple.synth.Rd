@@ -93,8 +93,8 @@ for each unit in the donor pool should be constructed. Will increase
 computation time.}
 
 \item{strategy}{The processing method you wish to use 
-"sequential" or "multiprocess". Use "multiprocess" to parallelize operations
- and reduce computing time. Default is \code{sequential}.}
+"sequential", "multicore" or "multisession" . Use "multicore" or "multisession" to parallelize operations
+ and reduce computing time. Default is \code{sequential}. Since SCtools >= 0.3.2 "multiprocess" is deprecated.}
 
 \item{Sigf.ipop}{The Precision setting for the ipop optimization routine. 
 Default of 5.}

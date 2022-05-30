@@ -41,8 +41,8 @@
 #' @param Sigf.ipop The Precision setting for the ipop optimization routine. 
 #'    Default of 5.
 #' @param strategy The processing method you wish to use 
-#'    "sequential" or "multiprocess". Use "multiprocess" to parallelize operations
-#'     and reduce computing time. Default is \code{sequential}.
+#'    "sequential", "multicore" or "multisession" . Use "multicore" or "multisession" to parallelize operations
+#'     and reduce computing time. Default is \code{sequential}. Since SCtools >= 0.3.2 "multiprocess" is deprecated.
 #' @details The function runs \code{\link[Synth]{dataprep}} and \code{\link[Synth]{synth}} 
 #'    for each unit identified in \code{treated.units}. It saves the vector with 
 #'    predicted values for each synthetic control, to be used in estimating 
@@ -123,7 +123,8 @@ multiple.synth<-function(foo,
   
   gen.placebos <- match_logical(gen.placebos)
   
-  strategy_match <- match.arg(strategy, c("sequential", "multiprocess"))
+  strategy_match <- match.arg(strategy, c("sequential", "multiprocess",
+  																				"multicore", "multisession"))
   
   if(!all(is.numeric(foo[[unit.variable]]))){
     stop("`unit.variable` must be a numeric column in `foo`")

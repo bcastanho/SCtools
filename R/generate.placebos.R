@@ -11,8 +11,8 @@
 #' @param Sigf.ipop The Precision setting for the ipop optimization routine. 
 #'     Default of 5.
 #' @param strategy The processing method you wish to use 
-#'    "sequential" or "multiprocess". Use "multiprocess" to parallelize operations
-#'     and reduce computing time. Default is \code{sequential}.
+#'    "sequential", "multicore" or "multisession". Use "multicore" or "multisession" to parallelize operations
+#'     and reduce computing time. Default is \code{sequential}. Since SCtools >= 0.3.2 "multiprocess" is deprecated.
 #' @return \describe{
 #'    \item{df }{Data frame with outcome data for each control unit and their 
 #'    respective synthetic control and for the original treated and its control}
@@ -114,7 +114,8 @@ generate.placebos <- function(dataprep.out,
     stop("You have not passed a valid argument for Signf.ipop. Please pass a positive integer")
   }
   
-  strategy_match <- match.arg(strategy, c("sequential", "multiprocess"))
+  strategy_match <- match.arg(strategy, c("sequential", "multiprocess",
+  																				"multicore", "multisession"))
   
   unit.numbers <- NULL
   

@@ -163,8 +163,8 @@ function(tdf,
                                 shape=factor(treat)))+
       ggplot2::geom_point(size=4)+
       ggplot2::scale_color_manual(values = c('gray50','black'),
-                         guide = FALSE)+
-      ggplot2::scale_shape_manual(values = c(17,15),guide = FALSE) + 
+                         guide = 'none')+
+      ggplot2::scale_shape_manual(values = c(17,15),guide = 'none') + 
       ggplot2::labs(y=ylab,
            x=xlab,
            title=title)+

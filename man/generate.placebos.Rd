@@ -28,8 +28,8 @@ generate_placebos(
 Default of 5.}
 
 \item{strategy}{The processing method you wish to use 
-"sequential" or "multiprocess". Use "multiprocess" to parallelize operations
- and reduce computing time. Default is \code{sequential}.}
+"sequential", "multicore" or "multisession". Use "multicore" or "multisession" to parallelize operations
+ and reduce computing time. Default is \code{sequential}. Since SCtools >= 0.3.2 "multiprocess" is deprecated.}
 }
 \value{
 \describe{
