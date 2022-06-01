@@ -8,7 +8,7 @@
 [![Travis build
 status](https://travis-ci.org/medewitt/SCtools.svg?branch=master)](https://travis-ci.org/medewitt/SCtools)
 [![Codecov test
-coverage](https://codecov.io/gh/medewitt/SCtools/branch/master/graph/badge.svg)](https://codecov.io/gh/medewitt/SCtools?branch=master)
+coverage](https://codecov.io/gh/medewitt/SCtools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/medewitt/SCtools?branch=master)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/SCtools)](https://CRAN.R-project.org/package=SCtools)
 [![AppVeyor build

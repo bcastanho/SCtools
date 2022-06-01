@@ -122,7 +122,7 @@ match_logical <- function(x){
 	
 	out <- try(grepl(pattern = "T", x = x, ignore.case = T))
 	
-	if(class(out) == "try-error"){
+	if(inherits(out, "try-error")){
 		stop("Please pass a logical (i.e. TRUE or FALSE)")
 	}
 	
