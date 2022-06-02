@@ -85,7 +85,7 @@
 #' ## to each unit listed as control, one at a time, and generate their
 #' ## synthetic versions. Sigf.ipop = 2 for faster computing time. 
 #' ## Increase to the default of 5 for better estimates. 
-#' tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 2, strategy='multiprocess')
+#' tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 2, strategy='multicore')
 #' 
 #' ## Plot the gaps in outcome values over time of each unit --
 #' ## treated and placebos -- to their synthetic controls
@@ -155,7 +155,7 @@ p.gaps<-ggplot2::ggplot(data=data.frame(df.plot),
                 x=xlab,
                 title=title)+
   ggplot2::scale_color_manual(values = c('2' = 'gray80', '1' = 'black'),
-                     labels = c(tdf$treated.name, 'Control units'), 
+                     labels = c('Control units',tdf$treated.name), 
                      guide = ggplot2::guide_legend(NULL))+
   ggplot2::theme(panel.background = ggplot2::element_blank(), 
           panel.grid.major = ggplot2::element_blank(),

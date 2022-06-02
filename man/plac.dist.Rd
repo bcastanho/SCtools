@@ -60,7 +60,7 @@ multi <- multiple.synth(foo = synth.data,
                        time.optimize.ssr = c(1984:1990),
                        unit.names.variable = "name",
                        time.plot = 1984:1996, gen.placebos = TRUE, Sigf.ipop = 2,
-                       strategy = 'multiprocess' )
+                       strategy = 'multicore' )
 
 ## Plot with the average path of the treated units and the average of their
 ## respective synthetic controls:
