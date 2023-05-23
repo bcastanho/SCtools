@@ -19,7 +19,7 @@ This package is a work in progress compiling functions to make it easier
 running placebo in space tests with synthetic control models and SCM
 with multiple treated units. It relies heavily on the ‘Synth’ package.
 
-In April, the 'Synth' package was archived from CRAN, due to the archival of 'LowRankQP', a package it depends on. Therefore, the installation of both 'Synth' and 'SCtools' now require the steps outlined in the following link: https://bcastanho.github.io/install_sctools
+In April 2023, the 'Synth' package was archived from CRAN, due to the archival of 'LowRankQP', a package it depends on. Therefore, the installation of both 'Synth' and 'SCtools' now require the steps outlined in the following link: https://bcastanho.github.io/install_sctools
 
 Please note that the ‘SCtools’ project is released with a [Contributor
 Code of
