@@ -192,7 +192,7 @@ placebo <- readRDS("placebo.rds")
 
 ```{r eval=FALSE}
 placebo <- generate.placebos(dataprep.out = dataprep.out,
-                             synth.out = out, strategy = "multiprocess")
+                             synth.out = out, strategy = "multicore")
 ```
 
 Now that we have our placebo object, we can represent it graphically with `plot_placebos`. Here we can see our donors (control unit) and our actual treated group. 
