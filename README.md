@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![Travis build
-status](https://travis-ci.org/medewitt/SCtools.svg?branch=master)](https://travis-ci.org/medewitt/SCtools)
 [![Codecov test
 coverage](https://codecov.io/gh/medewitt/SCtools/branch/master/graph/badge.svg)](https://app.codecov.io/gh/medewitt/SCtools?branch=master)
 [![CRAN

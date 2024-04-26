@@ -5,7 +5,7 @@
    mspe.test, mspe.plot) to assess the strength and 
    significance of a causal inference based on the synthetic control method. 
    On placebo tests, see Abadie and Gardeazabal (2003), and Abadie, Diamond, 
-   and Hainmueller (2010, 2011, 2014)."><title>Function to generate placebo synthetic controls — generate.placebos • SCtools</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Function to generate placebo synthetic controls — generate.placebos"><meta property="og:description" content="Constructs a synthetic control unit for each unit in the 
+   and Hainmueller (2010, 2011, 2014)."><title>Function to generate placebo synthetic controls — generate.placebos • SCtools</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Function to generate placebo synthetic controls — generate.placebos"><meta property="og:description" content="Constructs a synthetic control unit for each unit in the 
    donor pool of an implementation of the synthetic control method for a 
    single treated unit. Used for placebo tests (see plot_placebos, 
    mspe.test, mspe.plot) to assess the strength and 
@@ -18,11 +18,11 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">SCtools</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.3</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,38 +76,47 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">generate.placebos</span><span class="op">(</span>
-  <span class="va">dataprep.out</span>,
-  <span class="va">synth.out</span>,
-  Sigf.ipop <span class="op">=</span> <span class="fl">5</span>,
-  strategy <span class="op">=</span> <span class="st">"sequential"</span>
-<span class="op">)</span>
-
-<span class="fu">generate_placebos</span><span class="op">(</span>
-  <span class="va">dataprep.out</span>,
-  <span class="va">synth.out</span>,
-  Sigf.ipop <span class="op">=</span> <span class="fl">5</span>,
-  strategy <span class="op">=</span> <span class="st">"sequential"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">generate.placebos</span><span class="op">(</span></span>
+<span>  <span class="va">dataprep.out</span>,</span>
+<span>  <span class="va">synth.out</span>,</span>
+<span>  Sigf.ipop <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  strategy <span class="op">=</span> <span class="st">"sequential"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">generate_placebos</span><span class="op">(</span></span>
+<span>  <span class="va">dataprep.out</span>,</span>
+<span>  <span class="va">synth.out</span>,</span>
+<span>  Sigf.ipop <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  strategy <span class="op">=</span> <span class="st">"sequential"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>dataprep.out</dt>
 <dd><p>A data.prep object produced by the <code>dataprep</code> command</p></dd>
+
+
 <dt>synth.out</dt>
 <dd><p>A synth.out object produced by the <code>synth</code> command</p></dd>
+
+
 <dt>Sigf.ipop</dt>
 <dd><p>The Precision setting for the ipop optimization routine. 
 Default of 5.</p></dd>
+
+
 <dt>strategy</dt>
 <dd><p>The processing method you wish to use 
-"sequential" or "multiprocess". Use "multiprocess" to parallelize operations
- and reduce computing time. Default is <code>sequential</code>.</p></dd>
+"sequential", "multicore" or "multisession". Use "multicore" or "multisession" to parallelize operations
+ and reduce computing time. Default is <code>sequential</code>. Since SCtools &gt;= 0.3.2 "multiprocess" is deprecated.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <dl><dt>df </dt>
+    
+
+<dl><dt>df </dt>
 <dd><p>Data frame with outcome data for each control unit and their 
    respective synthetic control and for the original treated and its control</p></dd>
 
@@ -142,37 +151,37 @@ Default of 5.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## Example with toy data from Synth</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stanford.edu/~jhain" class="external-link">Synth</a></span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## Example with toy data from Synth</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://web.stanford.edu/~jhain/" class="external-link">Synth</a></span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ##</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> ## Synth Package: Implements Synthetic Control Methods.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ## See http://www.mit.edu/~jhainm/software.htm for additional information.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ## See https://web.stanford.edu/~jhain/synthpage.html for additional information.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="co"># Load the simulated data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">synth.data</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Execute dataprep to produce the necessary matrices for synth</span></span>
-<span class="r-in"><span class="va">dataprep.out</span><span class="op">&lt;-</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/pkg/Synth/man/dataprep.html" class="external-link">dataprep</a></span><span class="op">(</span></span>
-<span class="r-in">    foo <span class="op">=</span> <span class="va">synth.data</span>,</span>
-<span class="r-in">    predictors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X1"</span><span class="op">)</span>,</span>
-<span class="r-in">    predictors.op <span class="op">=</span> <span class="st">"mean"</span>,</span>
-<span class="r-in">    dependent <span class="op">=</span> <span class="st">"Y"</span>,</span>
-<span class="r-in">    unit.variable <span class="op">=</span> <span class="st">"unit.num"</span>,</span>
-<span class="r-in">    time.variable <span class="op">=</span> <span class="st">"year"</span>,</span>
-<span class="r-in">    special.predictors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Y"</span>, <span class="fl">1991</span>, <span class="st">"mean"</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span>,</span>
-<span class="r-in">    treatment.identifier <span class="op">=</span> <span class="fl">7</span>,</span>
-<span class="r-in">    controls.identifier <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">29</span>, <span class="fl">2</span>, <span class="fl">17</span><span class="op">)</span>,</span>
-<span class="r-in">    time.predictors.prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1984</span><span class="op">:</span><span class="fl">1989</span><span class="op">)</span>,</span>
-<span class="r-in">    time.optimize.ssr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1984</span><span class="op">:</span><span class="fl">1990</span><span class="op">)</span>,</span>
-<span class="r-in">    unit.names.variable <span class="op">=</span> <span class="st">"name"</span>,</span>
-<span class="r-in">    time.plot <span class="op">=</span> <span class="fl">1984</span><span class="op">:</span><span class="fl">1996</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># run the synth command to create the synthetic control</span></span>
-<span class="r-in"><span class="va">synth.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Synth/man/synth.html" class="external-link">synth</a></span><span class="op">(</span><span class="va">dataprep.out</span>, Sigf.ipop<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># Load the simulated data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">synth.data</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Execute dataprep to produce the necessary matrices for synth</span></span></span>
+<span class="r-in"><span><span class="va">dataprep.out</span><span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/Synth/man/dataprep.html" class="external-link">dataprep</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    foo <span class="op">=</span> <span class="va">synth.data</span>,</span></span>
+<span class="r-in"><span>    predictors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X1"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    predictors.op <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>    dependent <span class="op">=</span> <span class="st">"Y"</span>,</span></span>
+<span class="r-in"><span>    unit.variable <span class="op">=</span> <span class="st">"unit.num"</span>,</span></span>
+<span class="r-in"><span>    time.variable <span class="op">=</span> <span class="st">"year"</span>,</span></span>
+<span class="r-in"><span>    special.predictors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Y"</span>, <span class="fl">1991</span>, <span class="st">"mean"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    treatment.identifier <span class="op">=</span> <span class="fl">7</span>,</span></span>
+<span class="r-in"><span>    controls.identifier <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">29</span>, <span class="fl">2</span>, <span class="fl">17</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    time.predictors.prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1984</span><span class="op">:</span><span class="fl">1989</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    time.optimize.ssr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1984</span><span class="op">:</span><span class="fl">1990</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    unit.names.variable <span class="op">=</span> <span class="st">"name"</span>,</span></span>
+<span class="r-in"><span>    time.plot <span class="op">=</span> <span class="fl">1984</span><span class="op">:</span><span class="fl">1996</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># run the synth command to create the synthetic control</span></span></span>
+<span class="r-in"><span><span class="va">synth.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Synth/man/synth.html" class="external-link">synth</a></span><span class="op">(</span><span class="va">dataprep.out</span>, Sigf.ipop<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> X1, X0, Z1, Z0 all come directly from dataprep object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -193,8 +202,8 @@ Default of 5.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> solution.w:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  0.3616606 0.3220655 0.3147483 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">tdf</span> <span class="op">&lt;-</span> <span class="fu">generate.placebos</span><span class="op">(</span><span class="va">dataprep.out</span>,<span class="va">synth.out</span>, Sigf.ipop <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">tdf</span> <span class="op">&lt;-</span> <span class="fu">generate.placebos</span><span class="op">(</span><span class="va">dataprep.out</span>,<span class="va">synth.out</span>, Sigf.ipop <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> X1, X0, Z1, Z0 all come directly from dataprep object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -259,34 +268,34 @@ Default of 5.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `w.weight` -&gt; `w.weight...1`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `w.weight` -&gt; `w.weight...2`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `w.weight` -&gt; `w.weight...3`</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co">## Example with toy data from Synth</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stanford.edu/~jhain" class="external-link">Synth</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Load the simulated data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">synth.data</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Execute dataprep to produce the necessary matrices for synth</span></span>
-<span class="r-in"><span class="va">dataprep.out</span><span class="op">&lt;-</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/pkg/Synth/man/dataprep.html" class="external-link">dataprep</a></span><span class="op">(</span></span>
-<span class="r-in">    foo <span class="op">=</span> <span class="va">synth.data</span>,</span>
-<span class="r-in">    predictors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X1"</span><span class="op">)</span>,</span>
-<span class="r-in">    predictors.op <span class="op">=</span> <span class="st">"mean"</span>,</span>
-<span class="r-in">    dependent <span class="op">=</span> <span class="st">"Y"</span>,</span>
-<span class="r-in">    unit.variable <span class="op">=</span> <span class="st">"unit.num"</span>,</span>
-<span class="r-in">    time.variable <span class="op">=</span> <span class="st">"year"</span>,</span>
-<span class="r-in">    special.predictors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span class="r-in">      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Y"</span>, <span class="fl">1991</span>, <span class="st">"mean"</span><span class="op">)</span></span>
-<span class="r-in">    <span class="op">)</span>,</span>
-<span class="r-in">    treatment.identifier <span class="op">=</span> <span class="fl">7</span>,</span>
-<span class="r-in">    controls.identifier <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">29</span>, <span class="fl">2</span>, <span class="fl">13</span>, <span class="fl">17</span><span class="op">)</span>,</span>
-<span class="r-in">    time.predictors.prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1984</span><span class="op">:</span><span class="fl">1989</span><span class="op">)</span>,</span>
-<span class="r-in">    time.optimize.ssr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1984</span><span class="op">:</span><span class="fl">1990</span><span class="op">)</span>,</span>
-<span class="r-in">    unit.names.variable <span class="op">=</span> <span class="st">"name"</span>,</span>
-<span class="r-in">    time.plot <span class="op">=</span> <span class="fl">1984</span><span class="op">:</span><span class="fl">1996</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># run the synth command to create the synthetic control</span></span>
-<span class="r-in"><span class="va">synth.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Synth/man/synth.html" class="external-link">synth</a></span><span class="op">(</span><span class="va">dataprep.out</span>, Sigf.ipop<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="co">## Example with toy data from Synth</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://web.stanford.edu/~jhain/" class="external-link">Synth</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Load the simulated data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">synth.data</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Execute dataprep to produce the necessary matrices for synth</span></span></span>
+<span class="r-in"><span><span class="va">dataprep.out</span><span class="op">&lt;-</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/pkg/Synth/man/dataprep.html" class="external-link">dataprep</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    foo <span class="op">=</span> <span class="va">synth.data</span>,</span></span>
+<span class="r-in"><span>    predictors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"X1"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    predictors.op <span class="op">=</span> <span class="st">"mean"</span>,</span></span>
+<span class="r-in"><span>    dependent <span class="op">=</span> <span class="st">"Y"</span>,</span></span>
+<span class="r-in"><span>    unit.variable <span class="op">=</span> <span class="st">"unit.num"</span>,</span></span>
+<span class="r-in"><span>    time.variable <span class="op">=</span> <span class="st">"year"</span>,</span></span>
+<span class="r-in"><span>    special.predictors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"Y"</span>, <span class="fl">1991</span>, <span class="st">"mean"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span>,</span></span>
+<span class="r-in"><span>    treatment.identifier <span class="op">=</span> <span class="fl">7</span>,</span></span>
+<span class="r-in"><span>    controls.identifier <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">29</span>, <span class="fl">2</span>, <span class="fl">13</span>, <span class="fl">17</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    time.predictors.prior <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1984</span><span class="op">:</span><span class="fl">1989</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    time.optimize.ssr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1984</span><span class="op">:</span><span class="fl">1990</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    unit.names.variable <span class="op">=</span> <span class="st">"name"</span>,</span></span>
+<span class="r-in"><span>    time.plot <span class="op">=</span> <span class="fl">1984</span><span class="op">:</span><span class="fl">1996</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># run the synth command to create the synthetic control</span></span></span>
+<span class="r-in"><span><span class="va">synth.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Synth/man/synth.html" class="external-link">synth</a></span><span class="op">(</span><span class="va">dataprep.out</span>, Sigf.ipop<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> X1, X0, Z1, Z0 all come directly from dataprep object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -307,12 +316,12 @@ Default of 5.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> solution.w:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  0.2559408 0.1232918 0.3053249 0.315439 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## run the generate.placebos command to reassign treatment status</span></span>
-<span class="r-in"><span class="co">## to each unit listed as control, one at a time, and generate their</span></span>
-<span class="r-in"><span class="co">## synthetic versions. Sigf.ipop = 2 for faster computing time. </span></span>
-<span class="r-in"><span class="co">## Increase to the default of 5 for better estimates. </span></span>
-<span class="r-in"><span class="va">tdf</span> <span class="op">&lt;-</span> <span class="fu">generate.placebos</span><span class="op">(</span><span class="va">dataprep.out</span>,<span class="va">synth.out</span>, Sigf.ipop <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## run the generate.placebos command to reassign treatment status</span></span></span>
+<span class="r-in"><span><span class="co">## to each unit listed as control, one at a time, and generate their</span></span></span>
+<span class="r-in"><span><span class="co">## synthetic versions. Sigf.ipop = 2 for faster computing time. </span></span></span>
+<span class="r-in"><span><span class="co">## Increase to the default of 5 for better estimates. </span></span></span>
+<span class="r-in"><span><span class="va">tdf</span> <span class="op">&lt;-</span> <span class="fu">generate.placebos</span><span class="op">(</span><span class="va">dataprep.out</span>,<span class="va">synth.out</span>, Sigf.ipop <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> X1, X0, Z1, Z0 all come directly from dataprep object.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -398,7 +407,7 @@ Default of 5.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `w.weight` -&gt; `w.weight...2`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `w.weight` -&gt; `w.weight...3`</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> `w.weight` -&gt; `w.weight...4`</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -406,11 +415,11 @@ Default of 5.</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Bruno Castanho Silva, Michael DeWitt.</p>
+  <p>Developed by Bruno Castanho Silva, Michael DeWitt.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
     </footer></div>
