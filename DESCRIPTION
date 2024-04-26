@@ -1,12 +1,12 @@
 Package: SCtools
 Title: Extensions for Synthetic Controls Analysis
-Version: 0.3.2.1
-Date: 2022-05-30
+Version: 0.3.3
+Date: 2024-04-26
 Authors@R: c(
     person(given = 'Bruno',
            family = 'Castanho Silva',
            role = c('aut', 'cre'),
-           email = 'bcsilva@wiso.uni-koeln.de',
+           email = 'b.paula.castanho.e.silva@fu-berlin.de',
            comment = c(ORCID = '0000-0001-9363-4704')),
     person(given = 'Michael',
            family = 'DeWitt',
@@ -22,7 +22,7 @@ Description: Extensions to the synthetic controls analyses
     Abadie, Diamond,and Hainmueller (2010) <doi:10.1198/jasa.2009.ap08746> for
     use in Synthetic Control Analysis.
 BugReports: https://github.com/bcastanho/SCtools/issues
-Maintainer: Bruno Castanho Silva <bcsilva@wiso.uni-koeln.de>
+Maintainer: Bruno Castanho Silva <b.paula.castanho.e.silva@fu-berlin.de>
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -44,6 +44,6 @@ Suggests:
     knitr,
     tidyr,
     rmarkdown
-RoxygenNote: 7.2.0
+RoxygenNote: 7.3.1
 VignetteBuilder: knitr
 Config/testthat/edition: 3
