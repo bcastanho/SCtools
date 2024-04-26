@@ -114,7 +114,7 @@ generate.placebos <- function(dataprep.out,
     stop("You have not passed a valid argument for Signf.ipop. Please pass a positive integer")
   }
   
-  strategy_match <- match.arg(strategy, c("sequential", "multiprocess",
+  strategy_match <- match.arg(strategy, c("sequential",
   																				"multicore", "multisession"))
   
   unit.numbers <- NULL

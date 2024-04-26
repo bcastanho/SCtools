@@ -28,7 +28,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Bruno Castanho Silva \email{bcsilva@wiso.uni-koeln.de} (\href{https://orcid.org/0000-0001-9363-4704}{ORCID})
+\strong{Maintainer}: Bruno Castanho Silva \email{b.paula.castanho.e.silva@fu-berlin.de} (\href{https://orcid.org/0000-0001-9363-4704}{ORCID})
 
 Authors:
 \itemize{

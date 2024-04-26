@@ -123,7 +123,7 @@ multiple.synth<-function(foo,
   
   gen.placebos <- match_logical(gen.placebos)
   
-  strategy_match <- match.arg(strategy, c("sequential", "multiprocess",
+  strategy_match <- match.arg(strategy, c("sequential",
   																				"multicore", "multisession"))
   
   if(!all(is.numeric(foo[[unit.variable]]))){

@@ -110,7 +110,7 @@ synth.out <- synth(dataprep.out, Sigf.ipop=2)
 ## to each unit listed as control, one at a time, and generate their
 ## synthetic versions. Sigf.ipop = 2 for faster computing time. 
 ## Increase to the default of 5 for better estimates. 
-tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 2, strategy='multiprocess')
+tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 2, strategy='multisession')
 
 ## Plot the gaps in outcome values over time of each unit --
 ## treated and placebos -- to their synthetic controls
