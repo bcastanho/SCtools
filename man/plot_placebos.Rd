@@ -38,10 +38,8 @@ discarded. Default is \code{20}.}
 \item{...}{optional arguments (currently not used)}
 }
 \value{
-\describe{
-	 \item{p.gaps } Gaps plot indicating difference between the treated unit, 
+p.gaps Gaps plot indicating difference between the treated unit, 
 	 the placebos, and their respective synthetic controls.
-}
 }
 \description{
 Creates plots with the difference between observed units 

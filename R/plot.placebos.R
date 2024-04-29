@@ -15,10 +15,8 @@
 #' @param title Character. Optional. Title of the plot.
 #' @param alpha.placebos the transparency setting, default of \code{1}
 #' @param ... optional arguments (currently not used)
-#' @return \describe{
-#'		 \item{p.gaps } Gaps plot indicating difference between the treated unit, 
+#' @return p.gaps Gaps plot indicating difference between the treated unit, 
 #'		 the placebos, and their respective synthetic controls.
-#' }
 #' @seealso \code{\link{generate.placebos}}, \code{\link[Synth]{gaps.plot}}, 
 #'     \code{\link[Synth]{synth}}, \code{\link[Synth]{dataprep}}
 #' @examples 

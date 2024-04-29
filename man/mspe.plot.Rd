@@ -50,12 +50,12 @@ visualization easier.}
 }
 \value{
 \describe{
-	 \item{p.dot } Plot with the post/pre MSPE ratios for the treated unit and
+	 \item{p.dot }{Plot with the post/pre MSPE ratios for the treated unit and
 	 each placebo indicated individually. Returned if \code{plot.hist} is 
-	 \code{FALSE}.
-	 \item{p.dens} Histogram of the distribution of post/pre MSPE ratios for
+	 \code{FALSE}.}
+	 \item{p.dens }{Histogram of the distribution of post/pre MSPE ratios for
 	 all placebos and the treated unit. Returned if \code{plot.hist} is 
-	 \code{TRUE}.
+	 \code{TRUE}.}
 }
 }
 \description{
