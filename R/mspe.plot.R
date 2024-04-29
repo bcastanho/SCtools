@@ -16,6 +16,14 @@
 #' @param title Character. Optional. Title of the plot.
 #' @param xlab Character. Optional. Label of the x axis.
 #' @param ylab Character. Optional. Label of the y axis.
+#' @return \describe{
+#'		 \item{p.dot } Plot with the post/pre MSPE ratios for the treated unit and
+#'		 each placebo indicated individually. Returned if \code{plot.hist} is 
+#'		 \code{FALSE}.
+#'		 \item{p.dens} Histogram of the distribution of post/pre MSPE ratios for
+#'		 all placebos and the treated unit. Returned if \code{plot.hist} is 
+#'		 \code{TRUE}.
+#' }
 #' @details Post/pre-treatement mean square prediction error ratio is the 
 #'     difference between the observed outcome of a unit and its synthetic 
 #'     control, before and after treatement. A higher ratio means a small 
@@ -81,7 +89,7 @@
 ## Check visually how extreme is this value in the distribution:
 #' mspe.plot(tdf, discard.extreme = FALSE)
 #' }
-#' \dontrun{## Example with toy data from 'Synth'
+#' \donttest{## Example with toy data from 'Synth'
 #' library(Synth)
 #' # Load the simulated data
 #' data(synth.data)

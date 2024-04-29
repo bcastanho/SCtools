@@ -15,6 +15,10 @@
 #' @param title Character. Optional. Title of the plot.
 #' @param alpha.placebos the transparency setting, default of \code{1}
 #' @param ... optional arguments (currently not used)
+#' @return \describe{
+#'		 \item{p.gaps } Gaps plot indicating difference between the treated unit, 
+#'		 the placebos, and their respective synthetic controls.
+#' }
 #' @seealso \code{\link{generate.placebos}}, \code{\link[Synth]{gaps.plot}}, 
 #'     \code{\link[Synth]{synth}}, \code{\link[Synth]{dataprep}}
 #' @examples 
@@ -53,7 +57,7 @@
 #' p <- plot_placebos(tdf,discard.extreme=TRUE, mspe.limit=10, xlab='Year')
 #' p
 #' }
-#' \dontrun{## Example with toy data from Synth
+#' \donttest{## Example with toy data from Synth
 #' library(Synth)
 #' # Load the simulated data
 #' data(synth.data)

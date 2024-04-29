@@ -19,7 +19,7 @@
 #' p-value in a two-tailed test.}
 #' }
 #' @examples 
-#' \dontrun{
+#' \donttest{
 #' ## Using the toy data from Synth:
 #' library(Synth)
 #' data(synth.data)

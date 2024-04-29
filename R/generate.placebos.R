@@ -58,7 +58,7 @@
 #' 
 #' tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 1)
 #' }
-#' \dontrun{## Example with toy data from Synth
+#' \donttest{## Example with toy data from Synth
 #' library(Synth)
 #' # Load the simulated data
 #' data(synth.data)
