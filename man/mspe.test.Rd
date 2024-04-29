@@ -88,7 +88,7 @@ ratio$p.val
 
 mspe.plot(tdf, discard.extreme = FALSE)
 }
-\dontrun{## Example with toy data from 'Synth'
+\donttest{## Example with toy data from 'Synth'
 library(Synth)
 # Load the simulated data
 data(synth.data)

@@ -48,6 +48,16 @@ visualization easier.}
 
 \item{ylab}{Character. Optional. Label of the y axis.}
 }
+\value{
+\describe{
+	 \item{p.dot } Plot with the post/pre MSPE ratios for the treated unit and
+	 each placebo indicated individually. Returned if \code{plot.hist} is 
+	 \code{FALSE}.
+	 \item{p.dens} Histogram of the distribution of post/pre MSPE ratios for
+	 all placebos and the treated unit. Returned if \code{plot.hist} is 
+	 \code{TRUE}.
+}
+}
 \description{
 Plots the post/pre-treatment mean square prediction error ratio 
     for the treated unit and placebos.
@@ -100,7 +110,7 @@ ratio$p.val
 
 mspe.plot(tdf, discard.extreme = FALSE)
 }
-\dontrun{## Example with toy data from 'Synth'
+\donttest{## Example with toy data from 'Synth'
 library(Synth)
 # Load the simulated data
 data(synth.data)

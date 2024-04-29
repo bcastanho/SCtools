@@ -36,7 +36,7 @@ Takes the output object of \code{\link{multiple.synth}} creates a
     the average treatment effect of the k placebos each time.
 }
 \examples{
-\dontrun{
+\donttest{
 ## Using the toy data from Synth:
 library(Synth)
 data(synth.data)

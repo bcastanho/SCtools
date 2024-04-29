@@ -37,6 +37,12 @@ discarded. Default is \code{20}.}
 
 \item{...}{optional arguments (currently not used)}
 }
+\value{
+\describe{
+	 \item{p.gaps } Gaps plot indicating difference between the treated unit, 
+	 the placebos, and their respective synthetic controls.
+}
+}
 \description{
 Creates plots with the difference between observed units 
     and synthetic controls for the treated and control units. 
@@ -78,7 +84,7 @@ tdf <- generate.placebos(dataprep.out,synth.out, Sigf.ipop = 1)
 p <- plot_placebos(tdf,discard.extreme=TRUE, mspe.limit=10, xlab='Year')
 p
 }
-\dontrun{## Example with toy data from Synth
+\donttest{## Example with toy data from Synth
 library(Synth)
 # Load the simulated data
 data(synth.data)
